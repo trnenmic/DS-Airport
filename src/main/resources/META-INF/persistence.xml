@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <class>Model.Airplane</class>
+        <class>Model.Airport</class>
+        <class>Model.Client</class>
+        <class>Model.CrewMember</class>
+        <class>Model.Flight</class>
+        <class>Model.Luggage</class>
+        <class>Model.Route</class>
+        <class>Model.Ticket</class>
+        <properties>
+           <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://slon.felk.cvut.cz:5432/student_db16_19"/>
+            <property name="javax.persistence.jdbc.user" value="student_db16_19"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.password" value="MaMutairport"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+        </properties>
+    </persistence-unit>
+</persistence>
