@@ -25,6 +25,8 @@ public class Main {
 
         Airplane airplane = em.find(Airplane.class, 101);
         System.out.println(airplane);
+        
+        System.out.println("Testing Netbeans connection!");
 
 //finding by ID
         //Airplane booka = em.find(Airplane.class, 1);
