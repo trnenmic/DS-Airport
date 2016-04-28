@@ -28,6 +28,9 @@ public class Main {
         
         System.out.println("Testing Netbeans connection!");
 
+        System.out.println("Testing IDEA connection!");
+
+
 //finding by ID
         //Airplane booka = em.find(Airplane.class, 1);
         //System.out.println("Finding book> "+booka);
