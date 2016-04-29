@@ -2,6 +2,7 @@ package Model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 /**
  * Created by M on 27. 4. 2016.
@@ -15,6 +16,7 @@ public class Flight {
     private int fuelRequired;
     private int numBookedSeats;
     private Route routeByRouteIdRoute;
+    private Collection<CrewMember> crewMembers;
 
     @Id
     @Column(name = "id_flight", nullable = false, insertable = true, updatable = true)
@@ -113,5 +115,15 @@ public class Flight {
 
     public void setRouteByRouteIdRoute(Route routeByRouteIdRoute) {
         this.routeByRouteIdRoute = routeByRouteIdRoute;
+    }
+
+    @ManyToMany (mappedBy = "flights")
+    @JoinTable(name = "crew_member")
+    public Collection<CrewMember> getCrewMembers() {
+        return crewMembers;
+    }
+
+    public void setCrewMembers(Collection<CrewMember> crewMembers) {
+        this.crewMembers = crewMembers;
     }
 }

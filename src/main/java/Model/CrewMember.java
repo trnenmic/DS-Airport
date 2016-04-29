@@ -1,6 +1,7 @@
 package Model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by M on 27. 4. 2016.
@@ -12,6 +13,8 @@ public class CrewMember {
     private String passportNumber;
     private String address;
     private String gender;
+
+    private Collection<Flight> flights;
 
     @Id
     @Column(name = "id_crew_member", nullable = false, insertable = true, updatable = true)
@@ -76,5 +79,14 @@ public class CrewMember {
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         return result;
+    }
+
+    @ManyToMany
+    public Collection<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(Collection<Flight> flights) {
+        this.flights = flights;
     }
 }
