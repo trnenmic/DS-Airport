@@ -1,15 +1,15 @@
 package Model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Airport {
+public class Airport implements Serializable {
     private int idAirport;
     private String city;
     private String airportName;
@@ -17,7 +17,30 @@ public class Airport {
     private String iata;
     private String country;
 
+
+    private Collection<Route> destinations;
+    private Collection<Route> origins;
+
+    public static Airport createAirport(String city, String airportName, String icao, String iata, String country) {
+        Airport airport = new Airport();
+        airport.setAirportName(airportName);
+        airport.setCity(city);
+        airport.setIcao(icao);
+        airport.setIata(iata);
+        airport.setCountry(country);
+        airport.setDestinations(new ArrayList<Route>());
+        airport.setOrigins(new ArrayList<Route>());
+        return airport;
+    }
+
+    public String toString() {
+        return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdAirport() + " ; "
+                + this.getAirportName() + " ; " + this.getCity() + " ; " + this.getCountry() + " ; " + this.getIcao() + " ; " +
+                this.getIata() + " ]");
+    }
+
     @Id
+    @GeneratedValue
     @Column(name = "id_airport", nullable = false, insertable = true, updatable = true)
     public int getIdAirport() {
         return idAirport;
@@ -103,5 +126,23 @@ public class Airport {
         result = 31 * result + (iata != null ? iata.hashCode() : 0);
         result = 31 * result + (country != null ? country.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany()
+    public Collection<Route> getDestinations() {
+        return destinations;
+    }
+
+    public void setDestinations(Collection<Route> destinations) {
+        this.destinations = destinations;
+    }
+
+    @OneToMany()
+    public Collection<Route> getOrigins() {
+        return origins;
+    }
+
+    public void setOrigins(Collection<Route> origins) {
+        this.origins = origins;
     }
 }

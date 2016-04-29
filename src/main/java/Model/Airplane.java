@@ -1,6 +1,7 @@
 package Model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by M on 27. 4. 2016.
@@ -10,6 +11,11 @@ public class Airplane {
     private int idAirplane;
     private int capacity;
     private int fuelTankCapacity;
+
+//    @ManyToMany
+//    @JoinTable(name = "airplane_has_route")
+//    private Collection<Route> routes;
+
     private String airline;
     private Integer payload;
     private Integer loadingCapacity;
@@ -34,6 +40,10 @@ public class Airplane {
                 + this.getAirplaneCode() + " ; " + this.getAirline() + " ; " + this.getCapacity() + " ; " +
                 this.getFuelTankCapacity() + " ; " + this.getPayload() + " ]");
     }
+//
+//    public Collection<Route> getRoutes() { return routes; }
+//    public void setRoutes(Collection<Route> routes) { this.routes = routes; }
+
 
     @Id
     @GeneratedValue

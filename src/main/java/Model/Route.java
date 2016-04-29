@@ -1,8 +1,7 @@
 package Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by M on 27. 4. 2016.
@@ -11,7 +10,26 @@ import javax.persistence.Id;
 public class Route {
     private int idRoute;
 
+//    @ManyToMany
+//    @JoinTable(name="airplane_has_route")
+//    private Collection<Airplane> airplanes;
+
+    private Airport origin;
+    private Airport destination;
+
+
+    public static Route createRoute() {
+        Route route = new Route();
+        return route;
+    }
+
+    public String toString() {
+        return String.valueOf("[ " + Route.class + " : " + getIdRoute() + " ; Airport origin: " + getOrigin().getAirportName()
+                + " ; Airport destination: " + getDestination().getAirportName() + " ]");
+    }
+
     @Id
+    @GeneratedValue
     @Column(name = "id_route", nullable = false, insertable = true, updatable = true)
     public int getIdRoute() {
         return idRoute;
@@ -37,4 +55,34 @@ public class Route {
     public int hashCode() {
         return idRoute;
     }
+
+    @ManyToOne
+    public Airport getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Airport origin) {
+        this.origin = origin;
+    }
+
+    @ManyToOne
+    public Airport getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Airport destination) {
+        this.destination = destination;
+    }
+
+
+//
+//    public Collection<Airplane> getAirplanes() {
+//        return airplanes;
+//    }
+//
+//    public void setAirplanes(Collection<Airplane> airplanes) {
+//        this.airplanes = airplanes;
+//    }
+
+
 }
