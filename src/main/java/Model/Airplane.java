@@ -12,9 +12,7 @@ public class Airplane {
     private int capacity;
     private int fuelTankCapacity;
 
-//    @ManyToMany
-//    @JoinTable(name = "airplane_has_route")
-//    private Collection<Route> routes;
+    private Collection<Route> routes;
 
     private String airline;
     private Integer payload;
@@ -40,9 +38,16 @@ public class Airplane {
                 + this.getAirplaneCode() + " ; " + this.getAirline() + " ; " + this.getCapacity() + " ; " +
                 this.getFuelTankCapacity() + " ; " + this.getPayload() + " ]");
     }
-//
-//    public Collection<Route> getRoutes() { return routes; }
-//    public void setRoutes(Collection<Route> routes) { this.routes = routes; }
+
+    @ManyToMany (mappedBy = "airplanes")
+    @JoinTable(name = "route")
+    public Collection<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(Collection<Route> routes) {
+        this.routes = routes;
+    }
 
 
     @Id

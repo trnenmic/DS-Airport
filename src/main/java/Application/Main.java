@@ -21,6 +21,7 @@ public class Main {
         Airplane airplane = em.find(Airplane.class, 101);
         System.out.println(airplane);
 
+
         Airport airport = em.find(Airport.class, 301);
         System.out.println(airport);
 
@@ -28,15 +29,10 @@ public class Main {
         System.out.println(route);
 
 
-
-        //System.out.println(airport);
-
-        //airplane.getRoutes().add(null);
-
-
-//finding by ID
-        //Airplane booka = em.find(Airplane.class, 1);
-        //System.out.println("Finding book> "+booka);
+        Object[]airplanes = route.getAirplanes().toArray();
+        System.out.println((Airplane) airplanes[0]);
+        Object[]routes = airplane.getRoutes().toArray();
+        System.out.println((Route) routes[0]);
     }
 
     public static Airplane insertAirplane(EntityTransaction tx, EntityManager em){
@@ -66,5 +62,14 @@ public class Main {
         em.persist(airport);
         tx.commit();
         return airport;
+    }
+
+    public static void connectAirplaneToRoute(EntityTransaction tx, EntityManager em, Airplane airplane, Route route){
+        tx.begin();
+        airplane.getRoutes().add(route);
+        route.getAirplanes().add(airplane);
+        em.merge(airplane);
+        em.merge(route);
+        tx.commit();
     }
 }

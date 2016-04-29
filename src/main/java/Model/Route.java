@@ -10,9 +10,8 @@ import java.util.Collection;
 public class Route {
     private int idRoute;
 
-//    @ManyToMany
-//    @JoinTable(name="airplane_has_route")
-//    private Collection<Airplane> airplanes;
+
+    private Collection<Airplane> airplanes;
 
     private Airport origin;
     private Airport destination;
@@ -75,14 +74,15 @@ public class Route {
     }
 
 
-//
-//    public Collection<Airplane> getAirplanes() {
-//        return airplanes;
-//    }
-//
-//    public void setAirplanes(Collection<Airplane> airplanes) {
-//        this.airplanes = airplanes;
-//    }
+    @ManyToMany
+    //@JoinTable(name = "airplane_has_route")
+    public Collection<Airplane> getAirplanes() {
+        return airplanes;
+    }
+
+    public void setAirplanes(Collection<Airplane> airplanes) {
+        this.airplanes = airplanes;
+    }
 
 
 }
