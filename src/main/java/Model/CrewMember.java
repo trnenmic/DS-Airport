@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -8,7 +9,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "crew_member", schema = "public", catalog = "student_db16_19")
-public class CrewMember {
+public class CrewMember implements Serializable {
     private int idCrewMember;
     private String passportNumber;
     private String address;

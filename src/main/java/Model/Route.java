@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -7,7 +8,7 @@ import java.util.Collection;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Route {
+public class Route implements Serializable {
     private int idRoute;
 
 
@@ -22,6 +23,7 @@ public class Route {
         return route;
     }
 
+    @Override
     public String toString() {
         return String.valueOf("[ " + Route.class + " : " + getIdRoute() + " ; Airport origin: " + getOrigin().getAirportName()
                 + " ; Airport destination: " + getDestination().getAirportName() + " ]");

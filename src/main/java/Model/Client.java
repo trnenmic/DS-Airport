@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,7 @@ import javax.persistence.Id;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Client {
+public class Client implements Serializable {
     private int idPassenger;
     private String passportNumber;
     private String address;

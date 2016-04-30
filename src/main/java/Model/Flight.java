@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -8,7 +9,7 @@ import java.util.Collection;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Flight {
+public class Flight implements Serializable {
     private int idFlight;
     private Date departureDate;
     private Date arrivalDate;

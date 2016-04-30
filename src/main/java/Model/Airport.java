@@ -33,6 +33,7 @@ public class Airport implements Serializable {
         return airport;
     }
 
+    @Override
     public String toString() {
         return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdAirport() + " ; "
                 + this.getAirportName() + " ; " + this.getCity() + " ; " + this.getCountry() + " ; " + this.getIcao() + " ; " +

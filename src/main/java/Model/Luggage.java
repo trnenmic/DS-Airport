@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Luggage {
+public class Luggage implements Serializable {
     private int idLuggage;
     private int weight;
     private Integer luggageType;

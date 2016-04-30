@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -7,7 +8,7 @@ import java.util.Collection;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Airplane {
+public class Airplane implements Serializable {
     private int idAirplane;
     private int capacity;
     private int fuelTankCapacity;
@@ -32,7 +33,8 @@ public class Airplane {
         airplane.setAirplaneCode(airplaneCode);
         return airplane;
     }
-
+    
+    @Override
     public String toString() {
         return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdAirplane() + " ; "
                 + this.getAirplaneCode() + " ; " + this.getAirline() + " ; " + this.getCapacity() + " ; " +

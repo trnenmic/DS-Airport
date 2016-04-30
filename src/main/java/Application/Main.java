@@ -1,5 +1,6 @@
 package Application;
 
+import Data.*;
 import Model.Airplane;
 import Model.Airport;
 import Model.Route;
@@ -14,6 +15,8 @@ import javax.persistence.Persistence;
  */
 public class Main {
     public static void main(String[] args) {
+        Frame frame = new Frame();
+        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -33,6 +36,30 @@ public class Main {
         System.out.println((Airplane) airplanes[0]);
         Object[]routes = airplane.getRoutes().toArray();
         System.out.println((Route) routes[0]);
+        
+//        testAirplaneDAO();
+        
+    }
+    
+    public static void testAirplaneDAO() {
+        AirplaneDAO airplaneDAO = new AirplaneDAO();
+        System.out.println(airplaneDAO.find(451).getAirline());
+    }
+    
+    public static void testGenericDAO() {
+        
+        GenericDAO dao = new GenericDAOImpl();
+        
+        Airplane a1 = Airplane.createAirplane(200, 50, "CSA", 500, 1000, "OK1");
+        Airplane a2 = Airplane.createAirplane(200, 50, "CSA", 500, 1000, "OK2");
+        
+        dao.create(a1);
+        dao.create(a2);
+        
+        a1.setAirline("Lufthansa");
+//        
+        dao.update(a1);
+                
     }
 
     public static Airplane insertAirplane(EntityTransaction tx, EntityManager em){
