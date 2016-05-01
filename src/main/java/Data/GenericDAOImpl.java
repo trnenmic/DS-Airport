@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.*;
 
 /**
  *
@@ -15,6 +16,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
     protected EntityManager em = emf.createEntityManager();
     protected EntityTransaction tx = em.getTransaction();
+    protected CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+    protected CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
 
     @Override
     public T create(T t) {
