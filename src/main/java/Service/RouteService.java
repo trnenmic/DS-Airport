@@ -3,7 +3,6 @@ package Service;
 import Model.Airplane;
 import Model.Airport;
 import Model.Route;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.Root;
 
@@ -28,9 +27,7 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
     public List<Route> findAll() {
         update();
         resultList = typedQuery.getResultList();
-        List<Route> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
     
     @Override
@@ -38,9 +35,7 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
         select.orderBy(criteriaBuilder.asc(from.get("idRoute")));
         update();
         resultList = typedQuery.getResultList();
-        List<Route> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
 
     @Override

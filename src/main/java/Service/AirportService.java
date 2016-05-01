@@ -2,7 +2,6 @@ package Service;
 
 import Model.Airport;
 import Model.Route;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.Root;
 
@@ -27,9 +26,7 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
     public List<Airport> findAll() {
         update();
         resultList = typedQuery.getResultList();
-        List<Airport> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
     
     @Override
@@ -37,9 +34,7 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
         select.orderBy(criteriaBuilder.asc(from.get("idAirport")));
         update();
         resultList = typedQuery.getResultList();
-        List<Airport> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
 
     @Override

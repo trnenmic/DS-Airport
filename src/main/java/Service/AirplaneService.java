@@ -2,7 +2,6 @@ package Service;
 
 import Model.Airplane;
 import Model.Route;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.Root;
 
@@ -27,9 +26,7 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
     public List<Airplane> findAll() {
         update();
         resultList = typedQuery.getResultList();
-        List<Airplane> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
 
     @Override
@@ -37,18 +34,14 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
         select.orderBy(criteriaBuilder.asc(from.get("idAirplane")));
         update();
         resultList = typedQuery.getResultList();
-        List<Airplane> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
 
     public List<Airplane> findAllOrderedByCapacity() {
         select.orderBy(criteriaBuilder.asc(from.get("capacity")));
         update();
         resultList = typedQuery.getResultList();
-        List<Airplane> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
 
     @Override

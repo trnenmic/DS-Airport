@@ -1,11 +1,10 @@
 package Service;
 
-import Model.Airport;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -50,10 +49,12 @@ public class GenericManagerImpl<T> implements GenericManager<T> {
         typedQuery = em.createQuery(select);
     }
     
-    protected void cast(List<T> result) {
+    protected List<T> getCastedResult() {
+        List<T> result = new ArrayList<>();
         for (Object o : resultList) {
             result.add((T)o);
         }
+        return result;
     }
 
 }

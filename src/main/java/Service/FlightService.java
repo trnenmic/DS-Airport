@@ -1,7 +1,6 @@
 package Service;
 
 import Model.Flight;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.Root;
 
@@ -25,18 +24,14 @@ public class FlightService extends GenericManagerImpl<Flight>{
     public List<Flight> findAll() {
         update();
         resultList = typedQuery.getResultList();
-        List<Flight> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
     
     public List<Flight> findAllOrderedByID() {
         select.orderBy(criteriaBuilder.asc(from.get("idFlight")));
         update();
         resultList = typedQuery.getResultList();
-        List<Flight> result = new ArrayList<>();
-        cast(result);
-        return result;
+        return getCastedResult();
     }
     
 }
