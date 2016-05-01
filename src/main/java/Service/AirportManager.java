@@ -1,6 +1,5 @@
 package Service;
 
-import Model.Airplane;
 import Model.Airport;
 import Model.Route;
 
@@ -11,7 +10,8 @@ import java.util.List;
  */
 public interface AirportManager {
 
-    List<Airport> findAllAirports();
+    List<Airport> findAll();
+    List<Airport> findAllOrderedById();
 
     boolean eraseAirportRouteBound(int airportId, int routeId);
 

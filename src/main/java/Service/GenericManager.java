@@ -4,14 +4,16 @@ import java.util.List;
 
 /**
  * Created by M on 1. 5. 2016.
+ * @param <T>
  */
 public interface GenericManager<T> {
 
-    T findById(int id);
+//    T findById(int id);
 
-    boolean delete(int id);
+//    boolean delete(int id);
+    void delete(T t);
 
-    List<T> findAllOrdered();
+//    List<T> findAllOrdered();
 
     T update(T t);
 

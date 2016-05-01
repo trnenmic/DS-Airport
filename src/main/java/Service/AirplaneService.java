@@ -1,22 +1,73 @@
 package Service;
 
-import Data.AirplaneDAO;
 import Model.Airplane;
+import Model.Route;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.criteria.Root;
 
 /**
  *
  * @author Martin
  */
-public class AirplaneService {
+public class AirplaneService extends GenericManagerImpl implements AirplaneManager {
 
-    private AirplaneDAO airplaneDAO = new AirplaneDAO();
+    private final Root<Airplane> from;
     
-    // trosku zbytecne, budto DAO, nebo services
-    public void addAirplane(Airplane airplane) {
-        airplaneDAO.create(airplane);
+    public AirplaneService() {
+        this.from = criteriaQuery.from(Airplane.class);
+        this.select = criteriaQuery.select(from);
     }
-    
-    
+
+    public Airplane find(int idAirplane) {
+        return em.find(Airplane.class, idAirplane);
+    }
+
+    @Override
+    public List<Airplane> findAll() {
+        update();
+        resultList = typedQuery.getResultList();
+        List<Airplane> result = new ArrayList<>();
+        cast(result);
+        return result;
+    }
+
+    @Override
+    public List<Airplane> findAllOrderedById() {
+        select.orderBy(criteriaBuilder.asc(from.get("idAirplane")));
+        update();
+        resultList = typedQuery.getResultList();
+        List<Airplane> result = new ArrayList<>();
+        cast(result);
+        return result;
+    }
+
+    public List<Airplane> findAllOrderedByCapacity() {
+        select.orderBy(criteriaBuilder.asc(from.get("capacity")));
+        update();
+        resultList = typedQuery.getResultList();
+        List<Airplane> result = new ArrayList<>();
+        cast(result);
+        return result;
+    }
+
+    @Override
+    public List<Route> findJoinedRoutes(Airplane airplane) {
+        // TO DO
+        return null;
+    }
+
+    @Override
+    public boolean eraseAirplaneRouteBound(int airplaneId, int routeId) {
+        // TO DO
+        return false;
+    }
+
+    @Override
+    public List<Airplane> findSpecified(Integer capacity, Integer fuelTankCapacity, String airline, Integer payload, Integer loadingCapacity, String airplaneCode) {
+        // TO DO
+        return null;
+    }
     
     
 }
