@@ -4,6 +4,7 @@ import Data.*;
 import Model.Airplane;
 import Model.Airport;
 import Model.Route;
+import Service.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,17 +17,17 @@ import javax.persistence.Persistence;
 public class Main {
     public static void main(String[] args) {
 //        Frame frame = new Frame();
-        NewJFrame visualTest = new NewJFrame();
+//        NewJFrame visualTest = new NewJFrame();
         
-        AirplaneDAO airplaneDAO = new AirplaneDAO();
+        AirplaneService airplaneService = new AirplaneService();
         
         System.out.println("All airplanes, not sorted:");
-        for (Airplane airplane : airplaneDAO.findAll()) {
+        for (Airplane airplane : airplaneService.findAll()) {
             System.out.println(airplane);
         }
         System.out.println();
         System.out.println("All airplanes, sorted by id (ascending):");
-        for (Airplane airplane : airplaneDAO.findAllOrderedByID()) {
+        for (Airplane airplane : airplaneService.findAllOrderedById()) {
             System.out.println(airplane);
         }
         
