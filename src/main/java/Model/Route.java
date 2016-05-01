@@ -20,6 +20,8 @@ public class Route implements Serializable {
 
     public static Route createRoute() {
         Route route = new Route();
+        route.setOrigin(null);
+        route.setDestination(null);
         return route;
     }
 

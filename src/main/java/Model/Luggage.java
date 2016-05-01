@@ -12,9 +12,25 @@ public class Luggage implements Serializable {
     private int weight;
     private Integer luggageType;
     private String code;
-    private Ticket ticketByTicketIdTicket;
+    private Ticket ticket;
+
+    public static Luggage createLuggage(int weight, Integer luggageType, String code) {
+        Luggage luggage = new Luggage();
+        luggage.setWeight(weight);
+        luggage.setLuggageType(luggageType);
+        luggage.setCode(code);
+        luggage.setTicket(null);
+        return luggage;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdLuggage() + " ; "
+                + this.getWeight() + " ; " + this.getCode() + " ; " + this.getLuggageType() + " ]");
+    }
 
     @Id
+    @GeneratedValue
     @Column(name = "id_luggage", nullable = false, insertable = true, updatable = true)
     public int getIdLuggage() {
         return idLuggage;
@@ -80,11 +96,11 @@ public class Luggage implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "ticket_id_ticket", referencedColumnName = "id_ticket", nullable = false)
-    public Ticket getTicketByTicketIdTicket() {
-        return ticketByTicketIdTicket;
+    public Ticket getTicket() {
+        return ticket;
     }
 
-    public void setTicketByTicketIdTicket(Ticket ticketByTicketIdTicket) {
-        this.ticketByTicketIdTicket = ticketByTicketIdTicket;
+    public void setTicket(Ticket ticketByTicketIdTicket) {
+        this.ticket = ticketByTicketIdTicket;
     }
 }

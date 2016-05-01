@@ -1,10 +1,9 @@
 package Model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.Collection;
+import javax.persistence.*;
 
 /**
  * Created by M on 27. 4. 2016.
@@ -16,8 +15,30 @@ public class Ticket implements Serializable {
     private int travelClass;
     private int price;
     private int seat;
+    private Flight flight;
+    private Client client;
+    private Collection<Luggage> luggages;
+
+    public static Ticket createTicket(String ticketNumber, int travelClass, int price, int seat) {
+        Ticket ticket = new Ticket();
+        ticket.setTicketNumber(ticketNumber);
+        ticket.setTravelClass(travelClass);
+        ticket.setPrice(price);
+        ticket.setSeat(seat);
+        ticket.setLuggages(new ArrayList<Luggage>());
+        ticket.setFlight(null);
+        ticket.setClient(null);
+        return ticket;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf("[ " + this.getClass().toString() + " : " + this.getTicketNumber() + " ; "
+                + this.getTravelClass() + " ; " + this.getPrice() + " ; " + this.getSeat() + " ]");
+    }
 
     @Id
+    @GeneratedValue
     @Column(name = "id_ticket", nullable = false, insertable = true, updatable = true)
     public int getIdTicket() {
         return idTicket;
@@ -92,5 +113,34 @@ public class Ticket implements Serializable {
         result = 31 * result + price;
         result = 31 * result + seat;
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "flight_id_flight", referencedColumnName = "id_flight", nullable = false)
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    @OneToMany
+    public Collection<Luggage> getLuggages() {
+        return luggages;
+    }
+
+    public void setLuggages(Collection<Luggage> luggages) {
+        this.luggages = luggages;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "client_id_passenger", referencedColumnName = "id_passenger", nullable = false)
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

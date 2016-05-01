@@ -16,8 +16,6 @@ public class Airport implements Serializable {
     private String icao;
     private String iata;
     private String country;
-
-
     private Collection<Route> destinations;
     private Collection<Route> origins;
 

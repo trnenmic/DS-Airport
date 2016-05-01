@@ -12,13 +12,12 @@ public class Airplane implements Serializable {
     private int idAirplane;
     private int capacity;
     private int fuelTankCapacity;
-
-    private Collection<Route> routes;
-
     private String airline;
     private Integer payload;
     private Integer loadingCapacity;
     private String airplaneCode;
+    private Collection<Route> routes;
+    private Collection<Flight> flights;
 
 
     public static Airplane createAirplane(int capacity, int fuelTankCapacity,
@@ -29,28 +28,16 @@ public class Airplane implements Serializable {
         airplane.setAirline(airline);
         airplane.setPayload(payload);
         airplane.setLoadingCapacity(loadingCapacity);
-        //
         airplane.setAirplaneCode(airplaneCode);
         return airplane;
     }
-    
+
     @Override
     public String toString() {
         return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdAirplane() + " ; "
                 + this.getAirplaneCode() + " ; " + this.getAirline() + " ; " + this.getCapacity() + " ; " +
                 this.getFuelTankCapacity() + " ; " + this.getPayload() + " ]");
     }
-
-    @ManyToMany (mappedBy = "airplanes")
-    @JoinTable(name = "route")
-    public Collection<Route> getRoutes() {
-        return routes;
-    }
-
-    public void setRoutes(Collection<Route> routes) {
-        this.routes = routes;
-    }
-
 
     @Id
     @GeneratedValue
@@ -154,4 +141,24 @@ public class Airplane implements Serializable {
         result = 31 * result + (airplaneCode != null ? airplaneCode.hashCode() : 0);
         return result;
     }
+
+    @ManyToMany(mappedBy = "airplanes")
+    @JoinTable(name = "route")
+    public Collection<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(Collection<Route> routes) {
+        this.routes = routes;
+    }
+
+    @OneToMany
+    public Collection<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(Collection<Flight> flights) {
+        this.flights = flights;
+    }
+
 }

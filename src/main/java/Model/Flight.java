@@ -3,6 +3,7 @@ package Model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -16,10 +17,35 @@ public class Flight implements Serializable {
     private boolean inspected;
     private int fuelRequired;
     private int numBookedSeats;
-    private Route routeByRouteIdRoute;
+    private Route route;
+    private Airplane airplane;
     private Collection<CrewMember> crewMembers;
+    private Collection<Ticket> tickets;
+
+    public static Flight createFlight(Date departureDate, Date arrivalDate, boolean inspected, int fuelRequired, int numBookedSeats) {
+        Flight flight = new Flight();
+        flight.setDepartureDate(departureDate);
+        flight.setArrivalDate(arrivalDate);
+        flight.setInspected(inspected);
+        flight.setFuelRequired(fuelRequired);
+        flight.setNumBookedSeats(numBookedSeats);
+        flight.setCrewMembers(new ArrayList<CrewMember>());
+        flight.setTickets(new ArrayList<Ticket>());
+        flight.setAirplane(null);
+        flight.setRoute(null);
+        return flight;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdFlight() + " ; "
+                + this.getDepartureDate().toString() + " ; " + this.getArrivalDate().toString() + " ; "
+                + this.getFuelRequired() + " ; " + (this.isInspected() ? "inspected" : "not inspected") + " ; "
+                + this.getNumBookedSeats() + " ]");
+    }
 
     @Id
+    @GeneratedValue
     @Column(name = "id_flight", nullable = false, insertable = true, updatable = true)
     public int getIdFlight() {
         return idFlight;
@@ -110,15 +136,15 @@ public class Flight implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "route_id_route", referencedColumnName = "id_route", nullable = false)
-    public Route getRouteByRouteIdRoute() {
-        return routeByRouteIdRoute;
+    public Route getRoute() {
+        return route;
     }
 
-    public void setRouteByRouteIdRoute(Route routeByRouteIdRoute) {
-        this.routeByRouteIdRoute = routeByRouteIdRoute;
+    public void setRoute(Route routeByRouteIdRoute) {
+        this.route = routeByRouteIdRoute;
     }
 
-    @ManyToMany (mappedBy = "flights")
+    @ManyToMany(mappedBy = "flights")
     @JoinTable(name = "crew_member")
     public Collection<CrewMember> getCrewMembers() {
         return crewMembers;
@@ -126,5 +152,24 @@ public class Flight implements Serializable {
 
     public void setCrewMembers(Collection<CrewMember> crewMembers) {
         this.crewMembers = crewMembers;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "airplane_id_airplane", referencedColumnName = "id_airplane", nullable = false)
+    public Airplane getAirplane() {
+        return airplane;
+    }
+
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
+    }
+
+    @OneToMany
+    public Collection<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Collection<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

@@ -2,6 +2,7 @@ package Model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -14,10 +15,25 @@ public class CrewMember implements Serializable {
     private String passportNumber;
     private String address;
     private String gender;
-
     private Collection<Flight> flights;
 
+    public static CrewMember createCrewMember(String passportNumber, String address, String gender) {
+        CrewMember crewMember = new CrewMember();
+        crewMember.setAddress(address);
+        crewMember.setPassportNumber(passportNumber);
+        crewMember.setGender(gender);
+        crewMember.setFlights(new ArrayList<Flight>());
+        return crewMember;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdCrewMember() + " ; "
+                + this.getPassportNumber() + " ; " + this.getAddress() + " ; " + this.getGender() + " ]");
+    }
+
     @Id
+    @GeneratedValue
     @Column(name = "id_crew_member", nullable = false, insertable = true, updatable = true)
     public int getIdCrewMember() {
         return idCrewMember;
