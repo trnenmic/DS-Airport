@@ -15,28 +15,42 @@ import javax.persistence.Persistence;
  */
 public class Main {
     public static void main(String[] args) {
-        Frame frame = new Frame();
+//        Frame frame = new Frame();
+        NewJFrame visualTest = new NewJFrame();
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        Airplane airplane = em.find(Airplane.class, 101);
-        System.out.println(airplane);
-
-
-        Airport airport = em.find(Airport.class, 301);
-        System.out.println(airport);
-
-        Route route = em.find(Route.class, 401);
-        System.out.println(route);
-
-
-        Object[]airplanes = route.getAirplanes().toArray();
-        System.out.println((Airplane) airplanes[0]);
-        Object[]routes = airplane.getRoutes().toArray();
-        System.out.println((Route) routes[0]);
+        AirplaneDAO airplaneDAO = new AirplaneDAO();
         
+        System.out.println("All airplanes, not sorted:");
+        for (Airplane airplane : airplaneDAO.findAll()) {
+            System.out.println(airplane);
+        }
+        System.out.println();
+        System.out.println("All airplanes, sorted by id (ascending):");
+        for (Airplane airplane : airplaneDAO.findAllOrderedByID()) {
+            System.out.println(airplane);
+        }
+        
+        
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
+//        EntityManager em = emf.createEntityManager();
+//        EntityTransaction tx = em.getTransaction();
+//
+//        Airplane airplane = em.find(Airplane.class, 101);
+//        System.out.println(airplane);
+//
+//
+//        Airport airport = em.find(Airport.class, 301);
+//        System.out.println(airport);
+//
+//        Route route = em.find(Route.class, 401);
+//        System.out.println(route);
+//
+//
+//        Object[]airplanes = route.getAirplanes().toArray();
+//        System.out.println((Airplane) airplanes[0]);
+//        Object[]routes = airplane.getRoutes().toArray();
+//        System.out.println((Route) routes[0]);
+//        
 //        testAirplaneDAO();
         
     }
