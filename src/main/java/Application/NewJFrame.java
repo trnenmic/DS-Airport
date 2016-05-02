@@ -5,6 +5,9 @@
  */
 package Application;
 
+import javax.swing.JDialog;
+import javax.swing.UIManager;
+
 /**
  *
  * @author Martin
@@ -17,6 +20,7 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
         this.setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -28,203 +32,676 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jComboBox1 = new javax.swing.JComboBox();
+        MainTabbedPane = new javax.swing.JTabbedPane();
+        AirportPanel = new javax.swing.JPanel();
+        CreateAirportButton = new javax.swing.JButton();
+        UpdateAirportButton = new javax.swing.JButton();
+        DeleteAirportButton = new javax.swing.JButton();
+        ApplyFilterAirportButton = new javax.swing.JButton();
+        AirportFilterLabel = new javax.swing.JLabel();
+        AirportIcaoTextField = new javax.swing.JTextField();
+        AirportNameTextField = new javax.swing.JTextField();
+        AirportIataTextField = new javax.swing.JTextField();
+        AirportCityTextField = new javax.swing.JTextField();
+        AirportNameLabel = new javax.swing.JLabel();
+        AirportCityLabel = new javax.swing.JLabel();
+        AirportIcaoLabel = new javax.swing.JLabel();
+        AirportIataLabel = new javax.swing.JLabel();
+        AirportScrollPane = new javax.swing.JScrollPane();
+        AirportList = new javax.swing.JList();
+        AirplanePanel = new javax.swing.JPanel();
+        UpdateAirplaneButton = new javax.swing.JButton();
+        DeleteAirplaneButton = new javax.swing.JButton();
+        ApplyFilterAirplaneButton = new javax.swing.JButton();
+        CreateAirplaneButton = new javax.swing.JButton();
+        AirplaneFilterLabel = new javax.swing.JLabel();
+        AirplaneCodeLabel = new javax.swing.JLabel();
+        AirplaneAirlineLabel = new javax.swing.JLabel();
+        AirplaneCodeTextField = new javax.swing.JTextField();
+        AirplaneAirlineTextField = new javax.swing.JTextField();
+        AirplaneFuelGreaterLabel = new javax.swing.JLabel();
+        AirplaneFuelLesserLabel = new javax.swing.JLabel();
+        AirplaneLoadingGreaterLabel = new javax.swing.JLabel();
+        AirplaneLoadingLesserLabel = new javax.swing.JLabel();
+        AirplaneFuelGreaterTextField = new javax.swing.JTextField();
+        AirplaneFuelLesserTextField = new javax.swing.JTextField();
+        AirplaneLoadingGreaterTextField = new javax.swing.JTextField();
+        AirplaneLoadingLesserTextField = new javax.swing.JTextField();
+        AirplaneScrollPane = new javax.swing.JScrollPane();
+        AirplaneList = new javax.swing.JList();
+        RoutePanel = new javax.swing.JPanel();
+        UpdateRouteButton = new javax.swing.JButton();
+        DeleteRouteButton = new javax.swing.JButton();
+        ApplyFilterRouteButton = new javax.swing.JButton();
+        CreateRouteButton = new javax.swing.JButton();
+        RouteFilterLabel = new javax.swing.JLabel();
+        OriginFilterLabel = new javax.swing.JLabel();
+        DestinationFilterLabel = new javax.swing.JLabel();
+        RouteNameLabel1 = new javax.swing.JLabel();
+        RouteNameLabel2 = new javax.swing.JLabel();
+        RouteCityLabel1 = new javax.swing.JLabel();
+        RouteCityLabel2 = new javax.swing.JLabel();
+        RouteNameTextField1 = new javax.swing.JTextField();
+        RouteCityTextField1 = new javax.swing.JTextField();
+        RouteNameTextField2 = new javax.swing.JTextField();
+        RouteCityTextField2 = new javax.swing.JTextField();
+        RouteIcaoLabel1 = new javax.swing.JLabel();
+        RouteIataLabel1 = new javax.swing.JLabel();
+        RouteIcaoLabel2 = new javax.swing.JLabel();
+        RouteIataLabel2 = new javax.swing.JLabel();
+        RouteIcaoTextField1 = new javax.swing.JTextField();
+        RouteIataTextField1 = new javax.swing.JTextField();
+        RouteIataTextField2 = new javax.swing.JTextField();
+        RouteIcaoTextField2 = new javax.swing.JTextField();
+        RouteScrollPane = new javax.swing.JScrollPane();
+        RouteList = new javax.swing.JList();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Airport Manager");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setForeground(new java.awt.Color(153, 153, 255));
+        setLocation(new java.awt.Point(250, 250));
+        setLocationByPlatform(true);
 
-        jButton1.setText("Create new");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        MainTabbedPane.setBackground(new java.awt.Color(204, 204, 255));
+        MainTabbedPane.setPreferredSize(new java.awt.Dimension(1024, 768));
+
+        AirportPanel.setBackground(new java.awt.Color(204, 204, 255));
+
+        CreateAirportButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        CreateAirportButton.setText("Create new");
+        CreateAirportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CreateAirportButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Update selected");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        UpdateAirportButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        UpdateAirportButton.setText("Update selected");
+        UpdateAirportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                UpdateAirportButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Delete selected");
+        DeleteAirportButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        DeleteAirportButton.setForeground(new java.awt.Color(137, 25, 25));
+        DeleteAirportButton.setText("Delete selected");
+        DeleteAirportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteAirportButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Apply filter");
+        ApplyFilterAirportButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        ApplyFilterAirportButton.setForeground(new java.awt.Color(25, 62, 137));
+        ApplyFilterAirportButton.setText("Apply filter");
 
-        jLabel1.setText("Filter settings for airport:");
+        AirportFilterLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        AirportFilterLabel.setText("Filter settings for Airport:");
 
-        jTextField1.setText("jTextField1");
+        AirportIcaoTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirportIcaoTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTextField2.setText("jTextField1");
+        AirportNameTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirportNameTextField.setForeground(new java.awt.Color(255, 255, 255));
+        AirportNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AirportNameTextFieldActionPerformed(evt);
+            }
+        });
 
-        jTextField3.setText("jTextField1");
+        AirportIataTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirportIataTextField.setForeground(new java.awt.Color(255, 255, 255));
+        AirportIataTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AirportIataTextFieldActionPerformed(evt);
+            }
+        });
 
-        jTextField4.setText("jTextField1");
+        AirportCityTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirportCityTextField.setForeground(new java.awt.Color(255, 255, 255));
+        AirportCityTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AirportCityTextFieldActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("Name:");
+        AirportNameLabel.setText("Name:");
 
-        jLabel3.setText("City:");
+        AirportCityLabel.setText("City:");
 
-        jLabel4.setText("ICAO:");
+        AirportIcaoLabel.setText("ICAO:");
 
-        jLabel5.setText("IATA:");
+        AirportIataLabel.setText("IATA:");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        AirportList.setBackground(new java.awt.Color(52, 52, 56));
+        AirportList.setForeground(new java.awt.Color(255, 255, 255));
+        AirportList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        AirportList.setSelectionBackground(new java.awt.Color(0, 0, 0));
+        AirportList.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        AirportScrollPane.setViewportView(AirportList);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout AirportPanelLayout = new javax.swing.GroupLayout(AirportPanel);
+        AirportPanel.setLayout(AirportPanelLayout);
+        AirportPanelLayout.setHorizontalGroup(
+            AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AirportPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AirportScrollPane)
+                    .addGroup(AirportPanelLayout.createSequentialGroup()
+                        .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AirportPanelLayout.createSequentialGroup()
+                                .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AirportPanelLayout.createSequentialGroup()
+                                        .addComponent(AirportCityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(AirportCityTextField))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AirportPanelLayout.createSequentialGroup()
+                                        .addComponent(AirportNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField2)))
+                                        .addComponent(AirportNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AirportPanelLayout.createSequentialGroup()
+                                        .addComponent(AirportIcaoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AirportIcaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AirportPanelLayout.createSequentialGroup()
+                                        .addComponent(AirportIataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AirportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(AirportPanelLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(AirportFilterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
+                        .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(CreateAirportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ApplyFilterAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(UpdateAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(DeleteAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        AirportPanelLayout.setVerticalGroup(
+            AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AirportPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AirportPanelLayout.createSequentialGroup()
+                        .addComponent(AirportFilterLabel)
+                        .addGap(18, 18, 18)
+                        .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AirportIcaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AirportNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AirportNameLabel)
+                            .addComponent(AirportIcaoLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AirportCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(AirportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(AirportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(AirportIataLabel))
+                            .addComponent(AirportCityLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(AirportPanelLayout.createSequentialGroup()
+                        .addComponent(CreateAirportButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UpdateAirportButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DeleteAirportButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ApplyFilterAirportButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(AirportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        MainTabbedPane.addTab("Airport", AirportPanel);
+
+        AirplanePanel.setBackground(new java.awt.Color(204, 204, 255));
+
+        UpdateAirplaneButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        UpdateAirplaneButton.setText("Update selected");
+        UpdateAirplaneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateAirplaneButtonActionPerformed(evt);
+            }
+        });
+
+        DeleteAirplaneButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        DeleteAirplaneButton.setForeground(new java.awt.Color(137, 25, 25));
+        DeleteAirplaneButton.setText("Delete selected");
+        DeleteAirplaneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteAirplaneButtonActionPerformed(evt);
+            }
+        });
+
+        ApplyFilterAirplaneButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        ApplyFilterAirplaneButton.setForeground(new java.awt.Color(25, 62, 137));
+        ApplyFilterAirplaneButton.setText("Apply filter");
+
+        CreateAirplaneButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        CreateAirplaneButton.setText("Create new");
+        CreateAirplaneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateAirplaneButtonActionPerformed(evt);
+            }
+        });
+
+        AirplaneFilterLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        AirplaneFilterLabel.setText("Filter settings for Airplane:");
+
+        AirplaneCodeLabel.setText("Code:");
+
+        AirplaneAirlineLabel.setText("Airline:");
+
+        AirplaneCodeTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirplaneCodeTextField.setForeground(new java.awt.Color(255, 255, 255));
+
+        AirplaneAirlineTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirplaneAirlineTextField.setForeground(new java.awt.Color(255, 255, 255));
+
+        AirplaneFuelGreaterLabel.setText("Fuel capacity greater than:");
+
+        AirplaneFuelLesserLabel.setText("Fuel capacity lesser than:");
+
+        AirplaneLoadingGreaterLabel.setText("Loading capacity greater than:");
+
+        AirplaneLoadingLesserLabel.setText("Loading capacity lesser than:");
+
+        AirplaneFuelGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirplaneFuelGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
+
+        AirplaneFuelLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirplaneFuelLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
+
+        AirplaneLoadingGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirplaneLoadingGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
+
+        AirplaneLoadingLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
+        AirplaneLoadingLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
+
+        AirplaneList.setBackground(new java.awt.Color(52, 52, 56));
+        AirplaneList.setForeground(new java.awt.Color(255, 255, 255));
+        AirplaneList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        AirplaneScrollPane.setViewportView(AirplaneList);
+
+        javax.swing.GroupLayout AirplanePanelLayout = new javax.swing.GroupLayout(AirplanePanel);
+        AirplanePanel.setLayout(AirplanePanelLayout);
+        AirplanePanelLayout.setHorizontalGroup(
+            AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AirplanePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AirplaneScrollPane)
+                    .addGroup(AirplanePanelLayout.createSequentialGroup()
+                        .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AirplanePanelLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(AirplaneFilterLabel))
+                            .addGroup(AirplanePanelLayout.createSequentialGroup()
+                                .addComponent(AirplaneCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AirplaneCodeTextField))
+                            .addGroup(AirplanePanelLayout.createSequentialGroup()
+                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AirplaneFuelGreaterLabel)
+                                    .addComponent(AirplaneFuelLesserLabel))
+                                .addGap(10, 10, 10)
+                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AirplaneFuelLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AirplaneFuelGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(AirplanePanelLayout.createSequentialGroup()
+                                .addComponent(AirplaneAirlineLabel)
+                                .addGap(31, 31, 31)
+                                .addComponent(AirplaneAirlineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AirplanePanelLayout.createSequentialGroup()
+                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AirplaneLoadingGreaterLabel)
+                                    .addComponent(AirplaneLoadingLesserLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AirplaneLoadingLesserTextField)
+                                    .addComponent(AirplaneLoadingGreaterTextField))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                        .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(CreateAirplaneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ApplyFilterAirplaneButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(UpdateAirplaneButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(DeleteAirplaneButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+        );
+        AirplanePanelLayout.setVerticalGroup(
+            AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AirplanePanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AirplanePanelLayout.createSequentialGroup()
+                        .addComponent(AirplaneFilterLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(AirplaneCodeLabel)
+                                .addComponent(AirplaneCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AirplanePanelLayout.createSequentialGroup()
+                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(AirplaneAirlineLabel)
+                                    .addComponent(AirplaneAirlineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(AirplaneLoadingGreaterLabel)
+                                    .addComponent(AirplaneLoadingGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AirplaneFuelGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AirplaneFuelGreaterLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(AirplaneLoadingLesserLabel)
+                                    .addComponent(AirplaneLoadingLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AirplaneFuelLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AirplaneFuelLesserLabel)))))
+                    .addGroup(AirplanePanelLayout.createSequentialGroup()
+                        .addComponent(CreateAirplaneButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UpdateAirplaneButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DeleteAirplaneButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ApplyFilterAirplaneButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(AirplaneScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        MainTabbedPane.addTab("Airplane", AirplanePanel);
+
+        RoutePanel.setBackground(new java.awt.Color(204, 204, 255));
+
+        UpdateRouteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        UpdateRouteButton.setText("Update selected");
+        UpdateRouteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateRouteButtonActionPerformed(evt);
+            }
+        });
+
+        DeleteRouteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        DeleteRouteButton.setForeground(new java.awt.Color(137, 25, 25));
+        DeleteRouteButton.setText("Delete selected");
+        DeleteRouteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteRouteButtonActionPerformed(evt);
+            }
+        });
+
+        ApplyFilterRouteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        ApplyFilterRouteButton.setForeground(new java.awt.Color(25, 62, 137));
+        ApplyFilterRouteButton.setText("Apply filter");
+
+        CreateRouteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        CreateRouteButton.setText("Create new");
+        CreateRouteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateRouteButtonActionPerformed(evt);
+            }
+        });
+
+        RouteFilterLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        RouteFilterLabel.setText("Filter settings for Route:");
+
+        OriginFilterLabel.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        OriginFilterLabel.setText("Origin airport:");
+
+        DestinationFilterLabel.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        DestinationFilterLabel.setText("Destination airport:");
+
+        RouteNameLabel1.setText("Name:");
+
+        RouteNameLabel2.setText("Name:");
+
+        RouteCityLabel1.setText("City:");
+
+        RouteCityLabel2.setText("City:");
+
+        RouteNameTextField1.setBackground(new java.awt.Color(52, 52, 56));
+        RouteNameTextField1.setForeground(new java.awt.Color(255, 255, 255));
+
+        RouteCityTextField1.setBackground(new java.awt.Color(52, 52, 56));
+        RouteCityTextField1.setForeground(new java.awt.Color(255, 255, 255));
+
+        RouteNameTextField2.setBackground(new java.awt.Color(52, 52, 56));
+        RouteNameTextField2.setForeground(new java.awt.Color(255, 255, 255));
+
+        RouteCityTextField2.setBackground(new java.awt.Color(52, 52, 56));
+        RouteCityTextField2.setForeground(new java.awt.Color(255, 255, 255));
+
+        RouteIcaoLabel1.setText("ICAO:");
+
+        RouteIataLabel1.setText("IATA:");
+
+        RouteIcaoLabel2.setText("ICAO:");
+
+        RouteIataLabel2.setText("IATA:");
+
+        RouteIcaoTextField1.setBackground(new java.awt.Color(52, 52, 56));
+        RouteIcaoTextField1.setForeground(new java.awt.Color(255, 255, 255));
+
+        RouteIataTextField1.setBackground(new java.awt.Color(52, 52, 56));
+        RouteIataTextField1.setForeground(new java.awt.Color(255, 255, 255));
+
+        RouteIataTextField2.setBackground(new java.awt.Color(52, 52, 56));
+        RouteIataTextField2.setForeground(new java.awt.Color(255, 255, 255));
+
+        RouteIcaoTextField2.setBackground(new java.awt.Color(52, 52, 56));
+        RouteIcaoTextField2.setForeground(new java.awt.Color(255, 255, 255));
+
+        RouteList.setBackground(new java.awt.Color(52, 52, 56));
+        RouteList.setForeground(new java.awt.Color(255, 255, 255));
+        RouteList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        RouteScrollPane.setViewportView(RouteList);
+
+        javax.swing.GroupLayout RoutePanelLayout = new javax.swing.GroupLayout(RoutePanel);
+        RoutePanel.setLayout(RoutePanelLayout);
+        RoutePanelLayout.setHorizontalGroup(
+            RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RoutePanelLayout.createSequentialGroup()
+                .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RoutePanelLayout.createSequentialGroup()
+                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(RoutePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(DestinationFilterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(OriginFilterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(RoutePanelLayout.createSequentialGroup()
+                                        .addComponent(RouteNameLabel2)
                                         .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43))
+                                        .addComponent(RouteNameTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(RoutePanelLayout.createSequentialGroup()
+                                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(RouteNameLabel1)
+                                            .addComponent(RouteCityLabel1))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(RouteCityTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(RouteNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(RoutePanelLayout.createSequentialGroup()
+                                        .addComponent(RouteCityLabel2)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(RouteCityTextField2)))
+                                .addGap(42, 42, 42)
+                                .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(RoutePanelLayout.createSequentialGroup()
+                                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(RouteIcaoLabel2)
+                                            .addComponent(RouteIataLabel2))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(RouteIataTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                            .addComponent(RouteIcaoTextField2)))
+                                    .addGroup(RoutePanelLayout.createSequentialGroup()
+                                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(RouteIcaoLabel1)
+                                            .addComponent(RouteIataLabel1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(RouteIataTextField1)
+                                            .addComponent(RouteIcaoTextField1)))))
+                            .addGroup(RoutePanelLayout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(RouteFilterLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(CreateRouteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ApplyFilterRouteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(UpdateRouteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(DeleteRouteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(RoutePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(RouteScrollPane)))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel4))
-                    .addComponent(jButton2))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        RoutePanelLayout.setVerticalGroup(
+            RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RoutePanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RoutePanelLayout.createSequentialGroup()
+                        .addComponent(CreateRouteButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(UpdateRouteButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)))
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(DeleteRouteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ApplyFilterRouteButton))
+                    .addGroup(RoutePanelLayout.createSequentialGroup()
+                        .addComponent(RouteFilterLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(OriginFilterLabel)
+                            .addComponent(RouteNameLabel1)
+                            .addComponent(RouteNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RouteIcaoLabel1)
+                            .addComponent(RouteIcaoTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RouteCityLabel1)
+                            .addComponent(RouteCityTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RouteIataLabel1)
+                            .addComponent(RouteIataTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DestinationFilterLabel)
+                            .addComponent(RouteNameLabel2)
+                            .addComponent(RouteNameTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RouteIcaoLabel2)
+                            .addComponent(RouteIcaoTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(RoutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RouteCityLabel2)
+                            .addComponent(RouteCityTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RouteIataLabel2)
+                            .addComponent(RouteIataTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(RouteScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Airport", jPanel1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Airplane", jPanel2);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Route", jPanel3);
+        MainTabbedPane.addTab("Route", RoutePanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(MainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(MainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void CreateAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAirportButtonActionPerformed
+        AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true);
+        prepareDialog(airportAttributesDialog);
+    }//GEN-LAST:event_CreateAirportButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void UpdateAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateAirportButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_UpdateAirportButtonActionPerformed
+
+    private void AirportNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirportNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AirportNameTextFieldActionPerformed
+
+    private void DeleteAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteAirportButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteAirportButtonActionPerformed
+
+    private void CreateRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateRouteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreateRouteButtonActionPerformed
+
+    private void DeleteRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteRouteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteRouteButtonActionPerformed
+
+    private void UpdateRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateRouteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UpdateRouteButtonActionPerformed
+
+    private void AirportCityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirportCityTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AirportCityTextFieldActionPerformed
+
+    private void AirportIataTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirportIataTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AirportIataTextFieldActionPerformed
+
+    private void CreateAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAirplaneButtonActionPerformed
+        AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true);
+        prepareDialog(attributesDialog);
+    }//GEN-LAST:event_CreateAirplaneButtonActionPerformed
+
+    private void DeleteAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteAirplaneButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteAirplaneButtonActionPerformed
+
+    private void UpdateAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateAirplaneButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UpdateAirplaneButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,12 +713,13 @@ public class NewJFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+            /*for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+             if ("Nimbus".equals(info.getName())) {
+             javax.swing.UIManager.setLookAndFeel(info.getClassName());
+             break;
+             }
+             }*/
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -261,25 +739,78 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
 
+    private void prepareDialog(JDialog dialog) {
+        dialog.setVisible(true);
+        dialog.setAlwaysOnTop(true);
+        dialog.setLocationRelativeTo(null);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JList jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel AirplaneAirlineLabel;
+    private javax.swing.JTextField AirplaneAirlineTextField;
+    private javax.swing.JLabel AirplaneCodeLabel;
+    private javax.swing.JTextField AirplaneCodeTextField;
+    private javax.swing.JLabel AirplaneFilterLabel;
+    private javax.swing.JLabel AirplaneFuelGreaterLabel;
+    private javax.swing.JTextField AirplaneFuelGreaterTextField;
+    private javax.swing.JLabel AirplaneFuelLesserLabel;
+    private javax.swing.JTextField AirplaneFuelLesserTextField;
+    private javax.swing.JList AirplaneList;
+    private javax.swing.JLabel AirplaneLoadingGreaterLabel;
+    private javax.swing.JTextField AirplaneLoadingGreaterTextField;
+    private javax.swing.JLabel AirplaneLoadingLesserLabel;
+    private javax.swing.JTextField AirplaneLoadingLesserTextField;
+    private javax.swing.JPanel AirplanePanel;
+    private javax.swing.JScrollPane AirplaneScrollPane;
+    private javax.swing.JLabel AirportCityLabel;
+    private javax.swing.JTextField AirportCityTextField;
+    private javax.swing.JLabel AirportFilterLabel;
+    private javax.swing.JLabel AirportIataLabel;
+    private javax.swing.JTextField AirportIataTextField;
+    private javax.swing.JLabel AirportIcaoLabel;
+    private javax.swing.JTextField AirportIcaoTextField;
+    private javax.swing.JList AirportList;
+    private javax.swing.JLabel AirportNameLabel;
+    private javax.swing.JTextField AirportNameTextField;
+    private javax.swing.JPanel AirportPanel;
+    private javax.swing.JScrollPane AirportScrollPane;
+    private javax.swing.JButton ApplyFilterAirplaneButton;
+    private javax.swing.JButton ApplyFilterAirportButton;
+    private javax.swing.JButton ApplyFilterRouteButton;
+    private javax.swing.JButton CreateAirplaneButton;
+    private javax.swing.JButton CreateAirportButton;
+    private javax.swing.JButton CreateRouteButton;
+    private javax.swing.JButton DeleteAirplaneButton;
+    private javax.swing.JButton DeleteAirportButton;
+    private javax.swing.JButton DeleteRouteButton;
+    private javax.swing.JLabel DestinationFilterLabel;
+    private javax.swing.JTabbedPane MainTabbedPane;
+    private javax.swing.JLabel OriginFilterLabel;
+    private javax.swing.JLabel RouteCityLabel1;
+    private javax.swing.JLabel RouteCityLabel2;
+    private javax.swing.JTextField RouteCityTextField1;
+    private javax.swing.JTextField RouteCityTextField2;
+    private javax.swing.JLabel RouteFilterLabel;
+    private javax.swing.JLabel RouteIataLabel1;
+    private javax.swing.JLabel RouteIataLabel2;
+    private javax.swing.JTextField RouteIataTextField1;
+    private javax.swing.JTextField RouteIataTextField2;
+    private javax.swing.JLabel RouteIcaoLabel1;
+    private javax.swing.JLabel RouteIcaoLabel2;
+    private javax.swing.JTextField RouteIcaoTextField1;
+    private javax.swing.JTextField RouteIcaoTextField2;
+    private javax.swing.JList RouteList;
+    private javax.swing.JLabel RouteNameLabel1;
+    private javax.swing.JLabel RouteNameLabel2;
+    private javax.swing.JTextField RouteNameTextField1;
+    private javax.swing.JTextField RouteNameTextField2;
+    private javax.swing.JPanel RoutePanel;
+    private javax.swing.JScrollPane RouteScrollPane;
+    private javax.swing.JButton UpdateAirplaneButton;
+    private javax.swing.JButton UpdateAirportButton;
+    private javax.swing.JButton UpdateRouteButton;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
