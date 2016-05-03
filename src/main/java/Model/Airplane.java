@@ -34,9 +34,11 @@ public class Airplane implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdAirplane() + " ; "
-                + this.getAirplaneCode() + " ; " + this.getAirline() + " ; " + this.getCapacity() + " ; " +
-                this.getFuelTankCapacity() + " ; " + this.getPayload() + " ]");
+        return String.valueOf("| AIRPLANE | CODE : " + this.getAirplaneCode() + 
+                " | AIRLINE : " + this.getAirline() + " | CAPACITY : " 
+                + this.getCapacity() + " | FUEL CAPACITY : " +
+                this.getFuelTankCapacity() + " | PAYLOAD " + this.getPayload() 
+                + " | LOADING CAPACITY : " + this.getLoadingCapacity() + " |");
     }
 
     @Id

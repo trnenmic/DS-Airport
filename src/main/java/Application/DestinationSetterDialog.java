@@ -5,20 +5,42 @@
  */
 package Application;
 
+import Service.AirplaneService;
+import Service.AirportService;
+import Service.ManagementProvider;
+import Service.RouteService;
+import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
+
 /**
  *
  * @author M
  */
 public class DestinationSetterDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form RouteAttributesDialog
-     */
-    public DestinationSetterDialog(java.awt.Frame parent, boolean modal) {
+    private ManagementProvider mgProvider;
+    private Object detached = null;
+
+    public DestinationSetterDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
+        detached = o;
+        initDialog(managementProvider);
+    }
+
+    public DestinationSetterDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
+        super(parent, modal);
+        initDialog(managementProvider);
+    }
+
+    private void initDialog(ManagementProvider managementProvider) {
+        mgProvider = managementProvider;
         initComponents();
         setLocationRelativeTo(null);
-        
+        initLists();
+    }
+
+    private void initLists() {
+        routeHasAirportsList.setSelectionMode(SINGLE_SELECTION);
+        routeHasAirportsList.setListData(mgProvider.getAirportManager().findAll().toArray());
     }
 
     /**
@@ -45,7 +67,7 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
         routeSaveChangesButton = new javax.swing.JButton();
         routeDiscardChangesButton = new javax.swing.JButton();
         airplanesScrollPane = new javax.swing.JScrollPane();
-        routeHasAirplanesList = new javax.swing.JList();
+        routeHasAirportsList = new javax.swing.JList();
         applyFilterAirplaneButton = new javax.swing.JButton();
         OriginSelectorButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -201,14 +223,14 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
             }
         });
 
-        routeHasAirplanesList.setBackground(new java.awt.Color(52, 52, 56));
-        routeHasAirplanesList.setForeground(new java.awt.Color(255, 255, 255));
-        routeHasAirplanesList.setModel(new javax.swing.AbstractListModel() {
+        routeHasAirportsList.setBackground(new java.awt.Color(52, 52, 56));
+        routeHasAirportsList.setForeground(new java.awt.Color(255, 255, 255));
+        routeHasAirportsList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        airplanesScrollPane.setViewportView(routeHasAirplanesList);
+        airplanesScrollPane.setViewportView(routeHasAirportsList);
 
         applyFilterAirplaneButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         applyFilterAirplaneButton.setForeground(new java.awt.Color(25, 62, 137));
@@ -417,7 +439,11 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DestinationSetterDialog dialog = new DestinationSetterDialog(new javax.swing.JFrame(), true);
+                ManagementProvider managementProvider = new ManagementProvider();
+                managementProvider.setAirplaneManager(new AirplaneService());
+                managementProvider.setAirportManager(new AirportService());
+                managementProvider.setRouteManager(new RouteService());
+                DestinationSetterDialog dialog = new DestinationSetterDialog(new javax.swing.JFrame(), true, managementProvider);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -454,7 +480,7 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel routeCityLabel1;
     private javax.swing.JButton routeDiscardChangesButton;
-    private javax.swing.JList routeHasAirplanesList;
+    private javax.swing.JList routeHasAirportsList;
     private javax.swing.JLabel routeIataLabel1;
     private javax.swing.JLabel routeIataLabel4;
     private javax.swing.JLabel routeIcaoLabel1;

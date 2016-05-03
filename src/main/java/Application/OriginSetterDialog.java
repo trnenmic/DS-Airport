@@ -5,20 +5,42 @@
  */
 package Application;
 
+import Service.AirplaneService;
+import Service.AirportService;
+import Service.ManagementProvider;
+import Service.RouteService;
+import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
+
 /**
  *
  * @author M
  */
 public class OriginSetterDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form RouteAttributesDialog
-     */
-    public OriginSetterDialog(java.awt.Frame parent, boolean modal) {
+    private ManagementProvider mgProvider;
+    private Object detached = null;
+
+    public OriginSetterDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
+        detached = o;
+        initDialog(managementProvider);
+    }
+
+    public OriginSetterDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
+        super(parent, modal);
+        initDialog(managementProvider);
+    }
+
+    private void initDialog(ManagementProvider managementProvider) {
+        mgProvider = managementProvider;
         initComponents();
         setLocationRelativeTo(null);
-        
+        initLists();
+    }
+
+    private void initLists() {
+        routeHasAirplanesList.setSelectionMode(SINGLE_SELECTION);
+        routeHasAirplanesList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
     }
 
     /**
@@ -200,6 +222,9 @@ public class OriginSetterDialog extends javax.swing.JDialog {
                 routeDiscardChangesButtonActionPerformed(evt);
             }
         });
+
+        airplanesScrollPane.setMaximumSize(new java.awt.Dimension(1000, 800));
+        airplanesScrollPane.setMinimumSize(new java.awt.Dimension(50, 50));
 
         routeHasAirplanesList.setBackground(new java.awt.Color(52, 52, 56));
         routeHasAirplanesList.setForeground(new java.awt.Color(255, 255, 255));
@@ -413,7 +438,11 @@ public class OriginSetterDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                OriginSetterDialog dialog = new OriginSetterDialog(new javax.swing.JFrame(), true);
+                ManagementProvider managementProvider = new ManagementProvider();
+                managementProvider.setAirplaneManager(new AirplaneService());
+                managementProvider.setAirportManager(new AirportService());
+                managementProvider.setRouteManager(new RouteService());
+                OriginSetterDialog dialog = new OriginSetterDialog(new javax.swing.JFrame(), true, managementProvider);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

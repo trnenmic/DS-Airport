@@ -5,19 +5,45 @@
  */
 package Application;
 
+import Service.AirplaneService;
+import Service.AirportService;
+import Service.ManagementProvider;
+import Service.RouteService;
+import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
+
 /**
  *
  * @author M
  */
 public class RouteBoundingDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form RouteBoundingDialog
-     */
-    public RouteBoundingDialog(java.awt.Frame parent, boolean modal) {
+    private ManagementProvider mgProvider;
+    private Object detached = null;
+
+    public RouteBoundingDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
+        detached = o;
+        initDialog(managementProvider);
+    }
+
+    public RouteBoundingDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
+        super(parent, modal);
+        initDialog(managementProvider);
+    }
+
+    private void initDialog(ManagementProvider managementProvider) {
+        mgProvider = managementProvider;
         initComponents();
         setLocationRelativeTo(null);
+        initLists();
+    }
+
+    private void initLists() {
+        filteredRoutesList.setSelectionMode(SINGLE_SELECTION);
+        filteredRoutesList.setListData(mgProvider.getRouteManager().findAll().toArray());
+        currentRoutesList.setSelectionMode(SINGLE_SELECTION);
+        //currentRoutesList.setListData(mgProvider.getRouteManager().findAll().toArray());
+        //detached
     }
 
     /**
@@ -180,7 +206,7 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(applyFilterAirplaneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -424,7 +450,11 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RouteBoundingDialog dialog = new RouteBoundingDialog(new javax.swing.JFrame(), true);
+                ManagementProvider managementProvider = new ManagementProvider();
+                managementProvider.setAirplaneManager(new AirplaneService());
+                managementProvider.setAirportManager(new AirportService());
+                managementProvider.setRouteManager(new RouteService());
+                RouteBoundingDialog dialog = new RouteBoundingDialog(new javax.swing.JFrame(), true, managementProvider);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

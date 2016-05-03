@@ -5,20 +5,43 @@
  */
 package Application;
 
+import Application.GUIDesigners.DialogDesigner;
+import Service.AirplaneService;
+import Service.AirportService;
+import Service.ManagementProvider;
+import Service.RouteService;
+import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
+
 /**
  *
  * @author M
  */
 public class RouteAttributesDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form RouteAttributesDialog
-     */
-    public RouteAttributesDialog(java.awt.Frame parent, boolean modal) {
+    private ManagementProvider mgProvider;
+    private Object detached = null;
+
+    public RouteAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
+        detached = o;
+        initDialog(managementProvider);
+    }
+
+    public RouteAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
+        super(parent, modal);
+        initDialog(managementProvider);
+    }
+
+    private void initDialog(ManagementProvider managementProvider) {
+        mgProvider = managementProvider;
         initComponents();
         setLocationRelativeTo(null);
+        initLists();
+    }
 
+    private void initLists() {
+        routeHasAirplanesList.setSelectionMode(SINGLE_SELECTION);
+        //routeHasAirplanesList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
     }
 
     /**
@@ -351,6 +374,9 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
         routeAirplanesHeaderLabel.setText("Airplanes flying on this route:");
 
+        airplanesScrollPane.setMaximumSize(new java.awt.Dimension(1000, 800));
+        airplanesScrollPane.setMinimumSize(new java.awt.Dimension(50, 50));
+
         routeHasAirplanesList.setBackground(new java.awt.Color(165, 165, 178));
         routeHasAirplanesList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -385,12 +411,14 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(135, 135, 135)
                                 .addComponent(routeAirplanesHeaderLabel)))
-                        .addGap(0, 99, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(airplanesScrollPane)
-                            .addComponent(addAirplanesToFlyOnRouteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(addAirplanesToFlyOnRouteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(airplanesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 4, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -447,8 +475,8 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         //current origin might be send
-        DestinationSetterDialog destinationSetterDialog = new DestinationSetterDialog(null, true);
-        GuiDesigner.centerDialog(destinationSetterDialog);
+        DestinationSetterDialog destinationSetterDialog = new DestinationSetterDialog(null, true, mgProvider);
+        DialogDesigner.centerDialog(destinationSetterDialog);
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void destinationCityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinationCityTextFieldActionPerformed
@@ -465,8 +493,8 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void routeChangeOriginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeChangeOriginButtonActionPerformed
         //current origin might be send
-        OriginSetterDialog originSetterDialog = new OriginSetterDialog(null, true);
-        GuiDesigner.centerDialog(originSetterDialog);
+        OriginSetterDialog originSetterDialog = new OriginSetterDialog(null, true, mgProvider);
+        DialogDesigner.centerDialog(originSetterDialog);
 
     }//GEN-LAST:event_routeChangeOriginButtonActionPerformed
 
@@ -479,8 +507,8 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_routeDiscardChangesButtonActionPerformed
 
     private void addAirplanesToFlyOnRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAirplanesToFlyOnRouteButtonActionPerformed
-        AirplaneBoundingDialog airplaneBoundingDialog = new AirplaneBoundingDialog(null, true);
-        GuiDesigner.centerDialog(airplaneBoundingDialog);
+        AirplaneBoundingDialog airplaneBoundingDialog = new AirplaneBoundingDialog(null, true, mgProvider);
+        DialogDesigner.centerDialog(airplaneBoundingDialog);
     }//GEN-LAST:event_addAirplanesToFlyOnRouteButtonActionPerformed
 
     /**
@@ -513,7 +541,11 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RouteAttributesDialog dialog = new RouteAttributesDialog(new javax.swing.JFrame(), true);
+                ManagementProvider managementProvider = new ManagementProvider();
+                managementProvider.setAirplaneManager(new AirplaneService());
+                managementProvider.setAirportManager(new AirportService());
+                managementProvider.setRouteManager(new RouteService());
+                RouteAttributesDialog dialog = new RouteAttributesDialog(new javax.swing.JFrame(), true, managementProvider);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

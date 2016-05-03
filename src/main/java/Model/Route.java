@@ -27,8 +27,13 @@ public class Route implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf("[ " + Route.class + " : " + getIdRoute() + " ; Airport origin: " + getOrigin().getAirportName()
-                + " ; Airport destination: " + getDestination().getAirportName() + " ]");
+        return String.valueOf("| ROUTE | ORIGIN : " + getOrigin().getAirportName() 
+                + " , "+ getOrigin().getCity() + " , " + getOrigin().getCountry() 
+                + " , "+ getOrigin().getIcao() + " , " + getOrigin().getIata() 
+                + " | DESTINATION : " + getDestination().getAirportName() + " , " 
+                + getDestination().getCity() + " , " + getDestination().getCountry()
+                + " , " + getOrigin().getIcao() + " , " + getOrigin().getIata()
+                + " |");
     }
 
     @Id

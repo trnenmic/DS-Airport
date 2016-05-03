@@ -5,7 +5,14 @@
  */
 package Application;
 
+import Application.GUIDesigners.DialogDesigner;
+import Service.AirplaneService;
+import Service.AirportManager;
+import Service.AirportService;
+import Service.ManagementProvider;
+import Service.RouteService;
 import javax.swing.JDialog;
+import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 import javax.swing.UIManager;
 
 /**
@@ -14,6 +21,8 @@ import javax.swing.UIManager;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
+    public ManagementProvider mgProvider;
+
     /**
      * Creates new form NewJFrame
      */
@@ -21,7 +30,24 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
-        
+        initManagement();
+        initLists();
+    }
+
+    private void initLists() {
+        routejList.setSelectionMode(SINGLE_SELECTION);
+        routejList.setListData(mgProvider.getRouteManager().findAll().toArray());
+        airplanejList.setSelectionMode(SINGLE_SELECTION);
+        airplanejList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
+        airportjList.setSelectionMode(SINGLE_SELECTION);
+        airportjList.setListData(mgProvider.getAirportManager().findAll().toArray());
+    }
+
+    private void initManagement() {
+        mgProvider = new ManagementProvider();
+        mgProvider.setAirplaneManager(new AirplaneService());
+        mgProvider.setAirportManager(new AirportService());
+        mgProvider.setRouteManager(new RouteService());
     }
 
     /**
@@ -210,7 +236,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, airportPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(airportScrollPane)
+                    .addComponent(airportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(airportPanelLayout.createSequentialGroup()
                         .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(airportPanelLayout.createSequentialGroup()
@@ -369,7 +395,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(AirplanePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(airplaneScrollPane)
+                    .addComponent(airplaneScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(AirplanePanelLayout.createSequentialGroup()
                         .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AirplanePanelLayout.createSequentialGroup()
@@ -626,7 +652,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(routeIataTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(routeIcaoTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(createRouteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -635,7 +661,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addComponent(deleteRouteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(routePanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(routeScrollPane)))
+                        .addComponent(routeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         routePanelLayout.setVerticalGroup(
@@ -730,14 +756,15 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAirportButtonActionPerformed
-        AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true);
-        GuiDesigner.centerDialog(airportAttributesDialog);
+        AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true, mgProvider);
+        DialogDesigner.centerDialog(airportAttributesDialog);
     }//GEN-LAST:event_createAirportButtonActionPerformed
 
     private void updateAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirportButtonActionPerformed
         //send id
-        AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true);
-        GuiDesigner.centerDialog(airportAttributesDialog);
+        AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true, mgProvider);
+        DialogDesigner.centerDialog(airportAttributesDialog);
+        System.out.println(airportjList.getSelectedValue().toString());
     }//GEN-LAST:event_updateAirportButtonActionPerformed
 
     private void airportNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportNameTextFieldActionPerformed
@@ -749,8 +776,8 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteAirportButtonActionPerformed
 
     private void createRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRouteButtonActionPerformed
-        RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true);
-        GuiDesigner.centerDialog(attributesDialog);
+        RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true, mgProvider);
+        DialogDesigner.centerDialog(attributesDialog);
     }//GEN-LAST:event_createRouteButtonActionPerformed
 
     private void deleteRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteButtonActionPerformed
@@ -759,8 +786,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void updateRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRouteButtonActionPerformed
         //id must be set
-        RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true);
-        GuiDesigner.centerDialog(attributesDialog);
+        RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true, mgProvider);
+        DialogDesigner.centerDialog(attributesDialog);
     }//GEN-LAST:event_updateRouteButtonActionPerformed
 
     private void airportCityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportCityTextFieldActionPerformed
@@ -772,8 +799,8 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_airportIataTextFieldActionPerformed
 
     private void createAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAirplaneButtonActionPerformed
-        AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true);
-        GuiDesigner.centerDialog(attributesDialog);
+        AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true, mgProvider);
+        DialogDesigner.centerDialog(attributesDialog);
     }//GEN-LAST:event_createAirplaneButtonActionPerformed
 
     private void deleteAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirplaneButtonActionPerformed
@@ -782,8 +809,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void updateAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirplaneButtonActionPerformed
         //send airplane id
-        AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true);
-        GuiDesigner.centerDialog(attributesDialog);
+        AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true, mgProvider);
+        DialogDesigner.centerDialog(attributesDialog);
     }//GEN-LAST:event_updateAirplaneButtonActionPerformed
 
     private void airportCountryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportCountryTextFieldActionPerformed
