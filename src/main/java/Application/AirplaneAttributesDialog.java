@@ -6,6 +6,7 @@
 package Application;
 
 import Application.GUIDesigners.DialogDesigner;
+import Model.Airplane;
 import Service.AirplaneService;
 import Service.AirportService;
 import Service.ManagementProvider;
@@ -25,6 +26,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         super(parent, modal);
         detached = o;
         initDialog(managementProvider);
+        updateTextFields();
     }
 
     public AirplaneAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
@@ -42,6 +44,16 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private void initLists() {
         airplaneRoutesList.setSelectionMode(SINGLE_SELECTION);
         //airplaneRoutesList.setListData(mgProvider.getAirportManager().findAll().toArray());
+    }
+
+    private void updateTextFields() {
+        Airplane airplane = (Airplane) detached;
+        airplaneAirlineTextField.setText(airplane.getAirline());
+        airplaneCapacityTextField.setText("" + airplane.getCapacity());
+        airplaneCodeTextField.setText(airplane.getAirplaneCode());
+        airplaneFuelTankTextField.setText("" + airplane.getFuelTankCapacity());
+        airplaneLoadCapacityTextField.setText("" + airplane.getLoadingCapacity());
+        airplanePayloadTextField.setText("" + airplane.getPayload());
     }
 
     /**
@@ -115,6 +127,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         airplaneLoadCapacityLabel.setText("Load capacity:");
 
         airplaneLoadCapacityTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplaneLoadCapacityTextField.setForeground(new java.awt.Color(255, 255, 255));
         airplaneLoadCapacityTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 airplaneLoadCapacityTextFieldActionPerformed(evt);

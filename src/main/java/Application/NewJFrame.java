@@ -809,7 +809,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void updateAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirplaneButtonActionPerformed
         //send airplane id
-        AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true, mgProvider);
+        AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true, mgProvider, airplanejList.getSelectedValue());
         DialogDesigner.centerDialog(attributesDialog);
     }//GEN-LAST:event_updateAirplaneButtonActionPerformed
 
