@@ -6,6 +6,9 @@
 package Service;
 
 import Data.GenericDAOImpl;
+import Model.Airplane;
+import Model.Airport;
+import Model.Route;
 import Validator.InvalidAttributeException;
 
 /**
@@ -51,23 +54,25 @@ public class ManagementProvider implements ValidatorInterface {
     public void setRouteManager(RouteManager routeManager) {
         this.routeManager = routeManager;
     }
+
+    @Override
+    public void validateAirplane(Airplane airplane) throws InvalidAttributeException {
+        //to do
+    }
+
+    @Override
+    public void validateAirport(Airport airport) throws InvalidAttributeException {
+        //to do
+    }
+
+    @Override
+    public void validateRoute(Route route) throws InvalidAttributeException {
+        //to do
+    }
     
  
 
-    @Override
-    public void validateAirport() throws InvalidAttributeException {
-        //TO DO
-    }
 
-    @Override
-    public void validateRoute() throws InvalidAttributeException {
-        //TO DO
-    }
-
-    @Override
-    public void validateAirplane() throws InvalidAttributeException {
-        //TO DO
-    }
     
     
     

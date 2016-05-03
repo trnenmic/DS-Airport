@@ -5,6 +5,9 @@
  */
 package Service;
 
+import Model.Airplane;
+import Model.Airport;
+import Model.Route;
 import Validator.InvalidAttributeException;
 
 /**
@@ -13,10 +16,10 @@ import Validator.InvalidAttributeException;
  */
 public interface ValidatorInterface {
     
-    void validateAirplane() throws InvalidAttributeException;
+    void validateAirplane(Airplane airplane) throws InvalidAttributeException;
     
-    void validateAirport() throws InvalidAttributeException;
+    void validateAirport(Airport airport) throws InvalidAttributeException;
     
-    void validateRoute() throws InvalidAttributeException;
+    void validateRoute(Route route) throws InvalidAttributeException;
     
 }
