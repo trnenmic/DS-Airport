@@ -6,6 +6,7 @@
 package Application;
 
 import Application.GUIDesigners.DialogDesigner;
+import Data.GenericDAOImpl;
 import Service.AirplaneService;
 import Service.AirportManager;
 import Service.AirportService;
@@ -48,6 +49,7 @@ public class NewJFrame extends javax.swing.JFrame {
         mgProvider.setAirplaneManager(new AirplaneService());
         mgProvider.setAirportManager(new AirportService());
         mgProvider.setRouteManager(new RouteService());
+        mgProvider.setGenericDAOImpl(new GenericDAOImpl());
     }
 
     /**
@@ -764,7 +766,6 @@ public class NewJFrame extends javax.swing.JFrame {
         //send id
         AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true, mgProvider);
         DialogDesigner.centerDialog(airportAttributesDialog);
-        System.out.println(airportjList.getSelectedValue().toString());
     }//GEN-LAST:event_updateAirportButtonActionPerformed
 
     private void airportNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportNameTextFieldActionPerformed

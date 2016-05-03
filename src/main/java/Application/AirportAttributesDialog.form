@@ -27,22 +27,30 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="destinationsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="originsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="originScrollPane" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
-                  <Component id="airportQuoteLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="destinationScrollPane" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="warningLabel" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="destinationsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="originsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="originScrollPane" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
+                          <Component id="airportQuoteLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="destinationScrollPane" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="airportDiscardChangesButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="airportAttributesPanel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="airportSaveChangesButton" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="airportDiscardChangesButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="airportAttributesPanel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="airportSaveChangesButton" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,7 +79,9 @@
                       <Component id="airportQuoteLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <Component id="warningLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -328,6 +338,14 @@
           <Font name="Tahoma" size="12" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Configuration of Routes is done in Route tabb."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="warningLabel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="cc" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value=" "/>
       </Properties>
     </Component>
   </SubComponents>
