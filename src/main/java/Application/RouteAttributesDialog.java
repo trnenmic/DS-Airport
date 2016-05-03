@@ -5,7 +5,9 @@
  */
 package Application;
 
+import Application.GUIDesigners.BoundingUpdater;
 import Application.GUIDesigners.DialogDesigner;
+import Model.Route;
 import Service.AirplaneService;
 import Service.AirportService;
 import Service.ManagementProvider;
@@ -20,20 +22,25 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
+    private BoundingUpdater boundingUpdater;
+    private boolean updated = false;
 
     public RouteAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
         detached = o;
+        updated = true;
         initDialog(managementProvider);
     }
 
     public RouteAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
         super(parent, modal);
+        detached = Route.createRoute();
         initDialog(managementProvider);
     }
 
     private void initDialog(ManagementProvider managementProvider) {
         mgProvider = managementProvider;
+        boundingUpdater = new BoundingUpdater(managementProvider);
         initComponents();
         setLocationRelativeTo(null);
         initLists();
@@ -41,7 +48,30 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void initLists() {
         routeHasAirplanesList.setSelectionMode(SINGLE_SELECTION);
-        //routeHasAirplanesList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
+        updateLists();
+    }
+
+    private void updateLists() {
+        routeHasAirplanesList.setListData(((Route) detached).getAirplanes().toArray());
+        updateAirports();
+    }
+
+    private void updateAirports() {
+        Route route = (Route) detached;
+        if (route.getDestination() != null) {
+            destinationNameTextField.setText(route.getDestination().getAirportName());
+            destinationCityTextField.setText(route.getDestination().getCity());
+            destinationCountryTextField.setText(route.getDestination().getCountry());
+            destinationIataTextField.setText(route.getDestination().getIata());
+            destinationIcaoTextField.setText(route.getDestination().getIcao());
+        }
+        if (route.getOrigin() != null) {
+            originNameTextField.setText(route.getOrigin().getAirportName());
+            originCountryTextField.setText(route.getOrigin().getCountry());
+            originCityTextField.setText(route.getOrigin().getCity());
+            originIataTextField.setText(route.getOrigin().getIata());
+            originIcaoTextField.setText(route.getOrigin().getIcao());
+        }
     }
 
     /**
@@ -480,18 +510,22 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void routeChangeOriginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeChangeOriginButtonActionPerformed
         //current origin might be send
+        warningLabel.setText(" ");
         OriginSetterDialog originSetterDialog = new OriginSetterDialog(null, true, mgProvider);
         DialogDesigner.centerDialog(originSetterDialog);
 
     }//GEN-LAST:event_routeChangeOriginButtonActionPerformed
 
     private void routeSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeSaveButtonActionPerformed
-        // TODO add your handling code here:
+        warningLabel.setText(" ");
+// TODO add your handling code here:
     }//GEN-LAST:event_routeSaveButtonActionPerformed
 
     private void addAirplanesToFlyOnRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAirplanesToFlyOnRouteButtonActionPerformed
-        AirplaneBoundingDialog airplaneBoundingDialog = new AirplaneBoundingDialog(null, true, mgProvider);
+        warningLabel.setText(" ");
+        RouteBoundingDialog airplaneBoundingDialog = new RouteBoundingDialog(null, true, mgProvider, detached, boundingUpdater);
         DialogDesigner.centerDialog(airplaneBoundingDialog);
+        updateLists();
     }//GEN-LAST:event_addAirplanesToFlyOnRouteButtonActionPerformed
 
     /**

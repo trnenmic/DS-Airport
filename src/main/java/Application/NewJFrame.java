@@ -787,7 +787,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void updateRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRouteButtonActionPerformed
         //id must be set
-        RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true, mgProvider);
+        RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true, mgProvider, routejList.getSelectedValue());
         DialogDesigner.centerDialog(attributesDialog);
     }//GEN-LAST:event_updateRouteButtonActionPerformed
 

@@ -5,8 +5,10 @@
  */
 package Application;
 
+import Application.GUIDesigners.BoundingUpdater;
 import Application.GUIDesigners.DialogDesigner;
 import Model.Airplane;
+import ModelWrapper.AirplaneWrapper;
 import Service.AirplaneService;
 import Service.AirportService;
 import Service.ManagementProvider;
@@ -22,24 +24,29 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
+    private BoundingUpdater boundingUpdater;
+    private boolean update = false;
 
     public AirplaneAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
         detached = o;
+        update = true;
+        this.setTitle("Update Airplane Attributes");
         initDialog(managementProvider);
-        if (o != null) {
-            this.setTitle("Update Airport Attributes");
-        }
         updateTextFields();
     }
 
     public AirplaneAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
         super(parent, modal);
+        detached = Airplane.createAirplane(0, 0, "", 0, 0, "");
+        update = false;
+        this.setTitle("Create Airplane");
         initDialog(managementProvider);
     }
 
     private void initDialog(ManagementProvider managementProvider) {
         mgProvider = managementProvider;
+        boundingUpdater = new BoundingUpdater(managementProvider);
         initComponents();
         setLocationRelativeTo(null);
         initLists();
@@ -48,49 +55,40 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private void initLists() {
         airplaneRoutesList.setSelectionMode(SINGLE_SELECTION);
         updateLists();
-        
+
     }
-    
-    private void updateLists(){
-        if(detached != null){
-            airplaneRoutesList.setListData(((Airplane) detached).getRoutes().toArray());
-        } else {
-            airplaneRoutesList.setListData(new Object[0]);
-        }
-        
+
+    private void updateLists() {
+        airplaneRoutesList.setListData(((Airplane) detached).getRoutes().toArray());
     }
 
     private void updateTextFields() {
-        if (detached != null) {
-            Airplane airplane = (Airplane) detached;
-            airplaneAirlineTextField.setText(airplane.getAirline());
-            airplaneCapacityTextField.setText("" + airplane.getCapacity());
-            airplaneCodeTextField.setText(airplane.getAirplaneCode());
-            airplaneFuelTankTextField.setText("" + airplane.getFuelTankCapacity());
-            airplaneLoadCapacityTextField.setText("" + airplane.getLoadingCapacity());
-            airplanePayloadTextField.setText("" + airplane.getPayload());
-        }
+        Airplane airplane = (Airplane) detached;
+        airplaneAirlineTextField.setText(airplane.getAirline());
+        airplaneCapacityTextField.setText("" + airplane.getCapacity());
+        airplaneCodeTextField.setText(airplane.getAirplaneCode());
+        airplaneFuelTankTextField.setText("" + airplane.getFuelTankCapacity());
+        airplaneLoadCapacityTextField.setText("" + airplane.getLoadingCapacity());
+        airplanePayloadTextField.setText("" + airplane.getPayload());
     }
 
     private void saveAirplane() throws InvalidAttributeException {
         Airplane airplane = (Airplane) detached;
-        if (detached == null) {
-            detached = (Object) Airplane.createAirplane(
-                    Integer.parseInt(airplaneCapacityTextField.getText()), Integer.parseInt(airplaneFuelTankTextField.getText()),
-                    airplaneAirlineTextField.getText(),
-                    Integer.parseInt(airplanePayloadTextField.getText()),
-                    Integer.parseInt(airplaneLoadCapacityTextField.getText()),
-                    airplaneCodeTextField.getText());
-        } else {
-            airplane.setCapacity(Integer.parseInt(airplaneCapacityTextField.getText()));
-            airplane.setFuelTankCapacity(Integer.parseInt(airplaneFuelTankTextField.getText()));
-            airplane.setAirline(airplaneAirlineTextField.getText());
-            airplane.setPayload(Integer.parseInt(airplanePayloadTextField.getText()));
-            airplane.setLoadingCapacity(Integer.parseInt(airplaneLoadCapacityTextField.getText()));
-            airplane.setAirplaneCode(airplaneCodeTextField.getText());
-        }
+        airplane.setCapacity(Integer.parseInt(airplaneCapacityTextField.getText()));
+        airplane.setFuelTankCapacity(Integer.parseInt(airplaneFuelTankTextField.getText()));
+        airplane.setAirline(airplaneAirlineTextField.getText());
+        airplane.setPayload(Integer.parseInt(airplanePayloadTextField.getText()));
+        airplane.setLoadingCapacity(Integer.parseInt(airplaneLoadCapacityTextField.getText()));
+        airplane.setAirplaneCode(airplaneCodeTextField.getText());
         mgProvider.validateAirplane(airplane);
-        mgProvider.getGenericDAOImpl().update(airplane);
+        if (update) {
+            mgProvider.getGenericDAOImpl().update(airplane);
+        } else {
+            mgProvider.getGenericDAOImpl().create(airplane);
+            update = true;
+            this.setTitle("Update Airplane Attributes");
+        }
+        boundingUpdater.updateBoundings();
     }
 
     /**
@@ -312,12 +310,13 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_airplanePayloadTextFieldActionPerformed
 
     private void airplaneSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneSaveButtonActionPerformed
+        warningLabel.setText(" ");
         try {
             saveAirplane();
         } catch (NumberFormatException e) {
             warningLabel.setText("Input is not integer.");
         } catch (InvalidAttributeException e) {
-
+            warningLabel.setText(e.getMessage());
         }
     }//GEN-LAST:event_airplaneSaveButtonActionPerformed
 
@@ -326,7 +325,8 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_airplaneLoadCapacityTextFieldActionPerformed
 
     private void airplaneAddingRoutesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneAddingRoutesButtonActionPerformed
-        RouteBoundingDialog routeBoundingDialog = new RouteBoundingDialog(null, true, mgProvider);
+        warningLabel.setText(" ");
+        AirplaneBoundingDialog routeBoundingDialog = new AirplaneBoundingDialog(null, true, mgProvider, detached, boundingUpdater);
         DialogDesigner.centerDialog(routeBoundingDialog);
         updateLists();
     }//GEN-LAST:event_airplaneAddingRoutesButtonActionPerformed

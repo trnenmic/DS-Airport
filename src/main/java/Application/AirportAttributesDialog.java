@@ -5,10 +5,16 @@
  */
 package Application;
 
+import Application.GUIDesigners.BoundingUpdater;
+import Model.Airplane;
+import Model.Airport;
 import Service.AirplaneService;
 import Service.AirportService;
 import Service.ManagementProvider;
 import Service.RouteService;
+import Validator.InvalidAttributeException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 /**
@@ -19,10 +25,13 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
+    private BoundingUpdater boundingUpdater;
+    private boolean update = false;
 
     public AirportAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
         detached = o;
+        update = true;
         initDialog(managementProvider);
     }
 
@@ -33,6 +42,7 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
 
     private void initDialog(ManagementProvider managementProvider) {
         mgProvider = managementProvider;
+        this.boundingUpdater = new BoundingUpdater(managementProvider);
         initComponents();
         setLocationRelativeTo(null);
         initLists();
@@ -42,6 +52,24 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
         airportDestinationList.setSelectionMode(SINGLE_SELECTION);
         airportOriginList.setSelectionMode(SINGLE_SELECTION);
         //airportOriginList.setListData(mgProvider.getAirportManager().findAll().toArray());
+    }
+
+    private void saveAirport() throws InvalidAttributeException {
+        Airport airport = (Airport) detached;
+        airport.setAirportName(airportNameTextField.getText());
+        airport.setCity(airportCityTextField.getText());
+        airport.setCountry(airportCountryTextField.getText());
+        airport.setIata(airportIataTextField.getText());
+        airport.setIcao(airportIcaoTextField.getText());
+        mgProvider.validateAirport(airport);
+        if (update) {
+            mgProvider.getGenericDAOImpl().update(airport);
+        } else {
+            mgProvider.getGenericDAOImpl().create(airport);
+            update = true;
+            this.setTitle("Update Airport Attributes");
+        }
+        boundingUpdater.updateBoundings();
     }
 
     /**
@@ -254,7 +282,12 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void airportSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportSaveButtonActionPerformed
-        // TODO add your handling code here:
+        warningLabel.setText(" ");
+        try {
+            saveAirport();
+        } catch (InvalidAttributeException ex) {
+            warningLabel.setText(ex.getMessage());
+        }
     }//GEN-LAST:event_airportSaveButtonActionPerformed
 
     private void airportCountryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportCountryTextFieldActionPerformed
