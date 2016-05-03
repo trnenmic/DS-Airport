@@ -69,8 +69,7 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
         airportOriginList = new javax.swing.JList();
         destinationScrollPane = new javax.swing.JScrollPane();
         airportDestinationList = new javax.swing.JList();
-        airportSaveChangesButton = new javax.swing.JButton();
-        airportDiscardChangesButton = new javax.swing.JButton();
+        airportSaveButton = new javax.swing.JButton();
         destinationsLabel = new javax.swing.JLabel();
         originsLabel = new javax.swing.JLabel();
         airportQuoteLabel = new javax.swing.JLabel();
@@ -184,20 +183,11 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
         });
         destinationScrollPane.setViewportView(airportDestinationList);
 
-        airportSaveChangesButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        airportSaveChangesButton.setText("Save changes");
-        airportSaveChangesButton.addActionListener(new java.awt.event.ActionListener() {
+        airportSaveButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        airportSaveButton.setText("Save Airport");
+        airportSaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                airportSaveChangesButtonActionPerformed(evt);
-            }
-        });
-
-        airportDiscardChangesButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        airportDiscardChangesButton.setForeground(new java.awt.Color(179, 107, 12));
-        airportDiscardChangesButton.setText("Discard changes");
-        airportDiscardChangesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                airportDiscardChangesButtonActionPerformed(evt);
+                airportSaveButtonActionPerformed(evt);
             }
         });
 
@@ -232,32 +222,29 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
                             .addComponent(destinationScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(airportDiscardChangesButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(airportAttributesPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(airportSaveChangesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(airportSaveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 15, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airportSaveChangesButton)
-                    .addComponent(originsLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(airportDiscardChangesButton)
-                        .addGap(8, 8, 8)
-                        .addComponent(airportAttributesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(originsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(originScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(destinationsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(destinationScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(airportQuoteLabel)))
+                        .addComponent(airportQuoteLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(airportSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(airportAttributesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(warningLabel)
                 .addContainerGap())
@@ -266,13 +253,9 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void airportSaveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportSaveChangesButtonActionPerformed
+    private void airportSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportSaveButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_airportSaveChangesButtonActionPerformed
-
-    private void airportDiscardChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportDiscardChangesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_airportDiscardChangesButtonActionPerformed
+    }//GEN-LAST:event_airportSaveButtonActionPerformed
 
     private void airportCountryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportCountryTextFieldActionPerformed
         // TODO add your handling code here:
@@ -331,7 +314,6 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel airportCountryLabel;
     private javax.swing.JTextField airportCountryTextField;
     private javax.swing.JList airportDestinationList;
-    private javax.swing.JButton airportDiscardChangesButton;
     private javax.swing.JLabel airportIataLabel;
     private javax.swing.JTextField airportIataTextField;
     private javax.swing.JLabel airportIcaoLabel;
@@ -340,7 +322,7 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField airportNameTextField;
     private javax.swing.JList airportOriginList;
     private javax.swing.JLabel airportQuoteLabel;
-    private javax.swing.JButton airportSaveChangesButton;
+    private javax.swing.JButton airportSaveButton;
     private javax.swing.JScrollPane destinationScrollPane;
     private javax.swing.JLabel destinationsLabel;
     private javax.swing.JLabel jLabel1;

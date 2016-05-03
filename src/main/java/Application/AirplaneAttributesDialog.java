@@ -11,6 +11,7 @@ import Service.AirplaneService;
 import Service.AirportService;
 import Service.ManagementProvider;
 import Service.RouteService;
+import Validator.InvalidAttributeException;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 /**
@@ -46,7 +47,17 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
 
     private void initLists() {
         airplaneRoutesList.setSelectionMode(SINGLE_SELECTION);
-        //airplaneRoutesList.setListData(mgProvider.getAirportManager().findAll().toArray());
+        updateLists();
+        
+    }
+    
+    private void updateLists(){
+        if(detached != null){
+            airplaneRoutesList.setListData(((Airplane) detached).getRoutes().toArray());
+        } else {
+            airplaneRoutesList.setListData(new Object[0]);
+        }
+        
     }
 
     private void updateTextFields() {
@@ -61,25 +72,25 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         }
     }
 
-    private void saveAirplane() {
-        if(detached == null){
+    private void saveAirplane() throws InvalidAttributeException {
+        Airplane airplane = (Airplane) detached;
+        if (detached == null) {
             detached = (Object) Airplane.createAirplane(
-                    Integer.parseInt(airplaneCapacityTextField.getText())
-                    , Integer.parseInt(airplaneFuelTankTextField.getText()),
+                    Integer.parseInt(airplaneCapacityTextField.getText()), Integer.parseInt(airplaneFuelTankTextField.getText()),
                     airplaneAirlineTextField.getText(),
                     Integer.parseInt(airplanePayloadTextField.getText()),
                     Integer.parseInt(airplaneLoadCapacityTextField.getText()),
                     airplaneCodeTextField.getText());
         } else {
-           Airplane airplane = (Airplane) detached;
-           airplane.setCapacity(Integer.parseInt(airplaneCapacityTextField.getText()));
-           airplane.setFuelTankCapacity(Integer.parseInt(airplaneFuelTankTextField.getText()));
-           airplane.setAirline(airplaneAirlineTextField.getText());
-           airplane.setPayload(Integer.parseInt(airplanePayloadTextField.getText()));
-           airplane.setLoadingCapacity(Integer.parseInt(airplaneLoadCapacityTextField.getText()));
-           airplane.setAirplaneCode(airplaneCodeTextField.getText());
-           mgProvider.getGenericDAOImpl().update(airplane);
+            airplane.setCapacity(Integer.parseInt(airplaneCapacityTextField.getText()));
+            airplane.setFuelTankCapacity(Integer.parseInt(airplaneFuelTankTextField.getText()));
+            airplane.setAirline(airplaneAirlineTextField.getText());
+            airplane.setPayload(Integer.parseInt(airplanePayloadTextField.getText()));
+            airplane.setLoadingCapacity(Integer.parseInt(airplaneLoadCapacityTextField.getText()));
+            airplane.setAirplaneCode(airplaneCodeTextField.getText());
         }
+        mgProvider.validateAirplane(airplane);
+        mgProvider.getGenericDAOImpl().update(airplane);
     }
 
     /**
@@ -107,8 +118,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         airplaneLoadCapacityTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         airplaneRoutesList = new javax.swing.JList();
-        airplaneDiscardChanges = new javax.swing.JButton();
-        airplaneSaveChanges = new javax.swing.JButton();
+        airplaneSaveButton = new javax.swing.JButton();
         routesLabel = new javax.swing.JLabel();
         airplaneAddingRoutesButton = new javax.swing.JButton();
         warningLabel = new javax.swing.JLabel();
@@ -232,20 +242,11 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(airplaneRoutesList);
 
-        airplaneDiscardChanges.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        airplaneDiscardChanges.setForeground(new java.awt.Color(179, 107, 12));
-        airplaneDiscardChanges.setText("Discard changes");
-        airplaneDiscardChanges.addActionListener(new java.awt.event.ActionListener() {
+        airplaneSaveButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        airplaneSaveButton.setText("Save Airplane");
+        airplaneSaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                airplaneDiscardChangesActionPerformed(evt);
-            }
-        });
-
-        airplaneSaveChanges.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        airplaneSaveChanges.setText("Save changes");
-        airplaneSaveChanges.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                airplaneSaveChangesActionPerformed(evt);
+                airplaneSaveButtonActionPerformed(evt);
             }
         });
 
@@ -278,33 +279,29 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
                                 .addComponent(airplaneAddingRoutesButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(airplaneDiscardChanges, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                                .addComponent(airplaneSaveChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(airportAttributesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(airportAttributesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(airplaneSaveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airplaneSaveChanges)
-                    .addComponent(routesLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(airplaneDiscardChanges)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(airportAttributesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(routesLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(airplaneAddingRoutesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(airplaneAddingRoutesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(airplaneSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(airportAttributesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(warningLabel)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -314,17 +311,15 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_airplanePayloadTextFieldActionPerformed
 
-    private void airplaneSaveChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneSaveChangesActionPerformed
-        try{
+    private void airplaneSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneSaveButtonActionPerformed
+        try {
             saveAirplane();
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             warningLabel.setText("Input is not integer.");
-        }
-    }//GEN-LAST:event_airplaneSaveChangesActionPerformed
+        } catch (InvalidAttributeException e) {
 
-    private void airplaneDiscardChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneDiscardChangesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_airplaneDiscardChangesActionPerformed
+        }
+    }//GEN-LAST:event_airplaneSaveButtonActionPerformed
 
     private void airplaneLoadCapacityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneLoadCapacityTextFieldActionPerformed
         // TODO add your handling code here:
@@ -333,6 +328,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private void airplaneAddingRoutesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneAddingRoutesButtonActionPerformed
         RouteBoundingDialog routeBoundingDialog = new RouteBoundingDialog(null, true, mgProvider);
         DialogDesigner.centerDialog(routeBoundingDialog);
+        updateLists();
     }//GEN-LAST:event_airplaneAddingRoutesButtonActionPerformed
 
     /**
@@ -390,7 +386,6 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField airplaneCapacityTextField;
     private javax.swing.JLabel airplaneCodeLabel;
     private javax.swing.JTextField airplaneCodeTextField;
-    private javax.swing.JButton airplaneDiscardChanges;
     private javax.swing.JLabel airplaneFuelTankLabel;
     private javax.swing.JTextField airplaneFuelTankTextField;
     private javax.swing.JLabel airplaneLoadCapacityLabel;
@@ -398,7 +393,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel airplanePayloadLabel;
     private javax.swing.JTextField airplanePayloadTextField;
     private javax.swing.JList airplaneRoutesList;
-    private javax.swing.JButton airplaneSaveChanges;
+    private javax.swing.JButton airplaneSaveButton;
     private javax.swing.JPanel airportAttributesPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel routesLabel;

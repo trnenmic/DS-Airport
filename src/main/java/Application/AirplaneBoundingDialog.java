@@ -55,8 +55,6 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        routeDiscardChangesButton = new javax.swing.JButton();
-        routeSaveChangesButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         filteredAirplanesScrollPane = new javax.swing.JScrollPane();
         filteredAirplanesList = new javax.swing.JList();
@@ -83,23 +81,6 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Airplanes on selected Route");
-
-        routeDiscardChangesButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        routeDiscardChangesButton.setForeground(new java.awt.Color(179, 107, 12));
-        routeDiscardChangesButton.setText("Discard changes");
-        routeDiscardChangesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                routeDiscardChangesButtonActionPerformed(evt);
-            }
-        });
-
-        routeSaveChangesButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        routeSaveChangesButton.setText("Save changes");
-        routeSaveChangesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                routeSaveChangesButtonActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -241,7 +222,7 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(applyFilterAirplaneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBoudningToRouteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         currentAirplanesList.setBackground(new java.awt.Color(52, 52, 56));
@@ -266,6 +247,7 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
         jLabel1.setText("Current Airplanes for Route");
 
         warningLabel.setForeground(new java.awt.Color(204, 0, 0));
+        warningLabel.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -279,24 +261,15 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
                         .addGap(14, 14, 14))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(routeDiscardChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(routeSaveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(39, 39, 39))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(deleteRouteBoundingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(currentAirplanesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 14, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(266, 266, 266)
+                                    .addComponent(deleteRouteBoundingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(currentAirplanesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 9, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,31 +277,19 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(routeSaveChangesButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(routeDiscardChangesButton)
-                        .addGap(47, 47, 47)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(currentAirplanesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(currentAirplanesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteRouteBoundingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(warningLabel)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void routeDiscardChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeDiscardChangesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_routeDiscardChangesButtonActionPerformed
-
-    private void routeSaveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeSaveChangesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_routeSaveChangesButtonActionPerformed
 
     private void deleteRouteBoundingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteBoundingButtonActionPerformed
         // TODO add your handling code here:
@@ -404,8 +365,6 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane filteredAirplanesScrollPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton routeDiscardChangesButton;
-    private javax.swing.JButton routeSaveChangesButton;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

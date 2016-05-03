@@ -80,8 +80,7 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
         destinationIataTextField = new javax.swing.JTextField();
         routeChangeDestinationButton = new javax.swing.JButton();
         routeChangeOriginButton = new javax.swing.JButton();
-        routeSaveChangesButton = new javax.swing.JButton();
-        routeDiscardChangesButton = new javax.swing.JButton();
+        routeSaveButton = new javax.swing.JButton();
         routeAirplanesHeaderLabel = new javax.swing.JLabel();
         airplanesScrollPane = new javax.swing.JScrollPane();
         routeHasAirplanesList = new javax.swing.JList();
@@ -351,20 +350,11 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        routeSaveChangesButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        routeSaveChangesButton.setText("Save changes");
-        routeSaveChangesButton.addActionListener(new java.awt.event.ActionListener() {
+        routeSaveButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        routeSaveButton.setText("Save Route");
+        routeSaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                routeSaveChangesButtonActionPerformed(evt);
-            }
-        });
-
-        routeDiscardChangesButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        routeDiscardChangesButton.setForeground(new java.awt.Color(179, 107, 12));
-        routeDiscardChangesButton.setText("Discard changes");
-        routeDiscardChangesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                routeDiscardChangesButtonActionPerformed(evt);
+                routeSaveButtonActionPerformed(evt);
             }
         });
 
@@ -403,23 +393,20 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(94, 94, 94)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(routeDiscardChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(routeSaveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(135, 135, 135)
-                                        .addComponent(routeAirplanesHeaderLabel)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(addAirplanesToFlyOnRouteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(airplanesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 4, Short.MAX_VALUE))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(airplanesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(89, 89, 89)
+                                                .addComponent(routeSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 4, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(135, 135, 135)
+                                .addComponent(routeAirplanesHeaderLabel)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(warningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -429,9 +416,7 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(routeSaveChangesButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(routeDiscardChangesButton)
+                        .addComponent(routeSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(routeAirplanesHeaderLabel)
                         .addGap(15, 15, 15)
@@ -500,13 +485,9 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_routeChangeOriginButtonActionPerformed
 
-    private void routeSaveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeSaveChangesButtonActionPerformed
+    private void routeSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeSaveButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_routeSaveChangesButtonActionPerformed
-
-    private void routeDiscardChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeDiscardChangesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_routeDiscardChangesButtonActionPerformed
+    }//GEN-LAST:event_routeSaveButtonActionPerformed
 
     private void addAirplanesToFlyOnRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAirplanesToFlyOnRouteButtonActionPerformed
         AirplaneBoundingDialog airplaneBoundingDialog = new AirplaneBoundingDialog(null, true, mgProvider);
@@ -581,7 +562,6 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
     private javax.swing.JButton routeChangeOriginButton;
     private javax.swing.JLabel routeCityLabel1;
     private javax.swing.JLabel routeCityLabel2;
-    private javax.swing.JButton routeDiscardChangesButton;
     private javax.swing.JList routeHasAirplanesList;
     private javax.swing.JLabel routeHeadingLabel;
     private javax.swing.JLabel routeIataLabel1;
@@ -592,7 +572,7 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel routeIcaoLabel2;
     private javax.swing.JLabel routeNameLabel1;
     private javax.swing.JLabel routeNameLabel2;
-    private javax.swing.JButton routeSaveChangesButton;
+    private javax.swing.JButton routeSaveButton;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }
