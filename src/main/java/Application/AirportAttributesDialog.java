@@ -29,159 +29,161 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        AirportAttributesPanel = new javax.swing.JPanel();
+        airportAttributesPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        AirportNameLabel = new javax.swing.JLabel();
-        AirportNameTextField = new javax.swing.JTextField();
-        AirportCityLabel = new javax.swing.JLabel();
-        AirportCityTextField = new javax.swing.JTextField();
-        AirportIcaoLabel = new javax.swing.JLabel();
-        AirportIcaoTextField = new javax.swing.JTextField();
-        AirportIataLabel = new javax.swing.JLabel();
-        AirportIataTextField = new javax.swing.JTextField();
-        AirportCountryTextField = new javax.swing.JTextField();
-        AirportCountryLabel = new javax.swing.JLabel();
-        OriginScrollPane = new javax.swing.JScrollPane();
-        AirportOriginList = new javax.swing.JList();
-        DestinationScrollPane = new javax.swing.JScrollPane();
-        AirportDestinationList = new javax.swing.JList();
-        AirportSaveChanges = new javax.swing.JButton();
-        AirportDiscardChanges = new javax.swing.JButton();
-        DestinationsLabel = new javax.swing.JLabel();
-        OriginsLabel = new javax.swing.JLabel();
+        airportNameLabel = new javax.swing.JLabel();
+        airportNameTextField = new javax.swing.JTextField();
+        airportCityLabel = new javax.swing.JLabel();
+        airportCityTextField = new javax.swing.JTextField();
+        airportIcaoLabel = new javax.swing.JLabel();
+        airportIcaoTextField = new javax.swing.JTextField();
+        airportIataLabel = new javax.swing.JLabel();
+        airportIataTextField = new javax.swing.JTextField();
+        airportCountryTextField = new javax.swing.JTextField();
+        airportCountryLabel = new javax.swing.JLabel();
+        originScrollPane = new javax.swing.JScrollPane();
+        airportOriginList = new javax.swing.JList();
+        destinationScrollPane = new javax.swing.JScrollPane();
+        airportDestinationList = new javax.swing.JList();
+        airportSaveChangesButton = new javax.swing.JButton();
+        airportDiscardChangesButton = new javax.swing.JButton();
+        destinationsLabel = new javax.swing.JLabel();
+        originsLabel = new javax.swing.JLabel();
+        airportQuoteLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Airport Attributes");
         setBackground(new java.awt.Color(204, 204, 255));
 
-        AirportAttributesPanel.setBackground(new java.awt.Color(204, 204, 255));
+        airportAttributesPanel.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jLabel1.setText("Airport Attributes");
+        jLabel1.setText("Edit Airport Attributes");
 
-        AirportNameLabel.setText("Name:");
+        airportNameLabel.setText("Name:");
 
-        AirportNameTextField.setBackground(new java.awt.Color(52, 52, 56));
-        AirportNameTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airportNameTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airportNameTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        AirportCityLabel.setText("City:");
+        airportCityLabel.setText("City:");
 
-        AirportCityTextField.setBackground(new java.awt.Color(52, 52, 56));
-        AirportCityTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airportCityTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airportCityTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        AirportIcaoLabel.setText("ICAO");
+        airportIcaoLabel.setText("ICAO");
 
-        AirportIcaoTextField.setBackground(new java.awt.Color(52, 52, 56));
-        AirportIcaoTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airportIcaoTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airportIcaoTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        AirportIataLabel.setText("IATA");
+        airportIataLabel.setText("IATA");
 
-        AirportIataTextField.setBackground(new java.awt.Color(52, 52, 56));
-        AirportIataTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airportIataTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airportIataTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        AirportCountryTextField.setBackground(new java.awt.Color(52, 52, 56));
-        AirportCountryTextField.setForeground(new java.awt.Color(255, 255, 255));
-        AirportCountryTextField.addActionListener(new java.awt.event.ActionListener() {
+        airportCountryTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airportCountryTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airportCountryTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AirportCountryTextFieldActionPerformed(evt);
+                airportCountryTextFieldActionPerformed(evt);
             }
         });
 
-        AirportCountryLabel.setText("Country:");
+        airportCountryLabel.setText("Country:");
 
-        javax.swing.GroupLayout AirportAttributesPanelLayout = new javax.swing.GroupLayout(AirportAttributesPanel);
-        AirportAttributesPanel.setLayout(AirportAttributesPanelLayout);
-        AirportAttributesPanelLayout.setHorizontalGroup(
-            AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AirportAttributesPanelLayout.createSequentialGroup()
-                .addGroup(AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AirportAttributesPanelLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel1)
-                        .addGap(0, 50, Short.MAX_VALUE))
-                    .addGroup(AirportAttributesPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AirportNameLabel)
-                            .addComponent(AirportCityLabel)
-                            .addComponent(AirportIcaoLabel)
-                            .addComponent(AirportIataLabel)
-                            .addComponent(AirportCountryLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AirportCountryTextField)
-                            .addComponent(AirportIataTextField)
-                            .addComponent(AirportIcaoTextField)
-                            .addComponent(AirportCityTextField)
-                            .addComponent(AirportNameTextField))))
+        javax.swing.GroupLayout airportAttributesPanelLayout = new javax.swing.GroupLayout(airportAttributesPanel);
+        airportAttributesPanel.setLayout(airportAttributesPanelLayout);
+        airportAttributesPanelLayout.setHorizontalGroup(
+            airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(airportAttributesPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(airportNameLabel)
+                    .addComponent(airportCityLabel)
+                    .addComponent(airportIcaoLabel)
+                    .addComponent(airportIataLabel)
+                    .addComponent(airportCountryLabel))
+                .addGap(18, 18, 18)
+                .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(airportCountryTextField)
+                    .addComponent(airportIataTextField)
+                    .addComponent(airportIcaoTextField)
+                    .addComponent(airportCityTextField)
+                    .addComponent(airportNameTextField))
                 .addGap(25, 25, 25))
+            .addGroup(airportAttributesPanelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel1)
+                .addContainerGap(82, Short.MAX_VALUE))
         );
-        AirportAttributesPanelLayout.setVerticalGroup(
-            AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AirportAttributesPanelLayout.createSequentialGroup()
+        airportAttributesPanelLayout.setVerticalGroup(
+            airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(airportAttributesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AirportNameLabel)
-                    .addComponent(AirportNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(airportNameLabel)
+                    .addComponent(airportNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AirportCityLabel)
-                    .addComponent(AirportCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(airportCityLabel)
+                    .addComponent(airportCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AirportIcaoLabel)
-                    .addComponent(AirportIcaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(airportIcaoLabel)
+                    .addComponent(airportIcaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AirportIataLabel)
-                    .addComponent(AirportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(airportIataLabel)
+                    .addComponent(airportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(AirportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AirportCountryLabel)
-                    .addComponent(AirportCountryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(airportCountryLabel)
+                    .addComponent(airportCountryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
 
-        AirportOriginList.setBackground(new java.awt.Color(204, 204, 255));
-        AirportOriginList.setModel(new javax.swing.AbstractListModel() {
+        airportOriginList.setBackground(new java.awt.Color(165, 165, 178));
+        airportOriginList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        OriginScrollPane.setViewportView(AirportOriginList);
+        originScrollPane.setViewportView(airportOriginList);
 
-        AirportDestinationList.setBackground(new java.awt.Color(204, 204, 255));
-        AirportDestinationList.setModel(new javax.swing.AbstractListModel() {
+        airportDestinationList.setBackground(new java.awt.Color(165, 165, 178));
+        airportDestinationList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        DestinationScrollPane.setViewportView(AirportDestinationList);
+        destinationScrollPane.setViewportView(airportDestinationList);
 
-        AirportSaveChanges.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        AirportSaveChanges.setText("Save changes");
-        AirportSaveChanges.addActionListener(new java.awt.event.ActionListener() {
+        airportSaveChangesButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        airportSaveChangesButton.setText("Save changes");
+        airportSaveChangesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AirportSaveChangesActionPerformed(evt);
+                airportSaveChangesButtonActionPerformed(evt);
             }
         });
 
-        AirportDiscardChanges.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        AirportDiscardChanges.setForeground(new java.awt.Color(179, 107, 12));
-        AirportDiscardChanges.setText("Discard changes");
-        AirportDiscardChanges.addActionListener(new java.awt.event.ActionListener() {
+        airportDiscardChangesButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        airportDiscardChangesButton.setForeground(new java.awt.Color(179, 107, 12));
+        airportDiscardChangesButton.setText("Discard changes");
+        airportDiscardChangesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AirportDiscardChangesActionPerformed(evt);
+                airportDiscardChangesButtonActionPerformed(evt);
             }
         });
 
-        DestinationsLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        DestinationsLabel.setText("This Airport serves as  DESTINATION  in Routes:");
+        destinationsLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        destinationsLabel.setText("This Airport serves as  DESTINATION  in Routes:");
 
-        OriginsLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        OriginsLabel.setText("This Airport serves as  ORIGIN  in Routes:");
+        originsLabel.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        originsLabel.setText("This Airport serves as  ORIGIN  in Routes:");
+
+        airportQuoteLabel.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        airportQuoteLabel.setText("Configuration of Routes is done in Route tabb.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,54 +191,58 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(DestinationsLabel)
-                    .addComponent(OriginsLabel)
-                    .addComponent(OriginScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                    .addComponent(DestinationScrollPane))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(destinationsLabel)
+                        .addComponent(originsLabel)
+                        .addComponent(originScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                        .addComponent(destinationScrollPane))
+                    .addComponent(airportQuoteLabel))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AirportAttributesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AirportDiscardChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AirportSaveChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(airportDiscardChangesButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(airportAttributesPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(airportSaveChangesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AirportSaveChanges)
-                    .addComponent(OriginsLabel))
+                    .addComponent(airportSaveChangesButton)
+                    .addComponent(originsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(AirportDiscardChanges)
+                        .addComponent(airportDiscardChangesButton)
                         .addGap(8, 8, 8)
-                        .addComponent(AirportAttributesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(airportAttributesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(OriginScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DestinationsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DestinationScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(originScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(destinationsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(destinationScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(airportQuoteLabel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AirportSaveChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirportSaveChangesActionPerformed
+    private void airportSaveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportSaveChangesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AirportSaveChangesActionPerformed
+    }//GEN-LAST:event_airportSaveChangesButtonActionPerformed
 
-    private void AirportDiscardChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirportDiscardChangesActionPerformed
+    private void airportDiscardChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportDiscardChangesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AirportDiscardChangesActionPerformed
+    }//GEN-LAST:event_airportDiscardChangesButtonActionPerformed
 
-    private void AirportCountryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirportCountryTextFieldActionPerformed
+    private void airportCountryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportCountryTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AirportCountryTextFieldActionPerformed
+    }//GEN-LAST:event_airportCountryTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,25 +287,26 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AirportAttributesPanel;
-    private javax.swing.JLabel AirportCityLabel;
-    private javax.swing.JTextField AirportCityTextField;
-    private javax.swing.JLabel AirportCountryLabel;
-    private javax.swing.JTextField AirportCountryTextField;
-    private javax.swing.JList AirportDestinationList;
-    private javax.swing.JButton AirportDiscardChanges;
-    private javax.swing.JLabel AirportIataLabel;
-    private javax.swing.JTextField AirportIataTextField;
-    private javax.swing.JLabel AirportIcaoLabel;
-    private javax.swing.JTextField AirportIcaoTextField;
-    private javax.swing.JLabel AirportNameLabel;
-    private javax.swing.JTextField AirportNameTextField;
-    private javax.swing.JList AirportOriginList;
-    private javax.swing.JButton AirportSaveChanges;
-    private javax.swing.JScrollPane DestinationScrollPane;
-    private javax.swing.JLabel DestinationsLabel;
-    private javax.swing.JScrollPane OriginScrollPane;
-    private javax.swing.JLabel OriginsLabel;
+    private javax.swing.JPanel airportAttributesPanel;
+    private javax.swing.JLabel airportCityLabel;
+    private javax.swing.JTextField airportCityTextField;
+    private javax.swing.JLabel airportCountryLabel;
+    private javax.swing.JTextField airportCountryTextField;
+    private javax.swing.JList airportDestinationList;
+    private javax.swing.JButton airportDiscardChangesButton;
+    private javax.swing.JLabel airportIataLabel;
+    private javax.swing.JTextField airportIataTextField;
+    private javax.swing.JLabel airportIcaoLabel;
+    private javax.swing.JTextField airportIcaoTextField;
+    private javax.swing.JLabel airportNameLabel;
+    private javax.swing.JTextField airportNameTextField;
+    private javax.swing.JList airportOriginList;
+    private javax.swing.JLabel airportQuoteLabel;
+    private javax.swing.JButton airportSaveChangesButton;
+    private javax.swing.JScrollPane destinationScrollPane;
+    private javax.swing.JLabel destinationsLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane originScrollPane;
+    private javax.swing.JLabel originsLabel;
     // End of variables declaration//GEN-END:variables
 }

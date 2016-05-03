@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Component class="javax.swing.JSeparator" name="jSeparator1">
-    </Component>
-    <Component class="javax.swing.Box$Filler" name="filler1">
-      <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[32767, 32767]"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.Glue"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
-  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Airport Manager"/>
@@ -62,7 +36,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="MainTabbedPane" min="-2" pref="867" max="-2" attributes="0"/>
+              <Component id="mainTabbedPane" min="-2" pref="867" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -71,14 +45,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="MainTabbedPane" pref="528" max="32767" attributes="0"/>
+              <Component id="mainTabbedPane" pref="537" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="MainTabbedPane">
+    <Container class="javax.swing.JTabbedPane" name="mainTabbedPane">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="cc" red="cc" type="rgb"/>
@@ -90,7 +64,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="AirportPanel">
+        <Container class="javax.swing.JPanel" name="airportPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="cc" red="cc" type="rgb"/>
@@ -110,48 +84,54 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="AirportScrollPane" max="32767" attributes="0"/>
+                          <Component id="airportScrollPane" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="airportFilterLabel" min="-2" pref="238" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="AirportCityLabel" min="-2" pref="46" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="AirportCityTextField" max="32767" attributes="0"/>
+                                              <Component id="airportNameLabel" min="-2" pref="46" max="-2" attributes="0"/>
+                                              <EmptySpace pref="15" max="32767" attributes="0"/>
+                                              <Component id="airportNameTextField" min="-2" pref="150" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="AirportNameLabel" min="-2" pref="46" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="airportCountryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="airportCityLabel" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="AirportNameTextField" min="-2" pref="150" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="airportCityTextField" pref="150" max="32767" attributes="0"/>
+                                                  <Component id="airportCountryTextField" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="AirportIcaoLabel" min="-2" pref="46" max="-2" attributes="0"/>
+                                              <Component id="airportIcaoLabel" min="-2" pref="46" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="AirportIcaoTextField" min="-2" pref="90" max="-2" attributes="0"/>
+                                              <Component id="airportIcaoTextField" min="-2" pref="90" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="AirportIataLabel" min="-2" pref="46" max="-2" attributes="0"/>
+                                              <Component id="airportIataLabel" min="-2" pref="46" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="AirportIataTextField" min="-2" pref="90" max="-2" attributes="0"/>
+                                              <Component id="airportIataTextField" min="-2" pref="90" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Component id="AirportFilterLabel" min="-2" pref="238" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
-                              <EmptySpace pref="266" max="32767" attributes="0"/>
+                              <EmptySpace pref="263" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="CreateAirportButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                  <Component id="createAirportButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Component id="ApplyFilterAirportButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
-                                      <Component id="UpdateAirportButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
-                                      <Component id="DeleteAirportButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="applyFilterAirportButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="updateAirportButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="deleteAirportButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -166,43 +146,50 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="AirportFilterLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="airportFilterLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="AirportIcaoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="AirportNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="AirportNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="AirportIcaoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airportIcaoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airportNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airportNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airportIcaoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="AirportCityTextField" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="AirportIataTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="AirportIataLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="airportIataTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airportIataLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="airportCityLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="AirportCityLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airportCityTextField" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="airportCountryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airportCountryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="CreateAirportButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="createAirportButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="UpdateAirportButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="updateAirportButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="DeleteAirportButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="deleteAirportButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ApplyFilterAirportButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="applyFilterAirportButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="46" max="32767" attributes="0"/>
-                      <Component id="AirportScrollPane" min="-2" pref="300" max="-2" attributes="0"/>
+                      <Component id="airportScrollPane" min="-2" pref="300" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="CreateAirportButton">
+            <Component class="javax.swing.JButton" name="createAirportButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -210,10 +197,10 @@
                 <Property name="text" type="java.lang.String" value="Create new"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateAirportButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createAirportButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="UpdateAirportButton">
+            <Component class="javax.swing.JButton" name="updateAirportButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -221,10 +208,10 @@
                 <Property name="text" type="java.lang.String" value="Update selected"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateAirportButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateAirportButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="DeleteAirportButton">
+            <Component class="javax.swing.JButton" name="deleteAirportButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -235,10 +222,10 @@
                 <Property name="text" type="java.lang.String" value="Delete selected"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteAirportButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteAirportButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="ApplyFilterAirportButton">
+            <Component class="javax.swing.JButton" name="applyFilterAirportButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -249,7 +236,7 @@
                 <Property name="text" type="java.lang.String" value="Apply filter"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirportFilterLabel">
+            <Component class="javax.swing.JLabel" name="airportFilterLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="16" style="0"/>
@@ -257,7 +244,7 @@
                 <Property name="text" type="java.lang.String" value="Filter settings for Airport:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirportIcaoTextField">
+            <Component class="javax.swing.JTextField" name="airportIcaoTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -267,20 +254,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirportNameTextField">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="38" green="34" red="34" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AirportNameTextFieldActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="AirportIataTextField">
+            <Component class="javax.swing.JTextField" name="airportNameTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -290,10 +264,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AirportIataTextFieldActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="airportNameTextFieldActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirportCityTextField">
+            <Component class="javax.swing.JTextField" name="airportIataTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -303,34 +277,47 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AirportCityTextFieldActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="airportIataTextFieldActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirportNameLabel">
+            <Component class="javax.swing.JTextField" name="airportCityTextField">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="38" green="34" red="34" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="airportCityTextFieldActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="airportNameLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Name:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirportCityLabel">
+            <Component class="javax.swing.JLabel" name="airportCityLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="City:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirportIcaoLabel">
+            <Component class="javax.swing.JLabel" name="airportIcaoLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ICAO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirportIataLabel">
+            <Component class="javax.swing.JLabel" name="airportIataLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="IATA:"/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="AirportScrollPane">
+            <Container class="javax.swing.JScrollPane" name="airportScrollPane">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="AirportList">
+                <Component class="javax.swing.JList" name="airportjList">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="38" green="34" red="34" type="rgb"/>
@@ -357,6 +344,24 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="airportCountryLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Country:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="airportCountryTextField">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="38" green="34" red="34" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="airportCountryTextFieldActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="AirplanePanel">
@@ -379,56 +384,57 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="AirplaneScrollPane" max="32767" attributes="0"/>
+                          <Component id="airplaneScrollPane" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Component id="AirplaneFilterLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="airplaneFilterLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="AirplaneCodeLabel" min="-2" pref="41" max="-2" attributes="0"/>
+                                      <Component id="airplaneCodeLabel" min="-2" pref="41" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="AirplaneCodeTextField" max="32767" attributes="0"/>
+                                      <Component id="airplaneCodeTextField" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="AirplaneFuelGreaterLabel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneFuelLesserLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneFuelGreaterLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneFuelLesserLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="AirplaneFuelLesserTextField" min="-2" pref="45" max="-2" attributes="0"/>
-                                          <Component id="AirplaneFuelGreaterTextField" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="airplaneFuelGreaterTextField" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="airplaneFuelLesserTextField" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="AirplaneAirlineLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="airplaneAirlineLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="AirplaneAirlineTextField" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="airplaneAirlineTextField" min="-2" pref="175" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="AirplaneLoadingGreaterLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneLoadingLesserLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneLoadingGreaterLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneLoadingLesserLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="AirplaneLoadingLesserTextField" max="32767" attributes="0"/>
-                                          <Component id="AirplaneLoadingGreaterTextField" max="32767" attributes="0"/>
+                                          <Component id="airplaneLoadingLesserTextField" max="32767" attributes="0"/>
+                                          <Component id="airplaneLoadingGreaterTextField" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace pref="157" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="CreateAirplaneButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                  <Component id="createAirplaneButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Component id="ApplyFilterAirplaneButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
-                                      <Component id="UpdateAirplaneButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
-                                      <Component id="DeleteAirplaneButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="applyFilterAirplaneButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="updateAirplaneButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="deleteAirplaneButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -443,54 +449,54 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="AirplaneFilterLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="airplaneFilterLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="AirplaneCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="AirplaneCodeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="airplaneCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="airplaneCodeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="AirplaneAirlineLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneAirlineTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneAirlineLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneAirlineTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="AirplaneLoadingGreaterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneLoadingGreaterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneFuelGreaterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneFuelGreaterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneLoadingGreaterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneLoadingGreaterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneFuelGreaterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneFuelGreaterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="AirplaneLoadingLesserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneLoadingLesserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneFuelLesserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="AirplaneFuelLesserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneLoadingLesserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneLoadingLesserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneFuelLesserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="airplaneFuelLesserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="CreateAirplaneButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="createAirplaneButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="UpdateAirplaneButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="updateAirplaneButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="DeleteAirplaneButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="deleteAirplaneButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ApplyFilterAirplaneButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="applyFilterAirplaneButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="46" max="32767" attributes="0"/>
-                      <Component id="AirplaneScrollPane" min="-2" pref="300" max="-2" attributes="0"/>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
+                      <Component id="airplaneScrollPane" min="-2" pref="300" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="UpdateAirplaneButton">
+            <Component class="javax.swing.JButton" name="updateAirplaneButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -498,10 +504,10 @@
                 <Property name="text" type="java.lang.String" value="Update selected"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateAirplaneButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateAirplaneButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="DeleteAirplaneButton">
+            <Component class="javax.swing.JButton" name="deleteAirplaneButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -512,10 +518,10 @@
                 <Property name="text" type="java.lang.String" value="Delete selected"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteAirplaneButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteAirplaneButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="ApplyFilterAirplaneButton">
+            <Component class="javax.swing.JButton" name="applyFilterAirplaneButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -526,7 +532,7 @@
                 <Property name="text" type="java.lang.String" value="Apply filter"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="CreateAirplaneButton">
+            <Component class="javax.swing.JButton" name="createAirplaneButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -534,10 +540,10 @@
                 <Property name="text" type="java.lang.String" value="Create new"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateAirplaneButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createAirplaneButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirplaneFilterLabel">
+            <Component class="javax.swing.JLabel" name="airplaneFilterLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="16" style="0"/>
@@ -545,17 +551,17 @@
                 <Property name="text" type="java.lang.String" value="Filter settings for Airplane:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirplaneCodeLabel">
+            <Component class="javax.swing.JLabel" name="airplaneCodeLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Code:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirplaneAirlineLabel">
+            <Component class="javax.swing.JLabel" name="airplaneAirlineLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Airline:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirplaneCodeTextField">
+            <Component class="javax.swing.JTextField" name="airplaneCodeTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -565,7 +571,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirplaneAirlineTextField">
+            <Component class="javax.swing.JTextField" name="airplaneAirlineTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -575,27 +581,27 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirplaneFuelGreaterLabel">
+            <Component class="javax.swing.JLabel" name="airplaneFuelGreaterLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fuel capacity greater than:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirplaneFuelLesserLabel">
+            <Component class="javax.swing.JLabel" name="airplaneFuelLesserLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fuel capacity lesser than:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirplaneLoadingGreaterLabel">
+            <Component class="javax.swing.JLabel" name="airplaneLoadingGreaterLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Loading capacity greater than:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="AirplaneLoadingLesserLabel">
+            <Component class="javax.swing.JLabel" name="airplaneLoadingLesserLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Loading capacity lesser than:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirplaneFuelGreaterTextField">
+            <Component class="javax.swing.JTextField" name="airplaneFuelGreaterTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -605,7 +611,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirplaneFuelLesserTextField">
+            <Component class="javax.swing.JTextField" name="airplaneFuelLesserTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -615,7 +621,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirplaneLoadingGreaterTextField">
+            <Component class="javax.swing.JTextField" name="airplaneLoadingGreaterTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -625,7 +631,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="AirplaneLoadingLesserTextField">
+            <Component class="javax.swing.JTextField" name="airplaneLoadingLesserTextField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -635,11 +641,11 @@
                 </Property>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="AirplaneScrollPane">
+            <Container class="javax.swing.JScrollPane" name="airplaneScrollPane">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="AirplaneList">
+                <Component class="javax.swing.JList" name="airplanejList">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="38" green="34" red="34" type="rgb"/>
@@ -662,7 +668,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="RoutePanel">
+        <Container class="javax.swing.JPanel" name="routePanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="cc" red="cc" type="rgb"/>
@@ -681,82 +687,96 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="DestinationFilterLabel" max="32767" attributes="0"/>
-                                          <Component id="OriginFilterLabel" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="originFilterLabel" min="-2" pref="110" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="RouteNameLabel2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="RouteNameTextField2" min="-2" pref="138" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="RouteNameLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="RouteCityLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="routeNameLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="routeCityLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="RouteCityTextField1" min="-2" pref="137" max="-2" attributes="0"/>
-                                                  <Component id="RouteNameTextField1" min="-2" pref="138" max="-2" attributes="0"/>
+                                                  <Component id="routeCityTextField1" alignment="1" min="-2" pref="137" max="-2" attributes="0"/>
+                                                  <Component id="routeNameTextField1" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="RouteCityLabel2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="RouteCityTextField2" max="32767" attributes="0"/>
+                                              <Component id="routeCountryLabel1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="31" max="32767" attributes="0"/>
+                                              <Component id="routeCountryTextField1" min="-2" pref="137" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="routeIcaoLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeIataLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="RouteIcaoLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="RouteIataLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="RouteIataTextField2" pref="90" max="32767" attributes="0"/>
-                                                  <Component id="RouteIcaoTextField2" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="RouteIcaoLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="RouteIataLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="RouteIataTextField1" max="32767" attributes="0"/>
-                                                  <Component id="RouteIcaoTextField1" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="routeIataTextField1" max="32767" attributes="0"/>
+                                          <Component id="routeIcaoTextField1" min="-2" pref="90" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                      <Component id="RouteFilterLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="routeFilterLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="122" pref="122" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="routeCountryLabel2" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="routeCountryTextField2" min="-2" pref="137" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="routeNameLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="routeCityLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="routeCityTextField2" min="-2" pref="138" max="-2" attributes="0"/>
+                                                          <Component id="routeNameTextField2" min="-2" pref="138" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="routeIcaoLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="routeIataLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="destinationFilterLabel" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="routeIataTextField2" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="routeIcaoTextField2" min="-2" pref="90" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="139" max="32767" attributes="0"/>
+                              <EmptySpace pref="117" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="CreateRouteButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                  <Component id="createRouteButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Component id="ApplyFilterRouteButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
-                                      <Component id="UpdateRouteButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
-                                      <Component id="DeleteRouteButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="applyFilterRouteButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="updateRouteButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Component id="deleteRouteButton" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="RouteScrollPane" max="32767" attributes="0"/>
+                              <Component id="routeScrollPane" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -769,57 +789,94 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="CreateRouteButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="createRouteButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="UpdateRouteButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="updateRouteButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="DeleteRouteButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="deleteRouteButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ApplyFilterRouteButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="applyFilterRouteButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="RouteFilterLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="routeFilterLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="OriginFilterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteNameLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteNameTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteIcaoLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteIcaoTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="RouteCityLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteCityTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteIataLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteIataTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="routeIcaoLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeIcaoTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="routeIataLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeIataTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="originFilterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeNameLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeNameTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                              <Component id="routeCityLabel1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="routeCityTextField1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="routeCountryLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeCountryTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="DestinationFilterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteNameLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteNameTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteIcaoLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteIcaoTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="destinationFilterLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="routeNameLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeNameTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="routeCityLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeCityTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="routeIcaoLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeIcaoTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="routeIataLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="routeIataTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="RouteCityLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteCityTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteIataLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RouteIataTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="routeCountryLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="routeCountryTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
-                      <Component id="RouteScrollPane" min="-2" pref="300" max="-2" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <Component id="routeScrollPane" min="-2" pref="250" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="UpdateRouteButton">
+            <Component class="javax.swing.JButton" name="updateRouteButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -827,10 +884,10 @@
                 <Property name="text" type="java.lang.String" value="Update selected"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateRouteButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateRouteButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="DeleteRouteButton">
+            <Component class="javax.swing.JButton" name="deleteRouteButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -841,10 +898,10 @@
                 <Property name="text" type="java.lang.String" value="Delete selected"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteRouteButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteRouteButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="ApplyFilterRouteButton">
+            <Component class="javax.swing.JButton" name="applyFilterRouteButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -855,7 +912,7 @@
                 <Property name="text" type="java.lang.String" value="Apply filter"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="CreateRouteButton">
+            <Component class="javax.swing.JButton" name="createRouteButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="1"/>
@@ -863,10 +920,10 @@
                 <Property name="text" type="java.lang.String" value="Create new"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateRouteButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createRouteButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteFilterLabel">
+            <Component class="javax.swing.JLabel" name="routeFilterLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="16" style="0"/>
@@ -874,7 +931,7 @@
                 <Property name="text" type="java.lang.String" value="Filter settings for Route:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="OriginFilterLabel">
+            <Component class="javax.swing.JLabel" name="originFilterLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="2"/>
@@ -882,7 +939,7 @@
                 <Property name="text" type="java.lang.String" value="Origin airport:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="DestinationFilterLabel">
+            <Component class="javax.swing.JLabel" name="destinationFilterLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="13" style="2"/>
@@ -890,27 +947,27 @@
                 <Property name="text" type="java.lang.String" value="Destination airport:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteNameLabel1">
+            <Component class="javax.swing.JLabel" name="routeNameLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Name:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteNameLabel2">
+            <Component class="javax.swing.JLabel" name="routeNameLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Name:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteCityLabel1">
+            <Component class="javax.swing.JLabel" name="routeCityLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="City:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteCityLabel2">
+            <Component class="javax.swing.JLabel" name="routeCityLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="City:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RouteNameTextField1">
+            <Component class="javax.swing.JTextField" name="routeNameTextField1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -920,7 +977,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RouteCityTextField1">
+            <Component class="javax.swing.JTextField" name="routeCityTextField1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -930,7 +987,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RouteNameTextField2">
+            <Component class="javax.swing.JTextField" name="routeNameTextField2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -940,7 +997,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RouteCityTextField2">
+            <Component class="javax.swing.JTextField" name="routeCityTextField2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -950,27 +1007,27 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteIcaoLabel1">
+            <Component class="javax.swing.JLabel" name="routeIcaoLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ICAO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteIataLabel1">
+            <Component class="javax.swing.JLabel" name="routeIataLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="IATA:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteIcaoLabel2">
+            <Component class="javax.swing.JLabel" name="routeIcaoLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ICAO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="RouteIataLabel2">
+            <Component class="javax.swing.JLabel" name="routeIataLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="IATA:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RouteIcaoTextField1">
+            <Component class="javax.swing.JTextField" name="routeIcaoTextField1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -980,7 +1037,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RouteIataTextField1">
+            <Component class="javax.swing.JTextField" name="routeIataTextField1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -990,7 +1047,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RouteIataTextField2">
+            <Component class="javax.swing.JTextField" name="routeIataTextField2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -1000,7 +1057,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RouteIcaoTextField2">
+            <Component class="javax.swing.JTextField" name="routeIcaoTextField2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="34" red="34" type="rgb"/>
@@ -1010,11 +1067,11 @@
                 </Property>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="RouteScrollPane">
+            <Container class="javax.swing.JScrollPane" name="routeScrollPane">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="RouteList">
+                <Component class="javax.swing.JList" name="routejList">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="38" green="34" red="34" type="rgb"/>
@@ -1035,6 +1092,38 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="routeCountryLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Country:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="routeCountryTextField1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="38" green="34" red="34" type="rgb"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="routeCountryTextField1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="routeCountryLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Country:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="routeCountryTextField2">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="38" green="34" red="34" type="rgb"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="routeCountryTextField2ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

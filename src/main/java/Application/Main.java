@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
  */
 public class Main {
     public static void main(String[] args) {
-//        Frame frame = new Frame();
+        Frame frame = new Frame();
 //        NewJFrame visualTest = new NewJFrame();
         
         AirplaneService airplaneService = new AirplaneService();
