@@ -8,7 +8,6 @@ package Application;
 import Application.GUIDesigners.BoundingUpdater;
 import Application.GUIDesigners.DialogDesigner;
 import Model.Airplane;
-import ModelWrapper.AirplaneWrapper;
 import Service.AirplaneService;
 import Service.AirportService;
 import Service.ManagementProvider;
