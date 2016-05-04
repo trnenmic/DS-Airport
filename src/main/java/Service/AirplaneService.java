@@ -45,8 +45,11 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
     }
     
     public List<Airplane> findWithGreaterCapacity(int capacity) {
-        criteriaQuery.select(root)
+        CriteriaQuery tmp = criteriaQuery.select(root)
                 .where(criteriaBuilder.gt(root.get("capacity"), capacity));
+//        if (neco != null) {
+//            tmp.select(root).where(criteriaBuilder.equal(root.get("neco"), necodalsiho));
+//        }
         createResultList();
         return getCastedResult();
     }

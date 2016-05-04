@@ -17,7 +17,7 @@ import javax.persistence.Persistence;
 public class Main {
     public static void main(String[] args) {
 //        Frame frame = new Frame();
-//        NewJFrame visualTest = new NewJFrame();
+        NewJFrame visualTest = new NewJFrame();
         
         AirplaneService airplaneService = new AirplaneService();
         
@@ -36,6 +36,8 @@ public class Main {
         for (Airplane airplane : airplaneService.findWithGreaterCapacity(100)) {
             System.out.println(airplane);
         }
+        
+        AirportService a = new AirportService();
         
         
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
