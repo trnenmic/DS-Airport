@@ -38,7 +38,9 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
             this.setTitle("Update Airplane Attributes");
         }
         initDialog(managementProvider);
-        updateTextFields();
+        if (update) {
+            updateTextFields();
+        }
     }
 
     public AirplaneAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
@@ -55,6 +57,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         initLists();
+
     }
 
     private void initLists() {

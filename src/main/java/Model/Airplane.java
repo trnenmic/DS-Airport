@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -29,6 +30,8 @@ public class Airplane implements Serializable, Identifiable {
         airplane.setPayload(payload);
         airplane.setLoadingCapacity(loadingCapacity);
         airplane.setAirplaneCode(airplaneCode);
+        airplane.setRoutes(new ArrayList<Route>());
+        airplane.setFlights(new ArrayList<Flight>());
         return airplane;
     }
 

@@ -40,6 +40,9 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
             this.setTitle("Update Airport attributes");
         }
         initDialog(managementProvider);
+        if(updated){
+            updateTextFields();
+        }
     }
 
     public AirportAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
@@ -65,6 +68,15 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     private void updateLists() {
         airportOriginList.setListData(((Airport) detached).getOrigins().toArray());
         airportDestinationList.setListData(((Airport) detached).getDestinations().toArray());
+    }
+
+    private void updateTextFields() {
+        Airport airport = (Airport) detached;
+        airportNameTextField.setText(airport.getAirportName());
+        airportCityTextField.setText(airport.getCity());
+        airportCountryTextField.setText(airport.getCountry());
+        airportIataTextField.setText(airport.getIata());
+        airportIcaoTextField.setText(airport.getIcao());
     }
 
     private void saveAirport() throws InvalidAttributeException {
