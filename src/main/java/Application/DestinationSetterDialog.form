@@ -39,7 +39,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="applyFilterAirplaneButton" min="-2" pref="248" max="-2" attributes="0"/>
-                                  <Component id="OriginSelectorButton" min="-2" pref="248" max="-2" attributes="0"/>
+                                  <Component id="DestinationSelectorButton" min="-2" pref="248" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -60,7 +60,7 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="applyFilterAirplaneButton" min="-2" pref="47" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="OriginSelectorButton" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="DestinationSelectorButton" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -269,7 +269,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="routeHasAirportsList">
+        <Component class="javax.swing.JList" name="airportsList">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="34" red="34" type="rgb"/>
@@ -300,14 +300,20 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Apply filter"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="applyFilterAirplaneButtonActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="OriginSelectorButton">
+    <Component class="javax.swing.JButton" name="DestinationSelectorButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="13" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Set selected"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DestinationSelectorButtonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>

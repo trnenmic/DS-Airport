@@ -18,6 +18,7 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
         this.select = criteriaQuery.select(from);
     }
 
+    @Override
     public Airport find(int idAirport) {
         return em.find(Airport.class, idAirport);
     }
@@ -53,6 +54,12 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
     public List<Route> findJoinedDestinationRoutes(Airport airport) {
         // TO DO
         return null;
+    }
+
+    @Override
+    public List<Airport> findSpecified(String name, String city, String country, String icao, String iata) {
+        // TO DO
+        return findAll();
     }
     
 }

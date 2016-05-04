@@ -5,10 +5,14 @@
  */
 package Application;
 
+import Application.GUIDesigners.BoundingUpdater;
+import Model.Airport;
+import Model.Route;
 import Service.AirplaneService;
 import Service.AirportService;
 import Service.ManagementProvider;
 import Service.RouteService;
+import Validator.InvalidAttributeException;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 /**
@@ -19,15 +23,19 @@ public class OriginSetterDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
+    private BoundingUpdater boundingUpdater;
 
-    public OriginSetterDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
+    private String name = null;
+    private String city = null;
+    private String country = null;
+    private String iata = null;
+    private String icao = null;
+
+    public OriginSetterDialog(java.awt.Frame parent, boolean modal,
+            ManagementProvider managementProvider, Object o, BoundingUpdater boundingUpdater) {
         super(parent, modal);
         detached = o;
-        initDialog(managementProvider);
-    }
-
-    public OriginSetterDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
-        super(parent, modal);
+        this.boundingUpdater = boundingUpdater;
         initDialog(managementProvider);
     }
 
@@ -39,8 +47,26 @@ public class OriginSetterDialog extends javax.swing.JDialog {
     }
 
     private void initLists() {
-        routeHasAirplanesList.setSelectionMode(SINGLE_SELECTION);
-        routeHasAirplanesList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
+        airportsList.setSelectionMode(SINGLE_SELECTION);
+        updateLists();
+    }
+
+    private void updateLists() {
+        airportsList.setListData(mgProvider.getAirportManager().findSpecified(name,
+                city, country, icao, iata).toArray());
+        updateTextFields();
+    }
+
+    private void updateTextFields() {
+        Route route = (Route) detached;
+        if (route.getOrigin() != null) {
+            originNameTextField.setText(route.getOrigin().getAirportName());
+            originCountryTextField.setText(route.getOrigin().getCountry());
+            originCityTextField.setText(route.getOrigin().getCity());
+            originIataTextField.setText(route.getOrigin().getIata());
+            originIcaoTextField.setText(route.getOrigin().getIcao());
+        }
+
     }
 
     /**
@@ -65,7 +91,7 @@ public class OriginSetterDialog extends javax.swing.JDialog {
         originCountryTextField = new javax.swing.JTextField();
         originNameTextField = new javax.swing.JTextField();
         airplanesScrollPane = new javax.swing.JScrollPane();
-        routeHasAirplanesList = new javax.swing.JList();
+        airportsList = new javax.swing.JList();
         applyFilterAirplaneButton = new javax.swing.JButton();
         OriginSelectorButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -208,21 +234,31 @@ public class OriginSetterDialog extends javax.swing.JDialog {
         airplanesScrollPane.setMaximumSize(new java.awt.Dimension(1000, 800));
         airplanesScrollPane.setMinimumSize(new java.awt.Dimension(50, 50));
 
-        routeHasAirplanesList.setBackground(new java.awt.Color(52, 52, 56));
-        routeHasAirplanesList.setForeground(new java.awt.Color(255, 255, 255));
-        routeHasAirplanesList.setModel(new javax.swing.AbstractListModel() {
+        airportsList.setBackground(new java.awt.Color(52, 52, 56));
+        airportsList.setForeground(new java.awt.Color(255, 255, 255));
+        airportsList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        airplanesScrollPane.setViewportView(routeHasAirplanesList);
+        airplanesScrollPane.setViewportView(airportsList);
 
         applyFilterAirplaneButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         applyFilterAirplaneButton.setForeground(new java.awt.Color(25, 62, 137));
         applyFilterAirplaneButton.setText("Apply filter");
+        applyFilterAirplaneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyFilterAirplaneButtonActionPerformed(evt);
+            }
+        });
 
         OriginSelectorButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         OriginSelectorButton.setText("Set selected");
+        OriginSelectorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OriginSelectorButtonActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -383,6 +419,32 @@ public class OriginSetterDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_originCityTextFieldActionPerformed
 
+    private void applyFilterAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterAirplaneButtonActionPerformed
+        warningLabel.setText(" ");
+        name = (airportNameTextField.getText().equals("") ? null : airportNameTextField.getText());
+        city = (airportCityTextField.getText().equals("") ? null : airportCityTextField.getText());
+        country = (airportCountryTextField.getText().equals("") ? null : airportCountryTextField.getText());
+        iata = (airportIataTextField.getText().equals("") ? null : airportIataTextField.getText());
+        icao = (airportIcaoTextField.getText().equals("") ? null : airportIcaoTextField.getText());
+        updateLists();
+    }//GEN-LAST:event_applyFilterAirplaneButtonActionPerformed
+
+    private void OriginSelectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OriginSelectorButtonActionPerformed
+        if (airportsList.getSelectedValue() != null) {
+            Route route = (Route) detached;
+            Airport origin;
+            if (route.getOrigin() != null) {
+                origin = route.getOrigin();
+                origin.getOrigins().remove((Route) detached);
+                boundingUpdater.addAirport(origin);
+            }
+            origin = (Airport) airportsList.getSelectedValue();
+            route.setOrigin(origin);
+            origin.addOrigin(route);
+        }
+        updateTextFields();
+    }//GEN-LAST:event_OriginSelectorButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -412,6 +474,66 @@ public class OriginSetterDialog extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -420,7 +542,8 @@ public class OriginSetterDialog extends javax.swing.JDialog {
                 managementProvider.setAirplaneManager(new AirplaneService());
                 managementProvider.setAirportManager(new AirportService());
                 managementProvider.setRouteManager(new RouteService());
-                OriginSetterDialog dialog = new OriginSetterDialog(new javax.swing.JFrame(), true, managementProvider);
+                OriginSetterDialog dialog = new OriginSetterDialog(new javax.swing.JFrame(), true, managementProvider,
+                        Airport.createAirport("", "", "", "", ""), new BoundingUpdater(managementProvider));
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -446,6 +569,7 @@ public class OriginSetterDialog extends javax.swing.JDialog {
     private javax.swing.JTextField airportIcaoTextField;
     private javax.swing.JLabel airportNameLabel;
     private javax.swing.JTextField airportNameTextField;
+    private javax.swing.JList airportsList;
     private javax.swing.JButton applyFilterAirplaneButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -456,7 +580,6 @@ public class OriginSetterDialog extends javax.swing.JDialog {
     private javax.swing.JTextField originIcaoTextField;
     private javax.swing.JTextField originNameTextField;
     private javax.swing.JLabel routeCityLabel1;
-    private javax.swing.JList routeHasAirplanesList;
     private javax.swing.JLabel routeIataLabel1;
     private javax.swing.JLabel routeIataLabel4;
     private javax.swing.JLabel routeIcaoLabel1;

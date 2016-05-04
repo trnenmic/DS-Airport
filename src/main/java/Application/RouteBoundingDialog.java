@@ -341,7 +341,12 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
 
     private void addBoudningToRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBoudningToRouteButtonActionPerformed
         warningLabel.setText(" ");
-// TODO add your handling code here:
+        Route route = (Route) detached;
+        Airplane airplane = (Airplane) filteredAirplanesList.getSelectedValue();
+        route.addAirplane(airplane);
+        airplane.addRoute(route);
+        boundingUpdater.addAirplane(airplane);
+        updateLists();
     }//GEN-LAST:event_addBoudningToRouteButtonActionPerformed
 
     /**

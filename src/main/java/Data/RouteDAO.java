@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
  *
  * @author Martin
  */
-public class RouteDAO extends GenericDAOImpl<Route> {
-    
+public class RouteDAO extends GenericDAOImpl {
+    /*
     private final Root<Route> from = criteriaQuery.from(Route.class);
     private final CriteriaQuery<Object> select = criteriaQuery.select(from);
     private TypedQuery<Object> typedQuery;
@@ -48,4 +48,5 @@ public class RouteDAO extends GenericDAOImpl<Route> {
             result.add((Route)o);
         }
     }
+    */
 }

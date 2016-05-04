@@ -7,6 +7,9 @@ package Application;
 
 import Application.GUIDesigners.DialogDesigner;
 import Data.GenericDAOImpl;
+import Model.Airplane;
+import Model.Airport;
+import Model.Route;
 import Service.AirplaneService;
 import Service.AirportManager;
 import Service.AirportService;
@@ -24,6 +27,33 @@ public class NewJFrame extends javax.swing.JFrame {
 
     public ManagementProvider mgProvider;
 
+    //filter Airplanes
+    private String filterCode = null;
+    private String filterAirline = null;
+    private Integer filterMaxFuelCapacity = null;
+    private Integer filterMinFuelCapacity = null;
+    private Integer filterMaxLoadingCapacity = null;
+    private Integer filterMinLoadingCapacity = null;
+
+    //filter Routes
+    private String name1 = null;
+    private String name2 = null;
+    private String city1 = null;
+    private String city2 = null;
+    private String country1 = null;
+    private String country2 = null;
+    private String iata1 = null;
+    private String iata2 = null;
+    private String icao1 = null;
+    private String icao2 = null;
+
+    //filter airports
+    private String name = null;
+    private String city = null;
+    private String country = null;
+    private String iata = null;
+    private String icao = null;
+
     /**
      * Creates new form NewJFrame
      */
@@ -37,11 +67,32 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void initLists() {
         routejList.setSelectionMode(SINGLE_SELECTION);
-        routejList.setListData(mgProvider.getRouteManager().findAll().toArray());
         airplanejList.setSelectionMode(SINGLE_SELECTION);
-        airplanejList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
         airportjList.setSelectionMode(SINGLE_SELECTION);
+        updateLists();
+    }
+
+    private void updateLists() {
+        routejList.setListData(mgProvider.getRouteManager().findAll().toArray());
+        airplanejList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
         airportjList.setListData(mgProvider.getAirportManager().findAll().toArray());
+    }
+
+    private void updateAirportList() {
+        airportjList.setListData(mgProvider.getAirportManager().findSpecified(name,
+                city, country, icao, iata).toArray());
+    }
+
+    private void updateAirplaneList() {
+        airplanejList.setListData(mgProvider.getAirplaneManager().findSpecified(
+                filterCode, filterAirline,
+                filterMaxFuelCapacity, filterMinFuelCapacity,
+                filterMaxLoadingCapacity, filterMinLoadingCapacity).toArray());
+    }
+
+    private void updateRouteList() {
+        routejList.setListData(mgProvider.getRouteManager().findSpecified(
+                city1, city2, name1, name2, icao1, icao2, iata1, iata2, country1, country2).toArray());
     }
 
     private void initManagement() {
@@ -130,6 +181,7 @@ public class NewJFrame extends javax.swing.JFrame {
         routeCountryTextField1 = new javax.swing.JTextField();
         routeCountryLabel2 = new javax.swing.JLabel();
         routeCountryTextField2 = new javax.swing.JTextField();
+        warningLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Airport Manager");
@@ -171,6 +223,11 @@ public class NewJFrame extends javax.swing.JFrame {
         applyFilterAirportButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         applyFilterAirportButton.setForeground(new java.awt.Color(25, 62, 137));
         applyFilterAirportButton.setText("Apply filter");
+        applyFilterAirportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyFilterAirportButtonActionPerformed(evt);
+            }
+        });
 
         airportFilterLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         airportFilterLabel.setText("Filter settings for Airport:");
@@ -266,7 +323,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                         .addComponent(airportIataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(airportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
                         .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(createAirportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,7 +365,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(deleteAirportButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(applyFilterAirportButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(airportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -337,6 +394,11 @@ public class NewJFrame extends javax.swing.JFrame {
         applyFilterAirplaneButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         applyFilterAirplaneButton.setForeground(new java.awt.Color(25, 62, 137));
         applyFilterAirplaneButton.setText("Apply filter");
+        applyFilterAirplaneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyFilterAirplaneButtonActionPerformed(evt);
+            }
+        });
 
         createAirplaneButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         createAirplaneButton.setText("Create new");
@@ -473,7 +535,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(deleteAirplaneButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(applyFilterAirplaneButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(airplaneScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -502,6 +564,11 @@ public class NewJFrame extends javax.swing.JFrame {
         applyFilterRouteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         applyFilterRouteButton.setForeground(new java.awt.Color(25, 62, 137));
         applyFilterRouteButton.setText("Apply filter");
+        applyFilterRouteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyFilterRouteButtonActionPerformed(evt);
+            }
+        });
 
         createRouteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         createRouteButton.setText("Create new");
@@ -728,12 +795,15 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(routeCountryLabel2)
                             .addComponent(routeCountryTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(routeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         mainTabbedPane.addTab("Route", routePanel);
+
+        warningLabel.setForeground(new java.awt.Color(204, 0, 0));
+        warningLabel.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -741,15 +811,21 @@ public class NewJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(warningLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 537, Short.MAX_VALUE)
-                .addGap(16, 16, 16))
+                .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(warningLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -758,12 +834,14 @@ public class NewJFrame extends javax.swing.JFrame {
     private void createAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAirportButtonActionPerformed
         AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true, mgProvider);
         DialogDesigner.centerDialog(airportAttributesDialog);
+        updateLists();
     }//GEN-LAST:event_createAirportButtonActionPerformed
 
     private void updateAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirportButtonActionPerformed
         //send id
-        AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true, mgProvider);
+        AirportAttributesDialog airportAttributesDialog = new AirportAttributesDialog(this, true, mgProvider, airportjList.getSelectedValue());
         DialogDesigner.centerDialog(airportAttributesDialog);
+        updateLists();
     }//GEN-LAST:event_updateAirportButtonActionPerformed
 
     private void airportNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportNameTextFieldActionPerformed
@@ -771,22 +849,28 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_airportNameTextFieldActionPerformed
 
     private void deleteAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirportButtonActionPerformed
-        // TODO add your handling code here:
+        warningLabel.setText(" ");
+        mgProvider.getGenericDAOImpl().delete((Airport) airportjList.getSelectedValue());
+        updateAirportList();
     }//GEN-LAST:event_deleteAirportButtonActionPerformed
 
     private void createRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRouteButtonActionPerformed
         RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true, mgProvider);
         DialogDesigner.centerDialog(attributesDialog);
+        updateLists();
     }//GEN-LAST:event_createRouteButtonActionPerformed
 
     private void deleteRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteButtonActionPerformed
-        // TODO add your handling code here:
+        warningLabel.setText(" ");
+        mgProvider.getGenericDAOImpl().delete((Route) routejList.getSelectedValue());
+        updateRouteList();
     }//GEN-LAST:event_deleteRouteButtonActionPerformed
 
     private void updateRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRouteButtonActionPerformed
         //id must be set
         RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true, mgProvider, routejList.getSelectedValue());
         DialogDesigner.centerDialog(attributesDialog);
+        updateLists();
     }//GEN-LAST:event_updateRouteButtonActionPerformed
 
     private void airportCityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportCityTextFieldActionPerformed
@@ -800,16 +884,20 @@ public class NewJFrame extends javax.swing.JFrame {
     private void createAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAirplaneButtonActionPerformed
         AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true, mgProvider);
         DialogDesigner.centerDialog(attributesDialog);
+        updateLists();
     }//GEN-LAST:event_createAirplaneButtonActionPerformed
 
     private void deleteAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirplaneButtonActionPerformed
-        // TODO add your handling code here:
+        warningLabel.setText(" ");
+        mgProvider.getGenericDAOImpl().delete((Airplane) airplanejList.getSelectedValue());
+        updateAirplaneList();
     }//GEN-LAST:event_deleteAirplaneButtonActionPerformed
 
     private void updateAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirplaneButtonActionPerformed
         //send airplane id
         AirplaneAttributesDialog attributesDialog = new AirplaneAttributesDialog(this, true, mgProvider, airplanejList.getSelectedValue());
         DialogDesigner.centerDialog(attributesDialog);
+        updateLists();
     }//GEN-LAST:event_updateAirplaneButtonActionPerformed
 
     private void airportCountryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportCountryTextFieldActionPerformed
@@ -823,6 +911,46 @@ public class NewJFrame extends javax.swing.JFrame {
     private void routeCountryTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeCountryTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_routeCountryTextField2ActionPerformed
+
+    private void applyFilterRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterRouteButtonActionPerformed
+        warningLabel.setText(" ");
+        name1 = (routeNameTextField1.getText().equals("") ? null : routeNameTextField1.getText());
+        name2 = (routeNameTextField2.getText().equals("") ? null : routeNameTextField2.getText());
+        city1 = (routeCityTextField1.getText().equals("") ? null : routeCityTextField1.getText());
+        city2 = (routeCityTextField2.getText().equals("") ? null : routeCityTextField2.getText());
+        country1 = (routeCountryTextField1.getText().equals("") ? null : routeCountryTextField1.getText());
+        country2 = (routeCountryTextField2.getText().equals("") ? null : routeCountryTextField2.getText());
+        iata1 = (routeIataTextField1.getText().equals("") ? null : routeIataTextField1.getText());
+        iata2 = (routeIataTextField2.getText().equals("") ? null : routeIataTextField2.getText());
+        icao1 = (routeIcaoTextField1.getText().equals("") ? null : routeIcaoTextField1.getText());
+        icao2 = (routeIcaoTextField2.getText().equals("") ? null : routeIcaoTextField2.getText());
+        updateRouteList();
+    }//GEN-LAST:event_applyFilterRouteButtonActionPerformed
+
+    private void applyFilterAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterAirplaneButtonActionPerformed
+        warningLabel.setText(" ");
+        try {
+            filterCode = airplaneCodeTextField.getText().equals("") ? null : airplaneCodeTextField.getText();
+            filterAirline = airplaneAirlineTextField.getText().equals("") ? null : airplaneAirlineTextField.getText();
+            filterMaxFuelCapacity = Integer.parseInt(airplaneFuelGreaterTextField.getText());
+            filterMinFuelCapacity = Integer.parseInt(airplaneFuelLesserTextField.getText());
+            filterMaxLoadingCapacity = Integer.parseInt(airplaneLoadingGreaterTextField.getText());
+            filterMinLoadingCapacity = Integer.parseInt(airplaneLoadingLesserTextField.getText());
+            updateAirplaneList();
+        } catch (NumberFormatException e) {
+            warningLabel.setText("Input is not and integer.");
+        }
+    }//GEN-LAST:event_applyFilterAirplaneButtonActionPerformed
+
+    private void applyFilterAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterAirportButtonActionPerformed
+        warningLabel.setText(" ");
+        name = (airportNameTextField.getText().equals("") ? null : airportNameTextField.getText());
+        city = (airportCityTextField.getText().equals("") ? null : airportCityTextField.getText());
+        country = (airportCountryTextField.getText().equals("") ? null : airportCountryTextField.getText());
+        iata = (airportIataTextField.getText().equals("") ? null : airportIataTextField.getText());
+        icao = (airportIcaoTextField.getText().equals("") ? null : airportIcaoTextField.getText());
+        updateAirportList();
+    }//GEN-LAST:event_applyFilterAirportButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -930,5 +1058,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton updateAirplaneButton;
     private javax.swing.JButton updateAirportButton;
     private javax.swing.JButton updateRouteButton;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

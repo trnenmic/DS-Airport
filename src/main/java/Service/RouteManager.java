@@ -13,6 +13,7 @@ public interface RouteManager {
 
     List<Airplane> findJoinedAirplanes(Route route);
 
+    Route find(int idRoute);
     List<Route> findAll();
     List<Route> findAllOrderedById();
 

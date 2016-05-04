@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
  *
  * @author Martin
  */
-public class FlightDAO extends GenericDAOImpl<Flight> {
-    
+public class FlightDAO extends GenericDAOImpl {
+    /*
     private final Root<Flight> from = criteriaQuery.from(Flight.class);
     private final CriteriaQuery<Object> select = criteriaQuery.select(from);
     private TypedQuery<Object> typedQuery;
@@ -47,5 +47,5 @@ public class FlightDAO extends GenericDAOImpl<Flight> {
         for (Object o : resultList) {
             result.add((Flight)o);
         }
-    }
+    }*/
 }

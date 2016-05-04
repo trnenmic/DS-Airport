@@ -8,7 +8,8 @@ import java.util.Collection;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Airplane implements Serializable {
+public class Airplane implements Serializable, Identifiable {
+
     private int idAirplane;
     private int capacity;
     private int fuelTankCapacity;
@@ -19,9 +20,8 @@ public class Airplane implements Serializable {
     private Collection<Route> routes;
     private Collection<Flight> flights;
 
-
     public static Airplane createAirplane(int capacity, int fuelTankCapacity,
-                                          String airline, Integer payload, Integer loadingCapacity, String airplaneCode) {
+            String airline, Integer payload, Integer loadingCapacity, String airplaneCode) {
         Airplane airplane = new Airplane();
         airplane.setCapacity(capacity);
         airplane.setFuelTankCapacity(fuelTankCapacity);
@@ -34,11 +34,22 @@ public class Airplane implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf("| AIRPLANE | CODE : " + this.getAirplaneCode() + 
-                " | AIRLINE : " + this.getAirline() + " | CAPACITY : " 
-                + this.getCapacity() + " | FUEL CAPACITY : " +
-                this.getFuelTankCapacity() + " | PAYLOAD " + this.getPayload() 
+        return String.valueOf("| AIRPLANE | CODE : " + this.getAirplaneCode()
+                + " | AIRLINE : " + this.getAirline() + " | CAPACITY : "
+                + this.getCapacity() + " | FUEL CAPACITY : "
+                + this.getFuelTankCapacity() + " | PAYLOAD " + this.getPayload()
                 + " | LOADING CAPACITY : " + this.getLoadingCapacity() + " |");
+    }
+
+    public void addRoute(Route route) {
+        if (!routes.contains(route)) {
+            routes.add(route);
+        }
+    }
+    
+    @Override
+    public int getId() {
+        return idAirplane;
     }
 
     @Id
@@ -114,20 +125,36 @@ public class Airplane implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Airplane airplane = (Airplane) o;
 
-        if (idAirplane != airplane.idAirplane) return false;
-        if (capacity != airplane.capacity) return false;
-        if (fuelTankCapacity != airplane.fuelTankCapacity) return false;
-        if (airline != null ? !airline.equals(airplane.airline) : airplane.airline != null) return false;
-        if (payload != null ? !payload.equals(airplane.payload) : airplane.payload != null) return false;
-        if (loadingCapacity != null ? !loadingCapacity.equals(airplane.loadingCapacity) : airplane.loadingCapacity != null)
+        if (idAirplane != airplane.idAirplane) {
             return false;
-        if (airplaneCode != null ? !airplaneCode.equals(airplane.airplaneCode) : airplane.airplaneCode != null)
+        }
+        if (capacity != airplane.capacity) {
             return false;
+        }
+        if (fuelTankCapacity != airplane.fuelTankCapacity) {
+            return false;
+        }
+        if (airline != null ? !airline.equals(airplane.airline) : airplane.airline != null) {
+            return false;
+        }
+        if (payload != null ? !payload.equals(airplane.payload) : airplane.payload != null) {
+            return false;
+        }
+        if (loadingCapacity != null ? !loadingCapacity.equals(airplane.loadingCapacity) : airplane.loadingCapacity != null) {
+            return false;
+        }
+        if (airplaneCode != null ? !airplaneCode.equals(airplane.airplaneCode) : airplane.airplaneCode != null) {
+            return false;
+        }
 
         return true;
     }

@@ -19,6 +19,7 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
         this.select = criteriaQuery.select(from);
     }
 
+    @Override
     public Route find(int idRoute) {
         return em.find(Route.class, idRoute);
     }
@@ -71,7 +72,7 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
     @Override
     public List<Route> findSpecified(String city1, String city2, String airportName1, String airportName2, String icao1, String icao2, String iata1, String iata2, String country1, String country2) {
         // TO DO
-        return null;
+        return findAll();
     }
     
     

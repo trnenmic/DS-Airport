@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface AirportManager {
 
+    Airport find(int idAirport);
     List<Airport> findAll();
     List<Airport> findAllOrderedById();
 
@@ -17,4 +18,6 @@ public interface AirportManager {
 
     List<Route> findJoinedOriginRoutes(Airport airport);
     List<Route> findJoinedDestinationRoutes(Airport airport);
+    
+    List<Airport> findSpecified(String name, String city, String country, String icao, String iata);
 }

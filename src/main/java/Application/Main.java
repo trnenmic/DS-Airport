@@ -58,7 +58,7 @@ public class Main {
     
     public static void testAirplaneDAO() {
         AirplaneDAO airplaneDAO = new AirplaneDAO();
-        System.out.println(airplaneDAO.find(451).getAirline());
+        //System.out.println(airplaneDAO.find(451).getAirline());
     }
     
     public static void testGenericDAO() {

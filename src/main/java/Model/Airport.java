@@ -9,7 +9,8 @@ import java.util.Collection;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Airport implements Serializable {
+public class Airport implements Serializable, Identifiable {
+
     private int idAirport;
     private String city;
     private String airportName;
@@ -31,12 +32,24 @@ public class Airport implements Serializable {
         return airport;
     }
 
+    public void addDestination(Route route) {
+        if (!destinations.contains(route)) {
+            destinations.add(route);
+        }
+    }
+
+    public void addOrigin(Route route) {
+        if (!origins.contains(route)) {
+            origins.add(route);
+        }
+    }
+
     @Override
     public String toString() {
-        return String.valueOf("| AIRPORT | NAME : " + this.getAirportName() + 
-                " | CITY : " + this.getCity() + " | COUNTRY : " + this.getCountry() 
-                + " | ICAO : " + this.getIcao() + " | IATA : " +
-                this.getIata() + " |");
+        return String.valueOf("| AIRPORT | NAME : " + this.getAirportName()
+                + " | CITY : " + this.getCity() + " | COUNTRY : " + this.getCountry()
+                + " | ICAO : " + this.getIcao() + " | IATA : "
+                + this.getIata() + " |");
     }
 
     @Id
@@ -102,17 +115,33 @@ public class Airport implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Airport airport = (Airport) o;
 
-        if (idAirport != airport.idAirport) return false;
-        if (city != null ? !city.equals(airport.city) : airport.city != null) return false;
-        if (airportName != null ? !airportName.equals(airport.airportName) : airport.airportName != null) return false;
-        if (icao != null ? !icao.equals(airport.icao) : airport.icao != null) return false;
-        if (iata != null ? !iata.equals(airport.iata) : airport.iata != null) return false;
-        if (country != null ? !country.equals(airport.country) : airport.country != null) return false;
+        if (idAirport != airport.idAirport) {
+            return false;
+        }
+        if (city != null ? !city.equals(airport.city) : airport.city != null) {
+            return false;
+        }
+        if (airportName != null ? !airportName.equals(airport.airportName) : airport.airportName != null) {
+            return false;
+        }
+        if (icao != null ? !icao.equals(airport.icao) : airport.icao != null) {
+            return false;
+        }
+        if (iata != null ? !iata.equals(airport.iata) : airport.iata != null) {
+            return false;
+        }
+        if (country != null ? !country.equals(airport.country) : airport.country != null) {
+            return false;
+        }
 
         return true;
     }
@@ -144,5 +173,10 @@ public class Airport implements Serializable {
 
     public void setOrigins(Collection<Route> origins) {
         this.origins = origins;
+    }
+
+    @Override
+    public int getId() {
+        return idAirport;
     }
 }

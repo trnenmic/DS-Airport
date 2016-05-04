@@ -18,6 +18,8 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
         this.select = criteriaQuery.select(from);
     }
 
+    
+    @Override
     public Airplane find(int idAirplane) {
         return em.find(Airplane.class, idAirplane);
     }
@@ -57,10 +59,12 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
     }
 
     @Override
-    public List<Airplane> findSpecified(Integer capacity, Integer fuelTankCapacity, String airline, Integer payload, Integer loadingCapacity, String airplaneCode) {
+    public List<Airplane> findSpecified(String filterCode, String filterAirline,
+            Integer filterMaxFuelCapacity, Integer filterMinFuelCapacity, 
+            Integer filterMaxLoadingCapacity, Integer filterMinLoadingCapacity) {
         // TO DO
-        return null;
+        return findAll();
     }
-    
-    
+
+
 }

@@ -29,9 +29,15 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
 
     public AirplaneAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
-        detached = o;
-        update = true;
-        this.setTitle("Update Airplane Attributes");
+        if (o == null) {
+            detached = Airplane.createAirplane(0, 0, "", 0, 0, "");
+            update = false;
+            this.setTitle("Create Airplane");
+        } else {
+            detached = o;
+            update = true;
+            this.setTitle("Update Airplane Attributes");
+        }
         initDialog(managementProvider);
         updateTextFields();
     }
@@ -82,9 +88,9 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         airplane.setAirplaneCode(airplaneCodeTextField.getText());
         mgProvider.validateAirplane(airplane);
         if (update) {
-            mgProvider.getGenericDAOImpl().update(airplane);
+            detached = mgProvider.getGenericDAOImpl().update(airplane);
         } else {
-            mgProvider.getGenericDAOImpl().create(airplane);
+            detached = mgProvider.getGenericDAOImpl().create(airplane);
             update = true;
             this.setTitle("Update Airplane Attributes");
         }
@@ -318,6 +324,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         } catch (InvalidAttributeException e) {
             warningLabel.setText(e.getMessage());
         }
+        updateLists();
     }//GEN-LAST:event_airplaneSaveButtonActionPerformed
 
     private void airplaneLoadCapacityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneLoadCapacityTextFieldActionPerformed

@@ -11,15 +11,17 @@ import java.util.List;
 public interface AirplaneManager {
 
     List<Route> findJoinedRoutes(Airplane airplane);
-
+    
+    Airplane find(int idAirplane);
     List<Airplane> findAll();
     List<Airplane> findAllOrderedById();
 
     boolean eraseAirplaneRouteBound(int airplaneId, int routeId);
 
     /*If some parameter is null, parameter wont be used in select*/
-
-    List<Airplane> findSpecified(Integer capacity, Integer fuelTankCapacity, String airline,
-                              Integer payload, Integer loadingCapacity, String airplaneCode);
+    
+    List<Airplane> findSpecified(String filterCode, String filterAirline, 
+            Integer filterMaxFuelCapacity, Integer filterMinFuelCapacity, 
+            Integer filterMaxLoadingCapacity, Integer filterMinLoadingCapacity);
 
 }

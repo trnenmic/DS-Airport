@@ -12,6 +12,7 @@ import Service.AirplaneService;
 import Service.AirportService;
 import Service.ManagementProvider;
 import Service.RouteService;
+import Validator.InvalidAttributeException;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 /**
@@ -24,17 +25,26 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
     private Object detached = null;
     private BoundingUpdater boundingUpdater;
     private boolean updated = false;
+    private Boolean toBeRestored = true;
 
     public RouteAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
-        detached = o;
-        updated = true;
+        if (o == null) {
+            detached = Route.createRoute();
+            updated = false;
+            this.setTitle("Create Route");
+        } else {
+            detached = managementProvider.getRouteManager().find(((Route) o).getIdRoute());
+            updated = true;
+            this.setTitle("Update Route Attributes");
+        }
         initDialog(managementProvider);
     }
 
     public RouteAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
         super(parent, modal);
         detached = Route.createRoute();
+        this.setTitle("Create Route");
         initDialog(managementProvider);
     }
 
@@ -53,10 +63,10 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void updateLists() {
         routeHasAirplanesList.setListData(((Route) detached).getAirplanes().toArray());
-        updateAirports();
+        updateTextFields();
     }
 
-    private void updateAirports() {
+    private void updateTextFields() {
         Route route = (Route) detached;
         if (route.getDestination() != null) {
             destinationNameTextField.setText(route.getDestination().getAirportName());
@@ -72,6 +82,19 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
             originIataTextField.setText(route.getOrigin().getIata());
             originIcaoTextField.setText(route.getOrigin().getIcao());
         }
+    }
+
+    private void saveRoute() throws InvalidAttributeException {
+        Route route = (Route) detached;
+        mgProvider.validateRoute(route);
+        if (updated) {
+            detached = mgProvider.getGenericDAOImpl().update(route);
+        } else {
+            detached = mgProvider.getGenericDAOImpl().create(route);
+            updated = true;
+            this.setTitle("Update Route Attributes");
+        }
+        boundingUpdater.updateBoundings();
     }
 
     /**
@@ -252,6 +275,11 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
         });
 
         routeChangeDestinationButton.setText("Change DESTINATION");
+        routeChangeDestinationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                routeChangeDestinationButtonActionPerformed(evt);
+            }
+        });
 
         routeChangeOriginButton.setText("Change ORIGIN");
         routeChangeOriginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -492,7 +520,7 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         //current origin might be send
-        DestinationSetterDialog destinationSetterDialog = new DestinationSetterDialog(null, true, mgProvider);
+        DestinationSetterDialog destinationSetterDialog = new DestinationSetterDialog(null, true, mgProvider, detached, boundingUpdater);
         DialogDesigner.centerDialog(destinationSetterDialog);
     }//GEN-LAST:event_jTextField8ActionPerformed
 
@@ -511,13 +539,20 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
     private void routeChangeOriginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeChangeOriginButtonActionPerformed
         //current origin might be send
         warningLabel.setText(" ");
-        OriginSetterDialog originSetterDialog = new OriginSetterDialog(null, true, mgProvider);
+        OriginSetterDialog originSetterDialog = new OriginSetterDialog(null, true, mgProvider, detached, boundingUpdater);
         DialogDesigner.centerDialog(originSetterDialog);
-
+        updateLists();
+        updateTextFields();
     }//GEN-LAST:event_routeChangeOriginButtonActionPerformed
 
     private void routeSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeSaveButtonActionPerformed
         warningLabel.setText(" ");
+        try {
+            saveRoute();
+        } catch (InvalidAttributeException e) {
+            warningLabel.setText(e.getMessage());
+        }
+
 // TODO add your handling code here:
     }//GEN-LAST:event_routeSaveButtonActionPerformed
 
@@ -527,6 +562,14 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
         DialogDesigner.centerDialog(airplaneBoundingDialog);
         updateLists();
     }//GEN-LAST:event_addAirplanesToFlyOnRouteButtonActionPerformed
+
+    private void routeChangeDestinationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeChangeDestinationButtonActionPerformed
+        warningLabel.setText(" ");
+        DestinationSetterDialog originSetterDialog = new DestinationSetterDialog(null, true, mgProvider, detached, boundingUpdater);
+        DialogDesigner.centerDialog(originSetterDialog);
+        updateLists();
+        updateTextFields();
+    }//GEN-LAST:event_routeChangeDestinationButtonActionPerformed
 
     /**
      * @param args the command line arguments

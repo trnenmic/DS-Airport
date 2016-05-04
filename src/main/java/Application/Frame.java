@@ -57,7 +57,7 @@ public class Frame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+/*
             if (!isParsable(idAirplaneTF.getText())) {
                 System.out.println("Text field not parsable as integer!");
                 return;
@@ -71,7 +71,7 @@ public class Frame extends JFrame {
                     searchResults.setText("Airplane with id " + id + " not found!");
                 }
             }
-
+*/
         }
 
     }

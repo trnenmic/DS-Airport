@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
  *
  * @author Martin
  */
-public class AirportDAO extends GenericDAOImpl<Airport> {
-   
+public class AirportDAO extends GenericDAOImpl {
+   /*
     private final Root<Airport> from = criteriaQuery.from(Airport.class);
     private final CriteriaQuery<Object> select = criteriaQuery.select(from);
     private TypedQuery<Object> typedQuery;
@@ -47,5 +47,5 @@ public class AirportDAO extends GenericDAOImpl<Airport> {
         for (Object o : resultList) {
             result.add((Airport)o);
         }
-    }
+    }*/
 }

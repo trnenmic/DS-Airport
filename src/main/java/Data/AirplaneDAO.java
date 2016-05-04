@@ -10,8 +10,9 @@ import javax.persistence.criteria.*;
  *
  * @author Martin
  */
-public class AirplaneDAO extends GenericDAOImpl<Airplane> {
+public class AirplaneDAO extends GenericDAOImpl {
 
+    /*
     private final Root<Airplane> from = criteriaQuery.from(Airplane.class);
     private final CriteriaQuery<Object> select = criteriaQuery.select(from);
     private TypedQuery<Object> typedQuery;
@@ -55,7 +56,7 @@ public class AirplaneDAO extends GenericDAOImpl<Airplane> {
         for (Object o : resultList) {
             result.add((Airplane)o);
         }
-    }
+    }*/
     
 
 }

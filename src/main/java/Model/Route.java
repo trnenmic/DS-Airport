@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -8,7 +9,7 @@ import java.util.Collection;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Route implements Serializable {
+public class Route implements Serializable, Identifiable {
     private int idRoute;
 
 
@@ -22,6 +23,7 @@ public class Route implements Serializable {
         Route route = new Route();
         route.setOrigin(null);
         route.setDestination(null);
+        route.setAirplanes(new ArrayList<Airplane>());
         return route;
     }
 
@@ -34,6 +36,12 @@ public class Route implements Serializable {
                 + getDestination().getCity() + " , " + getDestination().getCountry()
                 + " , " + getOrigin().getIcao() + " , " + getOrigin().getIata()
                 + " |");
+    }
+    
+    public void addAirplane(Airplane airplane){
+        if(!airplanes.contains(airplane)){
+            airplanes.add(airplane);
+        }
     }
 
     @Id
@@ -91,6 +99,11 @@ public class Route implements Serializable {
 
     public void setAirplanes(Collection<Airplane> airplanes) {
         this.airplanes = airplanes;
+    }
+
+    @Override
+    public int getId() {
+        return idRoute;
     }
 
 
