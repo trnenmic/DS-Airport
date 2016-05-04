@@ -18,5 +18,7 @@ public interface GenericManager<T> {
     T update(T t);
 
     T create(T t);
+    
+    void refresh();
 
 }

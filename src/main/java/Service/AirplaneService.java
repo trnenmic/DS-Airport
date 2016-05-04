@@ -10,9 +10,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Martin
  */
-public class AirplaneService extends GenericManagerImpl implements AirplaneManager {
+public class AirplaneService extends GenericManagerImpl<Airplane> implements AirplaneManager {
 
-    private final Root<Airplane> root;
+    private Root<Airplane> root;
     
     public AirplaneService() {
         this.root = criteriaQuery.from(Airplane.class);
@@ -27,24 +27,28 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
 
     @Override
     public List<Airplane> findAll() {
+        refresh();
         createResultList();
         return getCastedResult();
     }
 
     @Override
     public List<Airplane> findAllOrderedById() {
+        refresh();
         criteriaQuery.orderBy(criteriaBuilder.asc(root.get("idAirplane")));
         createResultList();
         return getCastedResult();
     }
 
     public List<Airplane> findAllOrderedByCapacity() {
+        refresh();
         criteriaQuery.orderBy(criteriaBuilder.asc(root.get("capacity")));
         createResultList();
         return getCastedResult();
     }
     
     public List<Airplane> findWithGreaterCapacity(int capacity) {
+        refresh();
         CriteriaQuery tmp = criteriaQuery.select(root)
                 .where(criteriaBuilder.gt(root.get("capacity"), capacity));
 //        if (neco != null) {
@@ -72,7 +76,7 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
             Integer maxFuelCapacity, Integer minFuelCapacity, 
             Integer maxLoadingCapacity, Integer minLoadingCapacity) {
         
-        criteriaQuery = criteriaQuery.select(root);
+        refresh();
         if (code != null) {
             criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("code"), code));
         }
@@ -91,11 +95,15 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
         if (minLoadingCapacity != null) {
             criteriaQuery = criteriaQuery.where(criteriaBuilder.gt(root.get("loadingCapacity"), minLoadingCapacity));
         }
-        if (code == null && airline == null && maxFuelCapacity == null && minFuelCapacity == null && maxLoadingCapacity == null && minLoadingCapacity == null) {
-            return findAll();
-        }
         createResultList();
         return getCastedResult();
+    }
+
+    @Override
+    public void refresh() {
+        criteriaQuery = criteriaBuilder.createQuery();
+        root = criteriaQuery.from(Airplane.class);
+        criteriaQuery = criteriaQuery.select(root);
     }
 
 

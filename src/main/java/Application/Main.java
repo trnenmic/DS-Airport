@@ -36,6 +36,12 @@ public class Main {
         for (Airplane airplane : airplaneService.findWithGreaterCapacity(100)) {
             System.out.println(airplane);
         }
+        System.out.println();
+        System.out.println("All airplanes, not sorted:");
+        for (Airplane airplane : airplaneService.findAll()) {
+            System.out.println(airplane);
+        }
+        System.out.println();
         
         AirportService a = new AirportService();
         

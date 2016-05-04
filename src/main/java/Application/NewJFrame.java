@@ -10,6 +10,7 @@ import Service.AirportManager;
 import Service.AirportService;
 import Service.ManagementProvider;
 import Service.RouteService;
+import java.util.List;
 import javax.swing.JDialog;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 import javax.swing.UIManager;
@@ -74,8 +75,17 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void updateAirportList() {
-        airportjList.setListData(mgProvider.getAirportManager().findSpecified(name,
-                city, country, icao, iata).toArray());
+        
+        List<Airport> airports = mgProvider.getAirportManager().findSpecified(name,
+                city, country, icao, iata);
+        System.out.println("GUI result list:");
+        for (Airport a : airports) {
+            System.out.println(a);
+        }
+        System.out.println();
+        airportjList.setListData(airports.toArray());
+//        airportjList.setListData(mgProvider.getAirportManager().findSpecified(name,
+//                city, country, icao, iata).toArray());
     }
 
     private void updateAirplaneList() {

@@ -10,11 +10,11 @@ import javax.persistence.criteria.Root;
  */
 public class FlightService extends GenericManagerImpl<Flight>{
     
-    private final Root<Flight> from;
+    private Root<Flight> root;
 
     public FlightService() {
-        this.from = criteriaQuery.from(Flight.class);
-        this.criteriaQuery = criteriaQuery.select(from);
+        this.root = criteriaQuery.from(Flight.class);
+        this.criteriaQuery = criteriaQuery.select(root);
     }
     
     public Flight find(int idFlight) {
@@ -22,14 +22,23 @@ public class FlightService extends GenericManagerImpl<Flight>{
     }
     
     public List<Flight> findAll() {
+        refresh();
         createResultList();
         return getCastedResult();
     }
     
     public List<Flight> findAllOrderedByID() {
-        criteriaQuery.orderBy(criteriaBuilder.asc(from.get("idFlight")));
+        refresh();
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("idFlight")));
         createResultList();
         return getCastedResult();
     }
+    
+    @Override
+    public void refresh() {
+        criteriaQuery = criteriaBuilder.createQuery();
+        root = criteriaQuery.from(Flight.class);
+    }
+    
     
 }

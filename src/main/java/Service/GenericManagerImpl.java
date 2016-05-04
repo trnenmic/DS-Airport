@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
  * @author Martin
  * @param <T>
  */
-public class GenericManagerImpl<T> implements GenericManager<T> {
+public abstract class GenericManagerImpl<T> implements GenericManager<T> {
     
     protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
     protected EntityManager em = emf.createEntityManager();
@@ -43,6 +43,9 @@ public class GenericManagerImpl<T> implements GenericManager<T> {
         em.remove(t);
         tx.commit();
     }
+    
+    @Override
+    public abstract void refresh(); 
     
     protected void createResultList() {
         typedQuery = em.createQuery(criteriaQuery);

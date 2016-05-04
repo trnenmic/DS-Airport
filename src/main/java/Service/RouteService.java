@@ -13,7 +13,7 @@ import javax.persistence.criteria.Root;
  */
 public class RouteService extends GenericManagerImpl<Route> implements RouteManager {
     
-    private final Root<Route> root;
+    private Root<Route> root;
     
     public RouteService() {
         this.root = criteriaQuery.from(Route.class);
@@ -27,12 +27,14 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
     
     @Override
     public List<Route> findAll() {
+        refresh();
         createResultList();
         return getCastedResult();
     }
     
     @Override
     public List<Route> findAllOrderedById() {
+        refresh();
         criteriaQuery.orderBy(criteriaBuilder.asc(root.get("idRoute")));
         createResultList();
         return getCastedResult();
@@ -78,7 +80,7 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
     // Weird method - I have implemented it though...
     @Override
     public List<Route> findSpecified(String city1, String city2, String airportName1, String airportName2, String icao1, String icao2, String iata1, String iata2, String country1, String country2) {
-        criteriaQuery = criteriaQuery.select(root);
+        refresh();
         createResultList();
         
         List<Route> result = new ArrayList<>();
@@ -101,6 +103,12 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
             }
         }
         return result;
+    }
+    
+    @Override
+    public void refresh() {
+        criteriaQuery = criteriaBuilder.createQuery();
+        root = criteriaQuery.from(Route.class);
     }
     
     

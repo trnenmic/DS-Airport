@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
  */
 public class AirportService extends GenericManagerImpl<Airport> implements AirportManager {
     
-    private final Root<Airport> root;
+    private Root<Airport> root;
     
     public AirportService() {
         this.root = criteriaQuery.from(Airport.class);
@@ -26,12 +26,19 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
     
     @Override
     public List<Airport> findAll() {
+        refresh();
         createResultList();
+//        System.out.println("findAll result list:");
+//        for (Object o : resultList) {
+//            System.out.println((Airport)o);
+//        }
+//        System.out.println();
         return getCastedResult();
     }
     
     @Override
     public List<Airport> findAllOrderedById() {
+        refresh();
         criteriaQuery.orderBy(criteriaBuilder.asc(root.get("idAirport")));
         createResultList();
         return getCastedResult();
@@ -57,7 +64,14 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
 
     @Override
     public List<Airport> findSpecified(String name, String city, String country, String icao, String iata) {
-        criteriaQuery = criteriaQuery.select(root);
+//        if (name == null && city == null && country == null && icao == null && iata == null) {
+//            System.out.println("I AM HERE");
+//            return findAll();
+//        }
+        // Podle me by to melo fungovat i bez te dlouhe if podminky, protoze se vytvori result list pro criteriaQuery.select(root) coz
+        // je jako SELECT * FROM airport
+        
+        refresh();
         if (name != null) {
             criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("airportName"), name));
         }
@@ -73,11 +87,22 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
         if (iata != null) {
             criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("iata"), iata));
         }
-        if (name == null && city == null && country == null && icao == null && iata == null) {
-            return findAll();
-        }
         createResultList();
+        System.out.println("findSpecified method result list:");
+        for (Object a : resultList) {
+            System.out.println((Airport)a);
+        }
+        System.out.println();
+
+
         return getCastedResult();
+        
+    }
+
+    @Override
+    public void refresh() {
+        criteriaQuery = criteriaBuilder.createQuery();
+        root = criteriaQuery.from(Airport.class);
     }
     
 }
