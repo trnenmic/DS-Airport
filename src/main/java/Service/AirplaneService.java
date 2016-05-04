@@ -54,10 +54,10 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
         return getCastedResult();
     }
 
+    // REDUNDANT ???
     @Override
     public List<Route> findRoutes(Airplane airplane) {
-        // TO DO
-        return null;
+        return (List)airplane.getRoutes();
     }
 
     @Override
@@ -72,7 +72,30 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
             Integer maxFuelCapacity, Integer minFuelCapacity, 
             Integer maxLoadingCapacity, Integer minLoadingCapacity) {
         
-        return findAll();
+        criteriaQuery = criteriaQuery.select(root);
+        if (code != null) {
+            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("code"), code));
+        }
+        if (airline != null) {
+            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("airline"), airline));
+        }
+        if (maxFuelCapacity != null) {
+            criteriaQuery = criteriaQuery.where(criteriaBuilder.lt(root.get("fuelTankCapacity"), maxFuelCapacity));
+        }
+        if (minFuelCapacity != null) {
+            criteriaQuery = criteriaQuery.where(criteriaBuilder.gt(root.get("fuelTankCapacity"), minFuelCapacity));
+        }
+        if (maxLoadingCapacity != null) {
+            criteriaQuery = criteriaQuery.where(criteriaBuilder.lt(root.get("loadingCapacity"), maxLoadingCapacity));
+        }
+        if (minLoadingCapacity != null) {
+            criteriaQuery = criteriaQuery.where(criteriaBuilder.gt(root.get("loadingCapacity"), minLoadingCapacity));
+        }
+        if (code == null && airline == null && maxFuelCapacity == null && minFuelCapacity == null && maxLoadingCapacity == null && minLoadingCapacity == null) {
+            return findAll();
+        }
+        createResultList();
+        return getCastedResult();
     }
 
 
