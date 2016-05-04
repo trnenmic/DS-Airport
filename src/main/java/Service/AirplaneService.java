@@ -3,6 +3,7 @@ package Service;
 import Model.Airplane;
 import Model.Route;
 import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
@@ -11,11 +12,11 @@ import javax.persistence.criteria.Root;
  */
 public class AirplaneService extends GenericManagerImpl implements AirplaneManager {
 
-    private final Root<Airplane> from;
+    private final Root<Airplane> root;
     
     public AirplaneService() {
-        this.from = criteriaQuery.from(Airplane.class);
-        this.select = criteriaQuery.select(from);
+        this.root = criteriaQuery.from(Airplane.class);
+        this.criteriaQuery = criteriaQuery.select(root);
     }
 
     
@@ -26,28 +27,32 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
 
     @Override
     public List<Airplane> findAll() {
-        update();
-        resultList = typedQuery.getResultList();
+        createResultList();
         return getCastedResult();
     }
 
     @Override
     public List<Airplane> findAllOrderedById() {
-        select.orderBy(criteriaBuilder.asc(from.get("idAirplane")));
-        update();
-        resultList = typedQuery.getResultList();
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("idAirplane")));
+        createResultList();
         return getCastedResult();
     }
 
     public List<Airplane> findAllOrderedByCapacity() {
-        select.orderBy(criteriaBuilder.asc(from.get("capacity")));
-        update();
-        resultList = typedQuery.getResultList();
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("capacity")));
+        createResultList();
+        return getCastedResult();
+    }
+    
+    public List<Airplane> findWithGreaterCapacity(int capacity) {
+        criteriaQuery.select(root)
+                .where(criteriaBuilder.gt(root.get("capacity"), capacity));
+        createResultList();
         return getCastedResult();
     }
 
     @Override
-    public List<Route> findJoinedRoutes(Airplane airplane) {
+    public List<Route> findRoutes(Airplane airplane) {
         // TO DO
         return null;
     }
@@ -57,12 +62,13 @@ public class AirplaneService extends GenericManagerImpl implements AirplaneManag
         // TO DO
         return false;
     }
+        
 
     @Override
-    public List<Airplane> findSpecified(String filterCode, String filterAirline,
-            Integer filterMaxFuelCapacity, Integer filterMinFuelCapacity, 
-            Integer filterMaxLoadingCapacity, Integer filterMinLoadingCapacity) {
-        // TO DO
+    public List<Airplane> findSpecified(String code, String airline,
+            Integer maxFuelCapacity, Integer minFuelCapacity, 
+            Integer maxLoadingCapacity, Integer minLoadingCapacity) {
+        
         return findAll();
     }
 

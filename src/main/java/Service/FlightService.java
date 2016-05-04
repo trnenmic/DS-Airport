@@ -14,7 +14,7 @@ public class FlightService extends GenericManagerImpl<Flight>{
 
     public FlightService() {
         this.from = criteriaQuery.from(Flight.class);
-        this.select = criteriaQuery.select(from);
+        this.criteriaQuery = criteriaQuery.select(from);
     }
     
     public Flight find(int idFlight) {
@@ -22,15 +22,13 @@ public class FlightService extends GenericManagerImpl<Flight>{
     }
     
     public List<Flight> findAll() {
-        update();
-        resultList = typedQuery.getResultList();
+        createResultList();
         return getCastedResult();
     }
     
     public List<Flight> findAllOrderedByID() {
-        select.orderBy(criteriaBuilder.asc(from.get("idFlight")));
-        update();
-        resultList = typedQuery.getResultList();
+        criteriaQuery.orderBy(criteriaBuilder.asc(from.get("idFlight")));
+        createResultList();
         return getCastedResult();
     }
     

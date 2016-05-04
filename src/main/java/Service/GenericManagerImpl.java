@@ -18,7 +18,6 @@ public class GenericManagerImpl<T> implements GenericManager<T> {
     protected EntityTransaction tx = em.getTransaction();
     protected CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     protected CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
-    protected CriteriaQuery<Object> select;
     protected TypedQuery<Object> typedQuery;
     protected List<Object> resultList;
 
@@ -45,8 +44,9 @@ public class GenericManagerImpl<T> implements GenericManager<T> {
         tx.commit();
     }
     
-    protected void update() {
-        typedQuery = em.createQuery(select);
+    protected void createResultList() {
+        typedQuery = em.createQuery(criteriaQuery);
+        resultList = typedQuery.getResultList();
     }
     
     protected List<T> getCastedResult() {

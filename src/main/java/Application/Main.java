@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
  */
 public class Main {
     public static void main(String[] args) {
-        Frame frame = new Frame();
+//        Frame frame = new Frame();
 //        NewJFrame visualTest = new NewJFrame();
         
         AirplaneService airplaneService = new AirplaneService();
@@ -28,6 +28,12 @@ public class Main {
         System.out.println();
         System.out.println("All airplanes, sorted by id (ascending):");
         for (Airplane airplane : airplaneService.findAllOrderedById()) {
+            System.out.println(airplane);
+        }
+        
+        System.out.println();
+        System.out.println("Airplanes with capacity larger than 100");
+        for (Airplane airplane : airplaneService.findWithGreaterCapacity(100)) {
             System.out.println(airplane);
         }
         

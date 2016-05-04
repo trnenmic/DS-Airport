@@ -15,7 +15,7 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
     
     public AirportService() {
         this.from = criteriaQuery.from(Airport.class);
-        this.select = criteriaQuery.select(from);
+        this.criteriaQuery = criteriaQuery.select(from);
     }
 
     @Override
@@ -25,16 +25,14 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
     
     @Override
     public List<Airport> findAll() {
-        update();
-        resultList = typedQuery.getResultList();
+        createResultList();
         return getCastedResult();
     }
     
     @Override
     public List<Airport> findAllOrderedById() {
-        select.orderBy(criteriaBuilder.asc(from.get("idAirport")));
-        update();
-        resultList = typedQuery.getResultList();
+        criteriaQuery.orderBy(criteriaBuilder.asc(from.get("idAirport")));
+        createResultList();
         return getCastedResult();
     }
 

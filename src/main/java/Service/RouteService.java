@@ -16,7 +16,7 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
     
     public RouteService() {
         this.from = criteriaQuery.from(Route.class);
-        this.select = criteriaQuery.select(from);
+        this.criteriaQuery = criteriaQuery.select(from);
     }
 
     @Override
@@ -26,16 +26,14 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
     
     @Override
     public List<Route> findAll() {
-        update();
-        resultList = typedQuery.getResultList();
+        createResultList();
         return getCastedResult();
     }
     
     @Override
     public List<Route> findAllOrderedById() {
-        select.orderBy(criteriaBuilder.asc(from.get("idRoute")));
-        update();
-        resultList = typedQuery.getResultList();
+        criteriaQuery.orderBy(criteriaBuilder.asc(from.get("idRoute")));
+        createResultList();
         return getCastedResult();
     }
 

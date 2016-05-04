@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface AirplaneManager {
 
-    List<Route> findJoinedRoutes(Airplane airplane);
+    List<Route> findRoutes(Airplane airplane);
     
     Airplane find(int idAirplane);
     List<Airplane> findAll();

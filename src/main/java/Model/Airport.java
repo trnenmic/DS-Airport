@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 @Entity
 public class Airport implements Serializable, Identifiable {
-
+    
     private int idAirport;
     private String city;
     private String airportName;
