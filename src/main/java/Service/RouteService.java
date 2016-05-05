@@ -85,20 +85,70 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
         
         List<Route> result = new ArrayList<>();
         
+        boolean correct;
+        
         for (Route r : getCastedResult()) {
             Airport origin = r.getOrigin();
             Airport destination = r.getDestination();
             
-            if (origin.getAirportName().equals(airportName1) &&
-                    origin.getCity().equals(city1) &&
-                    origin.getIcao().equals(icao1) &&
-                    origin.getIata().equals(iata1) &&
-                    origin.getCountry().equals(country1) &&
-                destination.getAirportName().equals(airportName2) &&
-                    destination.getCity().equals(city2) &&
-                    destination.getIcao().equals(icao2) &&
-                    destination.getIata().equals(iata2) &&
-                    destination.getCountry().equals(country2)) {
+            correct = true;
+            // origin
+            if (correct && city1 != null) {
+                if (!origin.getCity().equals(city1)) {
+                    correct = false;
+                }
+            }
+            if (correct && airportName1 != null) {
+                if (!origin.getAirportName().equals(airportName1)) {
+                    correct = false;
+                }
+            }
+            if (correct && icao1 != null) {
+                if (!origin.getIcao().equals(icao1)) {
+                    correct = false;
+                }
+            }
+            if (correct && iata1 != null) {
+                if (!origin.getIata().equals(iata1)) {
+                    correct = false;
+                }
+            }
+            if (correct && country1 != null) {
+                if (!origin.getCountry().equals(country1)) {
+                    correct = false;
+                }
+            }
+            System.out.println("Correct after origin: " + correct);
+            
+            // destination
+            if (correct && city2 != null) {
+                System.out.println("Destination city: " + destination.getCity());
+                System.out.println("Filter destination city: " + city2);
+                if (!destination.getCity().equals(city2)) {
+                    correct = false;
+                }
+            }
+            if (correct && airportName2 != null) {
+                if (!destination.getAirportName().equals(airportName2)) {
+                    correct = false;
+                }
+            }
+            if (correct && icao2 != null) {
+                if (!destination.getIcao().equals(icao2)) {
+                    correct = false;
+                }
+            }
+            if (correct && iata2 != null) {
+                if (!destination.getIata().equals(iata2)) {
+                    correct = false;
+                }
+            }
+            if (correct && country2 != null) {
+                if (!destination.getCountry().equals(country2)) {
+                    correct = false;
+                }
+            }
+            if (correct) {
                 result.add(r);
             }
         }
