@@ -34,7 +34,7 @@ public class Route implements Serializable {
                 + " , "+ getOrigin().getIcao() + " , " + getOrigin().getIata() 
                 + " | DESTINATION : " + getDestination().getAirportName() + " , " 
                 + getDestination().getCity() + " , " + getDestination().getCountry()
-                + " , " + getOrigin().getIcao() + " , " + getOrigin().getIata()
+                + " , " + getDestination().getIcao() + " , " + getDestination().getIata()
                 + " |");
     }
     
