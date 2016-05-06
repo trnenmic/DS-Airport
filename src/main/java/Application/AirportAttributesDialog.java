@@ -81,11 +81,11 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
         airport.setCountry(airportCountryTextField.getText());
         airport.setIata(airportIataTextField.getText());
         airport.setIcao(airportIcaoTextField.getText());
-        mgProvider.validateAirport(airport);
+        mgProvider.getAirportValidator().validate(airport);
         if (updated) {
-            detached = mgProvider.getGenericDAOImpl().update(airport);
+            detached = mgProvider.getGenericManagerImpl().update(airport);
         } else {
-            detached = mgProvider.getGenericDAOImpl().create(airport);
+            detached = mgProvider.getGenericManagerImpl().create(airport);
             updated = true;
             this.setTitle("Update Airport Attributes");
         }

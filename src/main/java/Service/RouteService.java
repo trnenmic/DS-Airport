@@ -155,7 +155,6 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
         return result;
     }
     
-    @Override
     public void refresh() {
         criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Route.class);

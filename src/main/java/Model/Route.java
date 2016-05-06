@@ -9,9 +9,9 @@ import java.util.Collection;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Route implements Serializable, Identifiable {
+public class Route implements Serializable {
+    
     private int idRoute;
-
 
     private Collection<Airplane> airplanes;
 
@@ -99,11 +99,6 @@ public class Route implements Serializable, Identifiable {
 
     public void setAirplanes(Collection<Airplane> airplanes) {
         this.airplanes = airplanes;
-    }
-
-    @Override
-    public int getId() {
-        return idRoute;
     }
 
 

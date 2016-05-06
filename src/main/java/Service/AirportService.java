@@ -99,7 +99,6 @@ public class AirportService extends GenericManagerImpl<Airport> implements Airpo
         
     }
 
-    @Override
     public void refresh() {
         criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Airport.class);

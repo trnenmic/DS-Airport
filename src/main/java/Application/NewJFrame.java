@@ -8,6 +8,7 @@ import Model.Route;
 import Service.AirplaneService;
 import Service.AirportManager;
 import Service.AirportService;
+import Service.GenericManagerImpl;
 import Service.ManagementProvider;
 import Service.RouteService;
 import java.util.List;
@@ -105,7 +106,7 @@ public class NewJFrame extends javax.swing.JFrame {
         mgProvider.setAirplaneManager(new AirplaneService());
         mgProvider.setAirportManager(new AirportService());
         mgProvider.setRouteManager(new RouteService());
-        mgProvider.setGenericDAOImpl(new GenericDAOImpl());
+        mgProvider.setGenericManagerImpl(new GenericManagerImpl());
     }
 
     /**
@@ -855,7 +856,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void deleteAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirportButtonActionPerformed
         warningLabel.setText(" ");
-        mgProvider.getGenericDAOImpl().delete((Airport) airportjList.getSelectedValue());
+        mgProvider.getGenericManagerImpl().delete((Airport) airportjList.getSelectedValue());
         updateAirportList();
     }//GEN-LAST:event_deleteAirportButtonActionPerformed
 
@@ -867,7 +868,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void deleteRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteButtonActionPerformed
         warningLabel.setText(" ");
-        mgProvider.getGenericDAOImpl().delete((Route) routejList.getSelectedValue());
+        mgProvider.getGenericManagerImpl().delete((Route) routejList.getSelectedValue());
         updateRouteList();
     }//GEN-LAST:event_deleteRouteButtonActionPerformed
 
@@ -894,7 +895,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void deleteAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirplaneButtonActionPerformed
         warningLabel.setText(" ");
-        mgProvider.getGenericDAOImpl().delete((Airplane) airplanejList.getSelectedValue());
+        mgProvider.getGenericManagerImpl().delete((Airplane) airplanejList.getSelectedValue());
         updateAirplaneList();
     }//GEN-LAST:event_deleteAirplaneButtonActionPerformed
 

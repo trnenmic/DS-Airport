@@ -10,26 +10,26 @@ import javax.validation.constraints.*;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Airplane implements Serializable, Identifiable {
+public class Airplane implements Serializable {
 
     private int idAirplane;
-    private int capacity;
-    private int fuelTankCapacity;
+    private int passengerCapacity;
+    private int maximumRange;
     private String airline;
-    private Integer payload;
-    private Integer loadingCapacity;
+    private Integer maximumCargoCapacity;
+    private Integer maximumTakeoffWeight;
     private String airplaneCode;
     private Collection<Route> routes;
     private Collection<Flight> flights;
 
-    public static Airplane createAirplane(int capacity, int fuelTankCapacity,
+    public static Airplane createAirplane(int passengerCapacity, int fuelTankCapacity,
             String airline, Integer payload, Integer loadingCapacity, String airplaneCode) {
         Airplane airplane = new Airplane();
-        airplane.setCapacity(capacity);
-        airplane.setFuelTankCapacity(fuelTankCapacity);
+        airplane.setPassengerCapacity(passengerCapacity);
+        airplane.setMaximumRange(fuelTankCapacity);
         airplane.setAirline(airline);
-        airplane.setPayload(payload);
-        airplane.setLoadingCapacity(loadingCapacity);
+        airplane.setMaximumCargoCapacity(payload);
+        airplane.setMaximumTakeoffWeight(loadingCapacity);
         airplane.setAirplaneCode(airplaneCode);
         airplane.setRoutes(new ArrayList<>());
         airplane.setFlights(new ArrayList<>());
@@ -39,10 +39,10 @@ public class Airplane implements Serializable, Identifiable {
     @Override
     public String toString() {
         return String.valueOf("| AIRPLANE | CODE : " + this.getAirplaneCode()
-                + " | AIRLINE : " + this.getAirline() + " | CAPACITY : "
-                + this.getCapacity() + " | FUEL CAPACITY : "
-                + this.getFuelTankCapacity() + " | PAYLOAD " + this.getPayload()
-                + " | LOADING CAPACITY : " + this.getLoadingCapacity() + " |");
+                + " | AIRLINE : " + this.getAirline() + " | PASSENGER C. : "
+                + this.getPassengerCapacity() + " | RANGE : "
+                + this.getMaximumRange() + " | CARGO C. " + this.getMaximumCargoCapacity()
+                + " | TAKEOFF WEIGHT : " + this.getMaximumTakeoffWeight() + " |");
     }
 
     public void addRoute(Route route) {
@@ -50,12 +50,7 @@ public class Airplane implements Serializable, Identifiable {
             routes.add(route);
         }
     }
-
-    @Override
-    public int getId() {
-        return idAirplane;
-    }
-
+    
     @Id
     @GeneratedValue
     @Column(name = "id_airplane", nullable = false, insertable = true, updatable = true)
@@ -72,23 +67,23 @@ public class Airplane implements Serializable, Identifiable {
     @Min(0)
     @Max(1000)
     @Basic
-    @Column(name = "capacity", nullable = false, insertable = true, updatable = true)
-    public int getCapacity() {
-        return capacity;
+    @Column(name = "passenger_capacity", nullable = false, insertable = true, updatable = true)
+    public int getPassengerCapacity() {
+        return passengerCapacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setPassengerCapacity(int passengerCapacity) {
+        this.passengerCapacity = passengerCapacity;
     }
 
     @Basic
-    @Column(name = "fuel_tank_capacity", nullable = false, insertable = true, updatable = true)
-    public int getFuelTankCapacity() {
-        return fuelTankCapacity;
+    @Column(name = "maximum_range", nullable = false, insertable = true, updatable = true)
+    public int getMaximumRange() {
+        return maximumRange;
     }
 
-    public void setFuelTankCapacity(int fuelTankCapacity) {
-        this.fuelTankCapacity = fuelTankCapacity;
+    public void setMaximumRange(int maximumRange) {
+        this.maximumRange = maximumRange;
     }
 
     @Basic
@@ -102,23 +97,23 @@ public class Airplane implements Serializable, Identifiable {
     }
 
     @Basic
-    @Column(name = "payload", nullable = true, insertable = true, updatable = true)
-    public Integer getPayload() {
-        return payload;
+    @Column(name = "maximum_cargo_capacity", nullable = true, insertable = true, updatable = true)
+    public Integer getMaximumCargoCapacity() {
+        return maximumCargoCapacity;
     }
 
-    public void setPayload(Integer payload) {
-        this.payload = payload;
+    public void setMaximumCargoCapacity(Integer maximumCargoCapacity) {
+        this.maximumCargoCapacity = maximumCargoCapacity;
     }
 
     @Basic
-    @Column(name = "loading_capacity", nullable = true, insertable = true, updatable = true)
-    public Integer getLoadingCapacity() {
-        return loadingCapacity;
+    @Column(name = "maximum_takeoff_weight", nullable = true, insertable = true, updatable = true)
+    public Integer getMaximumTakeoffWeight() {
+        return maximumTakeoffWeight;
     }
 
-    public void setLoadingCapacity(Integer loadingCapacity) {
-        this.loadingCapacity = loadingCapacity;
+    public void setMaximumTakeoffWeight(Integer maximumTakeoffWeight) {
+        this.maximumTakeoffWeight = maximumTakeoffWeight;
     }
 
     @Basic
@@ -145,19 +140,19 @@ public class Airplane implements Serializable, Identifiable {
         if (idAirplane != airplane.idAirplane) {
             return false;
         }
-        if (capacity != airplane.capacity) {
+        if (passengerCapacity != airplane.passengerCapacity) {
             return false;
         }
-        if (fuelTankCapacity != airplane.fuelTankCapacity) {
+        if (maximumRange != airplane.maximumRange) {
             return false;
         }
         if (airline != null ? !airline.equals(airplane.airline) : airplane.airline != null) {
             return false;
         }
-        if (payload != null ? !payload.equals(airplane.payload) : airplane.payload != null) {
+        if (maximumCargoCapacity != null ? !maximumCargoCapacity.equals(airplane.maximumCargoCapacity) : airplane.maximumCargoCapacity != null) {
             return false;
         }
-        if (loadingCapacity != null ? !loadingCapacity.equals(airplane.loadingCapacity) : airplane.loadingCapacity != null) {
+        if (maximumTakeoffWeight != null ? !maximumTakeoffWeight.equals(airplane.maximumTakeoffWeight) : airplane.maximumTakeoffWeight != null) {
             return false;
         }
         if (airplaneCode != null ? !airplaneCode.equals(airplane.airplaneCode) : airplane.airplaneCode != null) {
@@ -170,11 +165,11 @@ public class Airplane implements Serializable, Identifiable {
     @Override
     public int hashCode() {
         int result = idAirplane;
-        result = 31 * result + capacity;
-        result = 31 * result + fuelTankCapacity;
+        result = 31 * result + passengerCapacity;
+        result = 31 * result + maximumRange;
         result = 31 * result + (airline != null ? airline.hashCode() : 0);
-        result = 31 * result + (payload != null ? payload.hashCode() : 0);
-        result = 31 * result + (loadingCapacity != null ? loadingCapacity.hashCode() : 0);
+        result = 31 * result + (maximumCargoCapacity != null ? maximumCargoCapacity.hashCode() : 0);
+        result = 31 * result + (maximumTakeoffWeight != null ? maximumTakeoffWeight.hashCode() : 0);
         result = 31 * result + (airplaneCode != null ? airplaneCode.hashCode() : 0);
         return result;
     }

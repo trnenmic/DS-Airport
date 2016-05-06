@@ -1,29 +1,29 @@
 package Service;
 
-import Data.GenericDAOImpl;
-import Model.Airplane;
-import Model.Airport;
-import Model.Route;
-import Validator.InvalidAttributeException;
+import Validator.*;
 
 /**
  *
  * @author M
  */
-public class ManagementProvider implements ValidatorInterface {
+public class ManagementProvider {
     
     private AirplaneManager airplaneManager;
     private AirportManager airportManager;
     private RouteManager routeManager;
     
-    private GenericDAOImpl genericDAOImpl;    
+    private AirplaneValidator airplaneValidator;
+    private AirportValidator airportValidator;
+    private RouteValidator routeValidator;
+    
+    private GenericManagerImpl genericManagerImpl;    
 
-    public GenericDAOImpl getGenericDAOImpl() {
-        return genericDAOImpl;
+    public GenericManagerImpl getGenericManagerImpl() {
+        return genericManagerImpl;
     }
 
-    public void setGenericDAOImpl(GenericDAOImpl genericDAOImpl) {
-        this.genericDAOImpl = genericDAOImpl;
+    public void setGenericManagerImpl(GenericManagerImpl genericManagerImpl) {
+        this.genericManagerImpl = genericManagerImpl;
     }
 
     public AirplaneManager getAirplaneManager() {
@@ -50,25 +50,29 @@ public class ManagementProvider implements ValidatorInterface {
         this.routeManager = routeManager;
     }
 
-    @Override
-    public void validateAirplane(Airplane airplane) throws InvalidAttributeException {
-        //to do
+    public AirplaneValidator getAirplaneValidator() {
+        return airplaneValidator;
     }
 
-    @Override
-    public void validateAirport(Airport airport) throws InvalidAttributeException {
-        //to do
+    public void setAirplaneValidator(AirplaneValidator airplaneValidator) {
+        this.airplaneValidator = airplaneValidator;
     }
 
-    @Override
-    public void validateRoute(Route route) throws InvalidAttributeException {
-        //to do
+    public AirportValidator getAirportValidator() {
+        return airportValidator;
     }
-    
- 
 
+    public void setAirportValidator(AirportValidator airportValidator) {
+        this.airportValidator = airportValidator;
+    }
 
-    
+    public RouteValidator getRouteValidator() {
+        return routeValidator;
+    }
+
+    public void setRouteValidator(RouteValidator routeValidator) {
+        this.routeValidator = routeValidator;
+    }
     
     
 }

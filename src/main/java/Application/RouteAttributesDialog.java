@@ -81,11 +81,11 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void saveRoute() throws InvalidAttributeException {
         Route route = (Route) detached;
-        mgProvider.validateRoute(route);
+        mgProvider.getRouteValidator().validate(route);
         if (updated) {
-            detached = mgProvider.getGenericDAOImpl().update(route);
+            detached = mgProvider.getGenericManagerImpl().update(route);
         } else {
-            detached = mgProvider.getGenericDAOImpl().create(route);
+            detached = mgProvider.getGenericManagerImpl().create(route);
             updated = true;
             this.setTitle("Update Route Attributes");
         }

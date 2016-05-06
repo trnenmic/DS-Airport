@@ -34,7 +34,6 @@ public class FlightService extends GenericManagerImpl<Flight>{
         return getCastedResult();
     }
     
-    @Override
     public void refresh() {
         criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Flight.class);

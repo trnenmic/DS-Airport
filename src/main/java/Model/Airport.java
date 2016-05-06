@@ -9,7 +9,7 @@ import java.util.Collection;
  * Created by M on 27. 4. 2016.
  */
 @Entity
-public class Airport implements Serializable, Identifiable {
+public class Airport implements Serializable {
     
     private int idAirport;
     private String city;
@@ -175,8 +175,4 @@ public class Airport implements Serializable, Identifiable {
         this.origins = origins;
     }
 
-    @Override
-    public int getId() {
-        return idAirport;
-    }
 }

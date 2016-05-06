@@ -25,13 +25,13 @@ public class BoundingUpdater {
 
     public void updateBoundings() {
         for (Airplane a : airplanes) {
-            managementProvider.getGenericDAOImpl().update(a);
+            managementProvider.getGenericManagerImpl().update(a);
         }
         for (Route r : routes) {
-            managementProvider.getGenericDAOImpl().update(r);
+            managementProvider.getGenericManagerImpl().update(r);
         }
         for (Airport a : airports) {
-            managementProvider.getGenericDAOImpl().update(a);
+            managementProvider.getGenericManagerImpl().update(a);
         }
         clean();
     }

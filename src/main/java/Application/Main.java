@@ -74,22 +74,6 @@ public class Main {
         AirplaneDAO airplaneDAO = new AirplaneDAO();
         //System.out.println(airplaneDAO.find(451).getAirline());
     }
-    
-    public static void testGenericDAO() {
-        
-        GenericDAO dao = new GenericDAOImpl();
-        
-        Airplane a1 = Airplane.createAirplane(200, 50, "CSA", 500, 1000, "OK1");
-        Airplane a2 = Airplane.createAirplane(200, 50, "CSA", 500, 1000, "OK2");
-        
-        dao.create(a1);
-        dao.create(a2);
-        
-        a1.setAirline("Lufthansa");
-//        
-        dao.update(a1);
-                
-    }
 
     public static Airplane insertAirplane(EntityTransaction tx, EntityManager em){
         // ID = 101

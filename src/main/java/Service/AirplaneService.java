@@ -99,9 +99,7 @@ public class AirplaneService extends GenericManagerImpl<Airplane> implements Air
         return getCastedResult();
     }
 
-    @Override
     public void refresh() {
-        criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Airplane.class);
         criteriaQuery = criteriaQuery.select(root);
     }

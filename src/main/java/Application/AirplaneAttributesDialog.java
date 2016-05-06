@@ -68,26 +68,26 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private void updateTextFields() {
         Airplane airplane = (Airplane) detached;
         airplaneAirlineTextField.setText(airplane.getAirline());
-        airplaneCapacityTextField.setText("" + airplane.getCapacity());
+        airplaneCapacityTextField.setText("" + airplane.getPassengerCapacity());
         airplaneCodeTextField.setText(airplane.getAirplaneCode());
-        airplaneFuelTankTextField.setText("" + airplane.getFuelTankCapacity());
-        airplaneLoadCapacityTextField.setText("" + airplane.getLoadingCapacity());
-        airplanePayloadTextField.setText("" + airplane.getPayload());
+        airplaneFuelTankTextField.setText("" + airplane.getMaximumRange());
+        airplaneLoadCapacityTextField.setText("" + airplane.getMaximumTakeoffWeight());
+        airplanePayloadTextField.setText("" + airplane.getMaximumCargoCapacity());
     }
 
     private void saveAirplane() throws InvalidAttributeException {
         Airplane airplane = (Airplane) detached;
-        airplane.setCapacity(Integer.parseInt(airplaneCapacityTextField.getText()));
-        airplane.setFuelTankCapacity(Integer.parseInt(airplaneFuelTankTextField.getText()));
+        airplane.setPassengerCapacity(Integer.parseInt(airplaneCapacityTextField.getText()));
+        airplane.setMaximumRange(Integer.parseInt(airplaneFuelTankTextField.getText()));
         airplane.setAirline(airplaneAirlineTextField.getText());
-        airplane.setPayload(Integer.parseInt(airplanePayloadTextField.getText()));
-        airplane.setLoadingCapacity(Integer.parseInt(airplaneLoadCapacityTextField.getText()));
+        airplane.setMaximumCargoCapacity(Integer.parseInt(airplanePayloadTextField.getText()));
+        airplane.setMaximumTakeoffWeight(Integer.parseInt(airplaneLoadCapacityTextField.getText()));
         airplane.setAirplaneCode(airplaneCodeTextField.getText());
-        mgProvider.validateAirplane(airplane);
+        mgProvider.getAirplaneValidator().validate(airplane);
         if (update) {
-            detached = mgProvider.getGenericDAOImpl().update(airplane);
+            detached = mgProvider.getGenericManagerImpl().update(airplane);
         } else {
-            detached = mgProvider.getGenericDAOImpl().create(airplane);
+            detached = mgProvider.getGenericManagerImpl().create(airplane);
             update = true;
             this.setTitle("Update Airplane Attributes");
         }
