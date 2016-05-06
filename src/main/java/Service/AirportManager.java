@@ -16,6 +16,9 @@ public interface AirportManager {
     void deleteAirport(Airport airport) throws InvalidAttributeException;
 
     Airport find(int idAirport);
+    
+    List<Airport> findAllOrdered();
+    
     List<Airport> findAll();
     List<Airport> findAllOrderedById();
 

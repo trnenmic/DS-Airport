@@ -18,7 +18,12 @@ public interface AirplaneManager {
     List<Route> findRoutes(Airplane airplane);
     
     Airplane find(int idAirplane);
+    
     List<Airplane> findAll();
+    
+    List<Airplane> findAllOrdered();
+    
+    
     List<Airplane> findAllOrderedById();
 
     boolean eraseAirplaneRouteBound(int airplaneId, int routeId);

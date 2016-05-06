@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -56,11 +57,20 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
     public List<Airport> findAll() {
         refresh();
         createResultList();
-//        System.out.println("findAll result list:");
-//        for (Object o : resultList) {
-//            System.out.println((Airport)o);
-//        }
-//        System.out.println();
+        return getCastedResult();
+    }
+    
+    @Override
+    public List<Airport> findAllOrdered() {
+        refresh();
+        List<Order> orders = new ArrayList<>(3);
+        
+        orders.add(criteriaBuilder.asc(root.get("airportName")));
+        orders.add(criteriaBuilder.asc(root.get("city")));
+        orders.add(criteriaBuilder.asc(root.get("country")));
+        criteriaQuery.orderBy(orders.toArray(new Order[orders.size()]));
+
+        createResultList();
         return getCastedResult();
     }
 
@@ -94,6 +104,11 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
     public List<Airport> findSpecified(String name, String city, String country, String icao, String iata) {
         refresh();
         List<Predicate> predicates = new ArrayList<>(5);
+        List<Order> orders = new ArrayList<>(3);
+        orders.add(criteriaBuilder.asc(root.get("airportName")));
+        orders.add(criteriaBuilder.asc(root.get("city")));
+        orders.add(criteriaBuilder.asc(root.get("country")));
+        
         if (name != null) {
             predicates.add(criteriaBuilder.equal(root.get("airportName"), name));
         }
@@ -112,6 +127,7 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         if (!predicates.isEmpty()) {
             criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
         }
+        criteriaQuery.orderBy(orders.toArray(new Order[orders.size()]));
         createResultList();
         return getCastedResult();
     }

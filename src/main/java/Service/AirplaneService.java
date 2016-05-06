@@ -7,6 +7,7 @@ import Validator.InvalidAttributeException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -15,42 +16,36 @@ import javax.persistence.criteria.Root;
  * @author Martin Cap
  */
 public class AirplaneService extends GenericServiceImpl<Airplane> implements AirplaneManager {
-    
+
     private Root<Airplane> root;
-    
+
     private final GenericDAOImpl<Airplane> airplaneDAO = new GenericDAOImpl<>();
-    
+
     public AirplaneService() {
         this.root = criteriaQuery.from(Airplane.class);
         this.criteriaQuery = criteriaQuery.select(root);
     }
-    
+
     @Override
     public Airplane createAirplane(Airplane airplane) throws InvalidAttributeException {
-        
+
         // validation
-        
         return airplaneDAO.create(airplane);
     }
 
     @Override
     public Airplane updateAirplane(Airplane airplane) throws InvalidAttributeException {
-        
+
         // validation
-        
         return airplaneDAO.update(airplane);
     }
 
     @Override
     public void deleteAirplane(Airplane airplane) throws InvalidAttributeException {
-        
+
         // validation
-        
     }
-    
-    
-    
-    
+
     @Override
     public Airplane find(int idAirplane) {
         return em.find(Airplane.class, idAirplane);
@@ -59,6 +54,21 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     @Override
     public List<Airplane> findAll() {
         refresh();
+        createResultList();
+        return getCastedResult();
+    }
+
+    @Override
+    public List<Airplane> findAllOrdered() {
+        refresh();
+        List<Order> orders = new ArrayList<>(4);
+        
+        orders.add(criteriaBuilder.asc(root.get("code")));
+        orders.add(criteriaBuilder.asc(root.get("airline")));
+        orders.add(criteriaBuilder.asc(root.get("passengerCapacity")));
+        orders.add(criteriaBuilder.asc(root.get("maximumRange")));
+        criteriaQuery.orderBy(orders.toArray(new Order[orders.size()]));
+
         createResultList();
         return getCastedResult();
     }
@@ -77,7 +87,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         createResultList();
         return getCastedResult();
     }
-    
+
     public List<Airplane> findWithGreaterCapacity(int capacity) {
         refresh();
         CriteriaQuery tmp = criteriaQuery.select(root)
@@ -92,7 +102,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     // REDUNDANT ???
     @Override
     public List<Route> findRoutes(Airplane airplane) {
-        return (List)airplane.getRoutes();
+        return (List) airplane.getRoutes();
     }
 
     @Override
@@ -100,14 +110,21 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         // TO DO
         return false;
     }
-        
+
     @Override
     public List<Airplane> findSpecified(String code, String airline,
-            Integer maxPassengerCapacity, Integer minPassengerCapacity, 
+            Integer maxPassengerCapacity, Integer minPassengerCapacity,
             Integer maxMaximumRange, Integer minMaximumRange) {
-        
+
         refresh();
         List<Predicate> predicates = new ArrayList<>(6);
+        List<Order> orders = new ArrayList<>(4);
+
+        orders.add(criteriaBuilder.asc(root.get("code")));
+        orders.add(criteriaBuilder.asc(root.get("airline")));
+        orders.add(criteriaBuilder.asc(root.get("passengerCapacity")));
+        orders.add(criteriaBuilder.asc(root.get("maximumRange")));
+
         if (code != null) {
             predicates.add(criteriaBuilder.equal(root.get("code"), code));
         }
@@ -129,6 +146,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         if (!predicates.isEmpty()) {
             criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
         }
+        criteriaQuery.orderBy(orders.toArray(new Order[orders.size()]));
         createResultList();
         return getCastedResult();
     }
@@ -137,5 +155,5 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         root = criteriaQuery.from(Airplane.class);
         criteriaQuery = criteriaQuery.select(root);
     }
-    
+
 }
