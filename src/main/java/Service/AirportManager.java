@@ -2,6 +2,7 @@ package Service;
 
 import Model.Airport;
 import Model.Route;
+import Validator.InvalidAttributeException;
 
 import java.util.List;
 
@@ -9,6 +10,10 @@ import java.util.List;
  * Created by M on 1. 5. 2016.
  */
 public interface AirportManager {
+    
+    Airport createAirport(Airport airport) throws InvalidAttributeException;
+    Airport updateAirport(Airport airport) throws InvalidAttributeException;
+    void deleteAirport(Airport airport) throws InvalidAttributeException;
 
     Airport find(int idAirport);
     List<Airport> findAll();

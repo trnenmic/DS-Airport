@@ -1,18 +1,11 @@
 package Application;
 
 import Application.GUIDesigners.DialogDesigner;
-import Data.GenericDAOImpl;
 import Model.Airplane;
 import Model.Airport;
 import Model.Route;
-import Service.AirplaneService;
-import Service.AirportManager;
-import Service.AirportService;
-import Service.GenericManagerImpl;
 import Service.ManagementProvider;
-import Service.RouteService;
 import java.util.List;
-import javax.swing.JDialog;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 import javax.swing.UIManager;
 
@@ -20,17 +13,17 @@ import javax.swing.UIManager;
  *
  * @author Martin
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class ApplicationFrame extends javax.swing.JFrame {
 
     public ManagementProvider mgProvider;
 
     //filter Airplanes
     private String filterCode = null;
     private String filterAirline = null;
-    private Integer filterMaxFuelCapacity = null;
-    private Integer filterMinFuelCapacity = null;
-    private Integer filterMaxLoadingCapacity = null;
-    private Integer filterMinLoadingCapacity = null;
+    private Integer filterMaxPassengerCapacity = null;
+    private Integer filterMinPassengerCapacity = null;
+    private Integer filterMaxMaximumRange = null;
+    private Integer filterMinMaximumRange = null;
 
     //filter Routes
     private String name1 = null;
@@ -54,7 +47,7 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public ApplicationFrame() {
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -76,24 +69,15 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void updateAirportList() {
-        
-        List<Airport> airports = mgProvider.getAirportManager().findSpecified(name,
-                city, country, icao, iata);
-        System.out.println("GUI result list:");
-        for (Airport a : airports) {
-            System.out.println(a);
-        }
-        System.out.println();
-        airportjList.setListData(airports.toArray());
-//        airportjList.setListData(mgProvider.getAirportManager().findSpecified(name,
-//                city, country, icao, iata).toArray());
+        airportjList.setListData(mgProvider.getAirportManager().findSpecified(name,
+                city, country, icao, iata).toArray());
     }
 
     private void updateAirplaneList() {
         airplanejList.setListData(mgProvider.getAirplaneManager().findSpecified(
                 filterCode, filterAirline,
-                filterMaxFuelCapacity, filterMinFuelCapacity,
-                filterMaxLoadingCapacity, filterMinLoadingCapacity).toArray());
+                filterMaxPassengerCapacity, filterMinPassengerCapacity,
+                filterMaxMaximumRange, filterMinMaximumRange).toArray());
     }
 
     private void updateRouteList() {
@@ -103,10 +87,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void initManagement() {
         mgProvider = new ManagementProvider();
-        mgProvider.setAirplaneManager(new AirplaneService());
-        mgProvider.setAirportManager(new AirportService());
-        mgProvider.setRouteManager(new RouteService());
-        mgProvider.setGenericManagerImpl(new GenericManagerImpl());
+//        mgProvider.setAirplaneManager(new AirplaneDAO());
+//        mgProvider.setAirportManager(new AirportDAO());
+//        mgProvider.setRouteManager(new RouteDAO());
+//        mgProvider.setGenericManagerImpl(new GenericDAOImpl());
     }
 
     /**
@@ -151,10 +135,10 @@ public class NewJFrame extends javax.swing.JFrame {
         airplaneFuelLesserLabel = new javax.swing.JLabel();
         airplaneLoadingGreaterLabel = new javax.swing.JLabel();
         airplaneLoadingLesserLabel = new javax.swing.JLabel();
-        airplaneFuelGreaterTextField = new javax.swing.JTextField();
-        airplaneFuelLesserTextField = new javax.swing.JTextField();
-        airplaneLoadingGreaterTextField = new javax.swing.JTextField();
-        airplaneLoadingLesserTextField = new javax.swing.JTextField();
+        airplanePassengerGreaterTextField = new javax.swing.JTextField();
+        airplanePassengerLesserTextField = new javax.swing.JTextField();
+        airplaneRangeGreaterTextField = new javax.swing.JTextField();
+        airplaneRangeLesserTextField = new javax.swing.JTextField();
         airplaneScrollPane = new javax.swing.JScrollPane();
         airplanejList = new javax.swing.JList();
         routePanel = new javax.swing.JPanel();
@@ -371,7 +355,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(deleteAirportButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(applyFilterAirportButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(airportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -427,25 +411,30 @@ public class NewJFrame extends javax.swing.JFrame {
         airplaneAirlineTextField.setBackground(new java.awt.Color(52, 52, 56));
         airplaneAirlineTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        airplaneFuelGreaterLabel.setText("Fuel capacity greater than:");
+        airplaneFuelGreaterLabel.setText("Passenger capacity greater than:");
 
-        airplaneFuelLesserLabel.setText("Fuel capacity lesser than:");
+        airplaneFuelLesserLabel.setText("Passenger capacity lesser than:");
 
-        airplaneLoadingGreaterLabel.setText("Loading capacity greater than:");
+        airplaneLoadingGreaterLabel.setText("Maximum range greater than:");
 
-        airplaneLoadingLesserLabel.setText("Loading capacity lesser than:");
+        airplaneLoadingLesserLabel.setText("Maximum range lesser than:");
 
-        airplaneFuelGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneFuelGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplanePassengerGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplanePassengerGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplanePassengerGreaterTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                airplanePassengerGreaterTextFieldActionPerformed(evt);
+            }
+        });
 
-        airplaneFuelLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneFuelLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplanePassengerLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplanePassengerLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        airplaneLoadingGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneLoadingGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplaneRangeGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplaneRangeGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        airplaneLoadingLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneLoadingLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplaneRangeLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplaneRangeLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
 
         airplanejList.setBackground(new java.awt.Color(52, 52, 56));
         airplanejList.setForeground(new java.awt.Color(255, 255, 255));
@@ -479,9 +468,9 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addComponent(airplaneFuelGreaterLabel)
                                     .addComponent(airplaneFuelLesserLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(airplaneFuelGreaterTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(airplaneFuelLesserTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(airplanePassengerGreaterTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                                    .addComponent(airplanePassengerLesserTextField))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(AirplanePanelLayout.createSequentialGroup()
@@ -494,9 +483,9 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addComponent(airplaneLoadingLesserLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(airplaneLoadingLesserTextField)
-                                    .addComponent(airplaneLoadingGreaterTextField))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                                    .addComponent(airplaneRangeLesserTextField)
+                                    .addComponent(airplaneRangeGreaterTextField))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(createAirplaneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -524,14 +513,14 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(airplaneLoadingGreaterLabel)
-                                    .addComponent(airplaneLoadingGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(airplaneFuelGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(airplaneRangeGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(airplanePassengerGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(airplaneFuelGreaterLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(AirplanePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(airplaneLoadingLesserLabel)
-                                    .addComponent(airplaneLoadingLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(airplaneFuelLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(airplaneRangeLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(airplanePassengerLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(airplaneFuelLesserLabel)))))
                     .addGroup(AirplanePanelLayout.createSequentialGroup()
                         .addComponent(createAirplaneButton)
@@ -541,7 +530,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(deleteAirplaneButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(applyFilterAirplaneButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(airplaneScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -938,10 +927,10 @@ public class NewJFrame extends javax.swing.JFrame {
         try {
             filterCode = airplaneCodeTextField.getText().equals("") ? null : airplaneCodeTextField.getText();
             filterAirline = airplaneAirlineTextField.getText().equals("") ? null : airplaneAirlineTextField.getText();
-            filterMaxFuelCapacity = Integer.parseInt(airplaneFuelGreaterTextField.getText());
-            filterMinFuelCapacity = Integer.parseInt(airplaneFuelLesserTextField.getText());
-            filterMaxLoadingCapacity = Integer.parseInt(airplaneLoadingGreaterTextField.getText());
-            filterMinLoadingCapacity = Integer.parseInt(airplaneLoadingLesserTextField.getText());
+            filterMaxPassengerCapacity = Integer.parseInt(airplanePassengerGreaterTextField.getText());
+            filterMinPassengerCapacity = Integer.parseInt(airplanePassengerLesserTextField.getText());
+            filterMaxMaximumRange = Integer.parseInt(airplaneRangeGreaterTextField.getText());
+            filterMinMaximumRange = Integer.parseInt(airplaneRangeLesserTextField.getText());
             updateAirplaneList();
         } catch (NumberFormatException e) {
             warningLabel.setText("Input is not and integer.");
@@ -957,6 +946,10 @@ public class NewJFrame extends javax.swing.JFrame {
         icao = (airportIcaoTextField.getText().equals("") ? null : airportIcaoTextField.getText());
         updateAirportList();
     }//GEN-LAST:event_applyFilterAirportButtonActionPerformed
+
+    private void airplanePassengerGreaterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplanePassengerGreaterTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_airplanePassengerGreaterTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -976,20 +969,23 @@ public class NewJFrame extends javax.swing.JFrame {
              }
              }*/
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ApplicationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ApplicationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ApplicationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ApplicationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                new ApplicationFrame().setVisible(true);
             }
         });
     }
@@ -1002,13 +998,13 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField airplaneCodeTextField;
     private javax.swing.JLabel airplaneFilterLabel;
     private javax.swing.JLabel airplaneFuelGreaterLabel;
-    private javax.swing.JTextField airplaneFuelGreaterTextField;
     private javax.swing.JLabel airplaneFuelLesserLabel;
-    private javax.swing.JTextField airplaneFuelLesserTextField;
     private javax.swing.JLabel airplaneLoadingGreaterLabel;
-    private javax.swing.JTextField airplaneLoadingGreaterTextField;
     private javax.swing.JLabel airplaneLoadingLesserLabel;
-    private javax.swing.JTextField airplaneLoadingLesserTextField;
+    private javax.swing.JTextField airplanePassengerGreaterTextField;
+    private javax.swing.JTextField airplanePassengerLesserTextField;
+    private javax.swing.JTextField airplaneRangeGreaterTextField;
+    private javax.swing.JTextField airplaneRangeLesserTextField;
     private javax.swing.JScrollPane airplaneScrollPane;
     private javax.swing.JList airplanejList;
     private javax.swing.JLabel airportCityLabel;

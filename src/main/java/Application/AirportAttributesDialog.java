@@ -1,12 +1,8 @@
 package Application;
 
 import Application.GUIDesigners.BoundingUpdater;
-import Model.Airplane;
 import Model.Airport;
-import Service.AirplaneService;
-import Service.AirportService;
 import Service.ManagementProvider;
-import Service.RouteService;
 import Validator.InvalidAttributeException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,11 +77,11 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
         airport.setCountry(airportCountryTextField.getText());
         airport.setIata(airportIataTextField.getText());
         airport.setIcao(airportIcaoTextField.getText());
-        mgProvider.getAirportValidator().validate(airport);
+//        mgProvider.getAirportValidator().validate(airport);
         if (updated) {
-            detached = mgProvider.getGenericManagerImpl().update(airport);
+            detached = mgProvider.getAirportManager().updateAirport(airport);
         } else {
-            detached = mgProvider.getGenericManagerImpl().create(airport);
+            detached = mgProvider.getAirportManager().createAirport(airport);
             updated = true;
             this.setTitle("Update Airport Attributes");
         }
@@ -346,9 +342,9 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ManagementProvider managementProvider = new ManagementProvider();
-                managementProvider.setAirplaneManager(new AirplaneService());
-                managementProvider.setAirportManager(new AirportService());
-                managementProvider.setRouteManager(new RouteService());
+//                managementProvider.setAirplaneManager(new AirplaneDAO());
+//                managementProvider.setAirportManager(new AirportDAO());
+//                managementProvider.setRouteManager(new RouteDAO());
                 AirportAttributesDialog dialog = new AirportAttributesDialog(new javax.swing.JFrame(), true, managementProvider);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override

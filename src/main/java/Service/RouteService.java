@@ -1,24 +1,56 @@
 package Service;
 
+import Data.GenericDAOImpl;
 import Model.Airplane;
 import Model.Airport;
 import Model.Route;
+import Validator.InvalidAttributeException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Martin
+ * @author Martin Cap
  */
-public class RouteService extends GenericManagerImpl<Route> implements RouteManager {
+public class RouteService extends GenericServiceImpl<Route> implements RouteManager {
     
     private Root<Route> root;
+    
+    private final GenericDAOImpl<Route> routeDAO = new GenericDAOImpl<>();
     
     public RouteService() {
         this.root = criteriaQuery.from(Route.class);
         this.criteriaQuery = criteriaQuery.select(root);
     }
+
+    @Override
+    public Route createRoute(Route route) throws InvalidAttributeException {
+        
+        // validation
+        
+        return routeDAO.create(route);
+        
+    }
+
+    @Override
+    public Route updateRoute(Route route) throws InvalidAttributeException {
+        
+        // validation
+        
+        return routeDAO.update(route);
+        
+    }
+
+    @Override
+    public void deleteRoute(Route route) throws InvalidAttributeException {
+        
+        // validation
+        
+        routeDAO.delete(route);
+        
+    }
+    
 
     @Override
     public Route find(int idRoute) {
@@ -77,7 +109,6 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
     
     // END OF REDUNDANT METHODS //
     
-    // Weird method - I have implemented it though...
     @Override
     public List<Route> findSpecified(String city1, String city2, String airportName1, String airportName2, String icao1, String icao2, String iata1, String iata2, String country1, String country2) {
         refresh();
@@ -118,12 +149,9 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
                     correct = false;
                 }
             }
-            System.out.println("Correct after origin: " + correct);
             
             // destination
             if (correct && city2 != null) {
-                System.out.println("Destination city: " + destination.getCity());
-                System.out.println("Filter destination city: " + city2);
                 if (!destination.getCity().equals(city2)) {
                     correct = false;
                 }
@@ -159,6 +187,6 @@ public class RouteService extends GenericManagerImpl<Route> implements RouteMana
         criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Route.class);
     }
-    
+
     
 }

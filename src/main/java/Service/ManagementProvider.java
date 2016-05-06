@@ -1,6 +1,6 @@
 package Service;
 
-import Validator.*;
+import Data.GenericDAOImpl;
 
 /**
  *
@@ -8,21 +8,17 @@ import Validator.*;
  */
 public class ManagementProvider {
     
-    private AirplaneManager airplaneManager;
-    private AirportManager airportManager;
-    private RouteManager routeManager;
+    private AirplaneManager airplaneManager = new AirplaneService();
+    private AirportManager airportManager = new AirportService();
+    private RouteManager routeManager = new RouteService();
     
-    private AirplaneValidator airplaneValidator;
-    private AirportValidator airportValidator;
-    private RouteValidator routeValidator;
-    
-    private GenericManagerImpl genericManagerImpl;    
+    private GenericDAOImpl genericManagerImpl = new GenericDAOImpl();
 
-    public GenericManagerImpl getGenericManagerImpl() {
+    public GenericDAOImpl getGenericManagerImpl() {
         return genericManagerImpl;
     }
 
-    public void setGenericManagerImpl(GenericManagerImpl genericManagerImpl) {
+    public void setGenericManagerImpl(GenericDAOImpl genericManagerImpl) {
         this.genericManagerImpl = genericManagerImpl;
     }
 
@@ -49,30 +45,5 @@ public class ManagementProvider {
     public void setRouteManager(RouteManager routeManager) {
         this.routeManager = routeManager;
     }
-
-    public AirplaneValidator getAirplaneValidator() {
-        return airplaneValidator;
-    }
-
-    public void setAirplaneValidator(AirplaneValidator airplaneValidator) {
-        this.airplaneValidator = airplaneValidator;
-    }
-
-    public AirportValidator getAirportValidator() {
-        return airportValidator;
-    }
-
-    public void setAirportValidator(AirportValidator airportValidator) {
-        this.airportValidator = airportValidator;
-    }
-
-    public RouteValidator getRouteValidator() {
-        return routeValidator;
-    }
-
-    public void setRouteValidator(RouteValidator routeValidator) {
-        this.routeValidator = routeValidator;
-    }
-    
     
 }

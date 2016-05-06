@@ -1,24 +1,55 @@
 package Service;
 
+import Data.GenericDAOImpl;
 import Model.Airplane;
 import Model.Route;
+import Validator.InvalidAttributeException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Martin
+ * @author Martin Cap
  */
-public class AirplaneService extends GenericManagerImpl<Airplane> implements AirplaneManager {
-
+public class AirplaneService extends GenericServiceImpl<Airplane> implements AirplaneManager {
+    
     private Root<Airplane> root;
+    
+    private final GenericDAOImpl<Airplane> airplaneDAO = new GenericDAOImpl<>();
     
     public AirplaneService() {
         this.root = criteriaQuery.from(Airplane.class);
         this.criteriaQuery = criteriaQuery.select(root);
     }
+    
+    @Override
+    public Airplane createAirplane(Airplane airplane) throws InvalidAttributeException {
+        
+        // validation
+        
+        return airplaneDAO.create(airplane);
+    }
 
+    @Override
+    public Airplane updateAirplane(Airplane airplane) throws InvalidAttributeException {
+        
+        // validation
+        
+        return airplaneDAO.update(airplane);
+    }
+
+    @Override
+    public void deleteAirplane(Airplane airplane) throws InvalidAttributeException {
+        
+        // validation
+        
+    }
+    
+    
+    
     
     @Override
     public Airplane find(int idAirplane) {
@@ -70,30 +101,33 @@ public class AirplaneService extends GenericManagerImpl<Airplane> implements Air
         return false;
     }
         
-
     @Override
     public List<Airplane> findSpecified(String code, String airline,
-            Integer maxFuelCapacity, Integer minFuelCapacity, 
-            Integer maxLoadingCapacity, Integer minLoadingCapacity) {
+            Integer maxPassengerCapacity, Integer minPassengerCapacity, 
+            Integer maxMaximumRange, Integer minMaximumRange) {
         
         refresh();
+        List<Predicate> predicates = new ArrayList<>(6);
         if (code != null) {
-            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("code"), code));
+            predicates.add(criteriaBuilder.equal(root.get("code"), code));
         }
         if (airline != null) {
-            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("airline"), airline));
+            predicates.add(criteriaBuilder.equal(root.get("airline"), airline));
         }
-        if (maxFuelCapacity != null) {
-            criteriaQuery = criteriaQuery.where(criteriaBuilder.lt(root.get("fuelTankCapacity"), maxFuelCapacity));
+        if (maxPassengerCapacity != null) {
+            predicates.add(criteriaBuilder.lt(root.get("passengerCapacity"), maxPassengerCapacity));
         }
-        if (minFuelCapacity != null) {
-            criteriaQuery = criteriaQuery.where(criteriaBuilder.gt(root.get("fuelTankCapacity"), minFuelCapacity));
+        if (minPassengerCapacity != null) {
+            predicates.add(criteriaBuilder.gt(root.get("passengerCapacity"), minPassengerCapacity));
         }
-        if (maxLoadingCapacity != null) {
-            criteriaQuery = criteriaQuery.where(criteriaBuilder.lt(root.get("loadingCapacity"), maxLoadingCapacity));
+        if (maxMaximumRange != null) {
+            predicates.add(criteriaBuilder.lt(root.get("maximumRange"), maxMaximumRange));
         }
-        if (minLoadingCapacity != null) {
-            criteriaQuery = criteriaQuery.where(criteriaBuilder.gt(root.get("loadingCapacity"), minLoadingCapacity));
+        if (minMaximumRange != null) {
+            predicates.add(criteriaBuilder.gt(root.get("maximumRange"), minMaximumRange));
+        }
+        if (!predicates.isEmpty()) {
+            criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
         }
         createResultList();
         return getCastedResult();
@@ -103,6 +137,5 @@ public class AirplaneService extends GenericManagerImpl<Airplane> implements Air
         root = criteriaQuery.from(Airplane.class);
         criteriaQuery = criteriaQuery.select(root);
     }
-
-
+    
 }

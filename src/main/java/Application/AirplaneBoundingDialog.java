@@ -3,10 +3,7 @@ package Application;
 import Application.GUIDesigners.BoundingUpdater;
 import Model.Airplane;
 import Model.Route;
-import Service.AirplaneService;
-import Service.AirportService;
 import Service.ManagementProvider;
-import Service.RouteService;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 /**
@@ -480,9 +477,9 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ManagementProvider managementProvider = new ManagementProvider();
-                managementProvider.setAirplaneManager(new AirplaneService());
-                managementProvider.setAirportManager(new AirportService());
-                managementProvider.setRouteManager(new RouteService());
+//                managementProvider.setAirplaneManager(new AirplaneDAO());
+//                managementProvider.setAirportManager(new AirportDAO());
+//                managementProvider.setRouteManager(new RouteDAO());
                 AirplaneBoundingDialog dialog = new AirplaneBoundingDialog(new javax.swing.JFrame(),
                         true, managementProvider, Airplane.createAirplane(0, 0, "", 0, 0, ""), new BoundingUpdater(managementProvider));
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

@@ -1,9 +1,11 @@
 package Service;
 
+import Model.CrewMember;
+
 /**
  *
- * @author Martin
+ * @author Martin Cap
  */
-public class CrewMemberService {
+public class CrewMemberService extends GenericServiceImpl<CrewMember> {
 
 }

@@ -3,10 +3,7 @@ package Application;
 import Application.GUIDesigners.BoundingUpdater;
 import Application.GUIDesigners.DialogDesigner;
 import Model.Airplane;
-import Service.AirplaneService;
-import Service.AirportService;
 import Service.ManagementProvider;
-import Service.RouteService;
 import Validator.InvalidAttributeException;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
@@ -83,11 +80,11 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         airplane.setMaximumCargoCapacity(Integer.parseInt(airplanePayloadTextField.getText()));
         airplane.setMaximumTakeoffWeight(Integer.parseInt(airplaneLoadCapacityTextField.getText()));
         airplane.setAirplaneCode(airplaneCodeTextField.getText());
-        mgProvider.getAirplaneValidator().validate(airplane);
+//        mgProvider.getAirplaneValidator().validate(airplane);
         if (update) {
-            detached = mgProvider.getGenericManagerImpl().update(airplane);
+            detached = mgProvider.getAirplaneManager().updateAirplane(airplane);
         } else {
-            detached = mgProvider.getGenericManagerImpl().create(airplane);
+            detached = mgProvider.getAirplaneManager().createAirplane(airplane);
             update = true;
             this.setTitle("Update Airplane Attributes");
         }
@@ -366,9 +363,9 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ManagementProvider managementProvider = new ManagementProvider();
-                managementProvider.setAirplaneManager(new AirplaneService());
-                managementProvider.setAirportManager(new AirportService());
-                managementProvider.setRouteManager(new RouteService());
+//                managementProvider.setAirplaneManager(new AirplaneDAO());
+//                managementProvider.setAirportManager(new AirportDAO());
+//                managementProvider.setRouteManager(new RouteDAO());
                 AirplaneAttributesDialog dialog = new AirplaneAttributesDialog(new javax.swing.JFrame(), true, managementProvider);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override

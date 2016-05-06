@@ -8,10 +8,10 @@ import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
- * @author Martin
+ * @author Martin Cap
  * @param <T>
  */
-public class GenericManagerImpl<T> implements GenericManager<T> {
+public class GenericServiceImpl<T> {
     
     protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
     protected EntityManager em = emf.createEntityManager();
@@ -20,33 +20,14 @@ public class GenericManagerImpl<T> implements GenericManager<T> {
     protected CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
     protected TypedQuery<Object> typedQuery;
     protected List<Object> resultList;
-
-    @Override
-    public T create(T t) {
-        tx.begin();
-        em.persist(t);
-        tx.commit();
-        return t;
-    }
-
-    @Override
-    public T update(T t) {
-        tx.begin();
-        em.merge(t);
-        tx.commit();
-        return t;
-    }
-
-    @Override
-    public void delete(T t) {
-        tx.begin();
-        em.remove(t);
-        tx.commit();
-    }
-    
+        
     protected void createResultList() {
         typedQuery = em.createQuery(criteriaQuery);
         resultList = typedQuery.getResultList();
+    }
+    
+    protected void refreshResultList() {
+        resultList = new ArrayList<>();
     }
     
     protected List<T> getCastedResult() {

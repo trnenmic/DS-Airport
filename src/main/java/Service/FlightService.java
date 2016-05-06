@@ -6,9 +6,9 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Martin
+ * @author Martin Cap
  */
-public class FlightService extends GenericManagerImpl<Flight>{
+public class FlightService extends GenericServiceImpl<Flight> {
     
     private Root<Flight> root;
 
@@ -38,6 +38,4 @@ public class FlightService extends GenericManagerImpl<Flight>{
         criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Flight.class);
     }
-    
-    
 }

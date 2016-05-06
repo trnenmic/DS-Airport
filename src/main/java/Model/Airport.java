@@ -84,7 +84,7 @@ public class Airport implements Serializable {
     }
 
     @Basic
-    @Column(name = "icao", nullable = false, insertable = true, updatable = true, length = 10000)
+    @Column(name = "icao", nullable = false, insertable = true, updatable = true, length = 4)
     public String getIcao() {
         return icao;
     }
@@ -94,7 +94,7 @@ public class Airport implements Serializable {
     }
 
     @Basic
-    @Column(name = "iata", nullable = false, insertable = true, updatable = true, length = 10000)
+    @Column(name = "iata", nullable = false, insertable = true, updatable = true, length = 3)
     public String getIata() {
         return iata;
     }

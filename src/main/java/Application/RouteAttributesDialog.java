@@ -3,10 +3,7 @@ package Application;
 import Application.GUIDesigners.BoundingUpdater;
 import Application.GUIDesigners.DialogDesigner;
 import Model.Route;
-import Service.AirplaneService;
-import Service.AirportService;
 import Service.ManagementProvider;
-import Service.RouteService;
 import Validator.InvalidAttributeException;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
@@ -81,11 +78,11 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void saveRoute() throws InvalidAttributeException {
         Route route = (Route) detached;
-        mgProvider.getRouteValidator().validate(route);
+//        mgProvider.getRouteValidator().validate(route);
         if (updated) {
-            detached = mgProvider.getGenericManagerImpl().update(route);
+            detached = mgProvider.getRouteManager().updateRoute(route);
         } else {
-            detached = mgProvider.getGenericManagerImpl().create(route);
+            detached = mgProvider.getRouteManager().createRoute(route);
             updated = true;
             this.setTitle("Update Route Attributes");
         }
@@ -597,9 +594,9 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ManagementProvider managementProvider = new ManagementProvider();
-                managementProvider.setAirplaneManager(new AirplaneService());
-                managementProvider.setAirportManager(new AirportService());
-                managementProvider.setRouteManager(new RouteService());
+//                managementProvider.setAirplaneManager(new AirplaneDAO());
+//                managementProvider.setAirportManager(new AirportDAO());
+//                managementProvider.setRouteManager(new RouteDAO());
                 RouteAttributesDialog dialog = new RouteAttributesDialog(new javax.swing.JFrame(), true, managementProvider);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override

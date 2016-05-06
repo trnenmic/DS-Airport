@@ -1,9 +1,11 @@
 package Service;
 
+import Model.Ticket;
+
 /**
  *
- * @author Martin
+ * @author Martin Cap
  */
-public class TicketService {
+public class TicketService extends GenericServiceImpl<Ticket> {
 
 }

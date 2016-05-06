@@ -1,9 +1,11 @@
 package Service;
 
+import Model.Client;
+
 /**
  *
- * @author Martin
+ * @author Martin Cap
  */
-public class ClientService {
+public class ClientService extends GenericServiceImpl<Client> {
 
 }

@@ -1,9 +1,11 @@
 package Service;
 
+import Model.Luggage;
+
 /**
  *
- * @author Martin
+ * @author Martin Cap
  */
-public class LuggageService {
+public class LuggageService extends GenericServiceImpl<Luggage> {
 
 }

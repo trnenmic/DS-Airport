@@ -3,6 +3,7 @@ package Service;
 import Model.Airplane;
 import Model.Airport;
 import Model.Route;
+import Validator.InvalidAttributeException;
 
 import java.util.List;
 
@@ -10,6 +11,11 @@ import java.util.List;
  * Created by M on 1. 5. 2016.
  */
 public interface RouteManager {
+    
+    Route createRoute(Route route) throws InvalidAttributeException;
+    Route updateRoute(Route route) throws InvalidAttributeException;
+    void deleteRoute(Route route) throws InvalidAttributeException;
+    
 
     List<Airplane> findJoinedAirplanes(Route route);
 

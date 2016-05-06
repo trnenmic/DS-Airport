@@ -135,7 +135,7 @@ public class Ticket implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "client_id_passenger", referencedColumnName = "id_passenger", nullable = false)
+    @JoinColumn(name = "client_id_client", referencedColumnName = "id_client", nullable = false)
     public Client getClient() {
         return client;
     }

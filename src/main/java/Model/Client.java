@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 public class Client implements Serializable {
-    private int idPassenger;
+    private int idClient;
     private String passportNumber;
     private String address;
     private String gender;
@@ -31,20 +31,20 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdPassenger() + " ; "
+        return String.valueOf("[ " + this.getClass().toString() + " : " + this.getIdClient() + " ; "
                 + this.email + " ; " + this.getPassportNumber() + " ; " + this.getAddress() + " ; " +
                 this.getPhoneNumber() + " ; " + this.getGender() + " ]");
     }
 
     @Id
     @GeneratedValue
-    @Column(name = "id_passenger", nullable = false, insertable = true, updatable = true)
-    public int getIdPassenger() {
-        return idPassenger;
+    @Column(name = "id_client", nullable = false, insertable = true, updatable = true)
+    public int getIdClient() {
+        return idClient;
     }
 
-    public void setIdPassenger(int idPassenger) {
-        this.idPassenger = idPassenger;
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
     }
 
     @Basic
@@ -104,7 +104,7 @@ public class Client implements Serializable {
 
         Client client = (Client) o;
 
-        if (idPassenger != client.idPassenger) return false;
+        if (idClient != client.idClient) return false;
         if (passportNumber != null ? !passportNumber.equals(client.passportNumber) : client.passportNumber != null)
             return false;
         if (address != null ? !address.equals(client.address) : client.address != null) return false;
@@ -117,7 +117,7 @@ public class Client implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = idPassenger;
+        int result = idClient;
         result = 31 * result + (passportNumber != null ? passportNumber.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);

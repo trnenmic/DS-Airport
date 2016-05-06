@@ -1,18 +1,15 @@
 package Data;
 
-import Model.Identifiable;
-
 /**
- *
- * @author Martin
+ * Created by M on 1. 5. 2016.
  * @param <T>
  */
-public interface GenericDAO {
-    
-    Identifiable create(Identifiable t);
-    Identifiable update(Identifiable t);
-    void delete(Identifiable t);
-    Object refresh(Object t);
-    
-    
+public interface GenericDAO<T> {
+
+    void delete(T t);
+
+    T update(T t);
+
+    T create(T t);
+
 }

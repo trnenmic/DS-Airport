@@ -3,10 +3,7 @@ package Application;
 import Application.GUIDesigners.BoundingUpdater;
 import Model.Airport;
 import Model.Route;
-import Service.AirplaneService;
-import Service.AirportService;
 import Service.ManagementProvider;
-import Service.RouteService;
 import Validator.InvalidAttributeException;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
@@ -497,9 +494,9 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ManagementProvider managementProvider = new ManagementProvider();
-                managementProvider.setAirplaneManager(new AirplaneService());
-                managementProvider.setAirportManager(new AirportService());
-                managementProvider.setRouteManager(new RouteService());
+//                managementProvider.setAirplaneManager(new AirplaneDAO());
+//                managementProvider.setAirportManager(new AirportDAO());
+//                managementProvider.setRouteManager(new RouteDAO());
                 DestinationSetterDialog dialog = new DestinationSetterDialog(new javax.swing.JFrame(),
                         true, managementProvider, Airport.createAirport("", "", "", "", ""), new BoundingUpdater(managementProvider));
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
