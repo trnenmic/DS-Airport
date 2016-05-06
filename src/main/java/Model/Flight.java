@@ -29,8 +29,8 @@ public class Flight implements Serializable {
         flight.setInspected(inspected);
         flight.setFuelRequired(fuelRequired);
         flight.setNumBookedSeats(numBookedSeats);
-        flight.setCrewMembers(new ArrayList<CrewMember>());
-        flight.setTickets(new ArrayList<Ticket>());
+        flight.setCrewMembers(new ArrayList<>());
+        flight.setTickets(new ArrayList<>());
         flight.setAirplane(null);
         flight.setRoute(null);
         return flight;

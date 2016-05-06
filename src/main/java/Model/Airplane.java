@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.Collection;
+import javax.validation.constraints.*;
 
 /**
  * Created by M on 27. 4. 2016.
@@ -30,8 +31,8 @@ public class Airplane implements Serializable, Identifiable {
         airplane.setPayload(payload);
         airplane.setLoadingCapacity(loadingCapacity);
         airplane.setAirplaneCode(airplaneCode);
-        airplane.setRoutes(new ArrayList<Route>());
-        airplane.setFlights(new ArrayList<Flight>());
+        airplane.setRoutes(new ArrayList<>());
+        airplane.setFlights(new ArrayList<>());
         return airplane;
     }
 
@@ -49,7 +50,7 @@ public class Airplane implements Serializable, Identifiable {
             routes.add(route);
         }
     }
-    
+
     @Override
     public int getId() {
         return idAirplane;
@@ -66,6 +67,10 @@ public class Airplane implements Serializable, Identifiable {
         this.idAirplane = idAirplane;
     }
 
+    // TESTING
+    @NotNull
+    @Min(0)
+    @Max(1000)
     @Basic
     @Column(name = "capacity", nullable = false, insertable = true, updatable = true)
     public int getCapacity() {
@@ -87,7 +92,7 @@ public class Airplane implements Serializable, Identifiable {
     }
 
     @Basic
-    @Column(name = "airline", nullable = true, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "airline", nullable = true, insertable = true, updatable = true, length = 10000)
     public String getAirline() {
         return airline;
     }
@@ -117,7 +122,7 @@ public class Airplane implements Serializable, Identifiable {
     }
 
     @Basic
-    @Column(name = "airplane_code", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "airplane_code", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getAirplaneCode() {
         return airplaneCode;
     }

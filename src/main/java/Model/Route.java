@@ -23,7 +23,7 @@ public class Route implements Serializable, Identifiable {
         Route route = new Route();
         route.setOrigin(null);
         route.setDestination(null);
-        route.setAirplanes(new ArrayList<Airplane>());
+        route.setAirplanes(new ArrayList<>());
         return route;
     }
 

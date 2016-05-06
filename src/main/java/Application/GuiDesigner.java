@@ -13,5 +13,5 @@ public class GuiDesigner {
         dialog.setAlwaysOnTop(true);
         dialog.setLocationRelativeTo(null);
     }
-
+    
 }

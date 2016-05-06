@@ -61,7 +61,7 @@ public class Luggage implements Serializable {
     }
 
     @Basic
-    @Column(name = "code", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "code", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getCode() {
         return code;
     }

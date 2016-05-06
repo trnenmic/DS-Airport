@@ -27,8 +27,8 @@ public class Airport implements Serializable, Identifiable {
         airport.setIcao(icao);
         airport.setIata(iata);
         airport.setCountry(country);
-        airport.setDestinations(new ArrayList<Route>());
-        airport.setOrigins(new ArrayList<Route>());
+        airport.setDestinations(new ArrayList<>());
+        airport.setOrigins(new ArrayList<>());
         return airport;
     }
 
@@ -64,7 +64,7 @@ public class Airport implements Serializable, Identifiable {
     }
 
     @Basic
-    @Column(name = "city", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "city", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getCity() {
         return city;
     }
@@ -74,7 +74,7 @@ public class Airport implements Serializable, Identifiable {
     }
 
     @Basic
-    @Column(name = "airport_name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "airport_name", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getAirportName() {
         return airportName;
     }
@@ -84,7 +84,7 @@ public class Airport implements Serializable, Identifiable {
     }
 
     @Basic
-    @Column(name = "icao", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "icao", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getIcao() {
         return icao;
     }
@@ -94,7 +94,7 @@ public class Airport implements Serializable, Identifiable {
     }
 
     @Basic
-    @Column(name = "iata", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "iata", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getIata() {
         return iata;
     }
@@ -104,7 +104,7 @@ public class Airport implements Serializable, Identifiable {
     }
 
     @Basic
-    @Column(name = "country", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "country", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getCountry() {
         return country;
     }

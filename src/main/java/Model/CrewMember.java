@@ -22,7 +22,7 @@ public class CrewMember implements Serializable {
         crewMember.setAddress(address);
         crewMember.setPassportNumber(passportNumber);
         crewMember.setGender(gender);
-        crewMember.setFlights(new ArrayList<Flight>());
+        crewMember.setFlights(new ArrayList<>());
         return crewMember;
     }
 
@@ -44,7 +44,7 @@ public class CrewMember implements Serializable {
     }
 
     @Basic
-    @Column(name = "passport_number", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "passport_number", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getPassportNumber() {
         return passportNumber;
     }
@@ -54,7 +54,7 @@ public class CrewMember implements Serializable {
     }
 
     @Basic
-    @Column(name = "address", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "address", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getAddress() {
         return address;
     }
@@ -64,7 +64,7 @@ public class CrewMember implements Serializable {
     }
 
     @Basic
-    @Column(name = "gender", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "gender", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getGender() {
         return gender;
     }

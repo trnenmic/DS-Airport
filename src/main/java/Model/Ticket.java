@@ -25,7 +25,7 @@ public class Ticket implements Serializable {
         ticket.setTravelClass(travelClass);
         ticket.setPrice(price);
         ticket.setSeat(seat);
-        ticket.setLuggages(new ArrayList<Luggage>());
+        ticket.setLuggages(new ArrayList<>());
         ticket.setFlight(null);
         ticket.setClient(null);
         return ticket;
@@ -49,7 +49,7 @@ public class Ticket implements Serializable {
     }
 
     @Basic
-    @Column(name = "ticket_number", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "ticket_number", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getTicketNumber() {
         return ticketNumber;
     }

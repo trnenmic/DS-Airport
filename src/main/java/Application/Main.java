@@ -19,31 +19,31 @@ public class Main {
 //        Frame frame = new Frame();
         NewJFrame visualTest = new NewJFrame();
         
-        AirplaneService airplaneService = new AirplaneService();
-        
-        System.out.println("All airplanes, not sorted:");
-        for (Airplane airplane : airplaneService.findAll()) {
-            System.out.println(airplane);
-        }
-        System.out.println();
-        System.out.println("All airplanes, sorted by id (ascending):");
-        for (Airplane airplane : airplaneService.findAllOrderedById()) {
-            System.out.println(airplane);
-        }
-        
-        System.out.println();
-        System.out.println("Airplanes with capacity larger than 100");
-        for (Airplane airplane : airplaneService.findWithGreaterCapacity(100)) {
-            System.out.println(airplane);
-        }
-        System.out.println();
-        System.out.println("All airplanes, not sorted:");
-        for (Airplane airplane : airplaneService.findAll()) {
-            System.out.println(airplane);
-        }
-        System.out.println();
-        
-        AirportService a = new AirportService();
+//        AirplaneService airplaneService = new AirplaneService();
+//        
+//        System.out.println("All airplanes, not sorted:");
+//        for (Airplane airplane : airplaneService.findAll()) {
+//            System.out.println(airplane);
+//        }
+//        System.out.println();
+//        System.out.println("All airplanes, sorted by id (ascending):");
+//        for (Airplane airplane : airplaneService.findAllOrderedById()) {
+//            System.out.println(airplane);
+//        }
+//        
+//        System.out.println();
+//        System.out.println("Airplanes with capacity larger than 100");
+//        for (Airplane airplane : airplaneService.findWithGreaterCapacity(100)) {
+//            System.out.println(airplane);
+//        }
+//        System.out.println();
+//        System.out.println("All airplanes, not sorted:");
+//        for (Airplane airplane : airplaneService.findAll()) {
+//            System.out.println(airplane);
+//        }
+//        System.out.println();
+//        
+//        AirportService a = new AirportService();
         
         
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");

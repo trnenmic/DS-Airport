@@ -25,7 +25,7 @@ public class Client implements Serializable {
         client.setGender(gender);
         client.setEmail(email);
         client.setPhoneNumber(phoneNumber);
-        client.setTickets(new ArrayList<Ticket>());
+        client.setTickets(new ArrayList<>());
         return client;
     }
 
@@ -48,7 +48,7 @@ public class Client implements Serializable {
     }
 
     @Basic
-    @Column(name = "passport_number", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "passport_number", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getPassportNumber() {
         return passportNumber;
     }
@@ -58,7 +58,7 @@ public class Client implements Serializable {
     }
 
     @Basic
-    @Column(name = "address", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "address", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getAddress() {
         return address;
     }
@@ -68,7 +68,7 @@ public class Client implements Serializable {
     }
 
     @Basic
-    @Column(name = "gender", nullable = false, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "gender", nullable = false, insertable = true, updatable = true, length = 10000)
     public String getGender() {
         return gender;
     }
@@ -78,7 +78,7 @@ public class Client implements Serializable {
     }
 
     @Basic
-    @Column(name = "email", nullable = true, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "email", nullable = true, insertable = true, updatable = true, length = 10000)
     public String getEmail() {
         return email;
     }
@@ -88,7 +88,7 @@ public class Client implements Serializable {
     }
 
     @Basic
-    @Column(name = "phone_number", nullable = true, insertable = true, updatable = true, length = 2147483647)
+    @Column(name = "phone_number", nullable = true, insertable = true, updatable = true, length = 10000)
     public String getPhoneNumber() {
         return phoneNumber;
     }
