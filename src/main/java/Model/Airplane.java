@@ -22,14 +22,14 @@ public class Airplane implements Serializable {
     private Collection<Route> routes;
     private Collection<Flight> flights;
 
-    public static Airplane createAirplane(int passengerCapacity, int fuelTankCapacity,
-            String airline, Integer payload, Integer loadingCapacity, String airplaneCode) {
+    public static Airplane createAirplane(int passengerCapacity, int maximumRange,
+            String airline, Integer maximumCargoCapacity, Integer maximumTakeoffWeight, String airplaneCode) {
         Airplane airplane = new Airplane();
         airplane.setPassengerCapacity(passengerCapacity);
-        airplane.setMaximumRange(fuelTankCapacity);
+        airplane.setMaximumRange(maximumRange);
         airplane.setAirline(airline);
-        airplane.setMaximumCargoCapacity(payload);
-        airplane.setMaximumTakeoffWeight(loadingCapacity);
+        airplane.setMaximumCargoCapacity(maximumCargoCapacity);
+        airplane.setMaximumTakeoffWeight(maximumTakeoffWeight);
         airplane.setAirplaneCode(airplaneCode);
         airplane.setRoutes(new ArrayList<>());
         airplane.setFlights(new ArrayList<>());

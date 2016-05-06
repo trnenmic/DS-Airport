@@ -45,7 +45,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
     private String icao = null;
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form ApplicationFrame
      */
     public ApplicationFrame() {
         initComponents();
