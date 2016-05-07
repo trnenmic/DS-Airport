@@ -481,7 +481,7 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
 //                managementProvider.setAirportManager(new AirportDAO());
 //                managementProvider.setRouteManager(new RouteDAO());
                 AirplaneBoundingDialog dialog = new AirplaneBoundingDialog(new javax.swing.JFrame(),
-                        true, managementProvider, Airplane.createAirplane(0, 0, "", 0, 0, ""), new BoundingUpdater(managementProvider));
+                        true, managementProvider, Airplane.createAirplane("", "", 0, 0, 0, 0), new BoundingUpdater(managementProvider));
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

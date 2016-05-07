@@ -10,23 +10,23 @@ import java.util.Collection;
  */
 @Entity
 public class Airport implements Serializable {
-    
+
     private int idAirport;
-    private String city;
     private String airportName;
+    private String city;
+    private String country;
     private String icao;
     private String iata;
-    private String country;
     private Collection<Route> destinations;
     private Collection<Route> origins;
 
-    public static Airport createAirport(String city, String airportName, String icao, String iata, String country) {
+    public static Airport createAirport(String airportName, String city, String country, String icao, String iata) {
         Airport airport = new Airport();
         airport.setAirportName(airportName);
         airport.setCity(city);
+        airport.setCountry(country);
         airport.setIcao(icao);
         airport.setIata(iata);
-        airport.setCountry(country);
         airport.setDestinations(new ArrayList<>());
         airport.setOrigins(new ArrayList<>());
         return airport;

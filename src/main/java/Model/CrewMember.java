@@ -19,8 +19,8 @@ public class CrewMember implements Serializable {
 
     public static CrewMember createCrewMember(String passportNumber, String address, String gender) {
         CrewMember crewMember = new CrewMember();
-        crewMember.setAddress(address);
         crewMember.setPassportNumber(passportNumber);
+        crewMember.setAddress(address);
         crewMember.setGender(gender);
         crewMember.setFlights(new ArrayList<>());
         return crewMember;

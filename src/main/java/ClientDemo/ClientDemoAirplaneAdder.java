@@ -65,9 +65,8 @@ public class ClientDemoAirplaneAdder {
                 tmp = br.readLine();
                 array = tmp.split(",");
                 
-                // asi predelat poradi dat ve filu, nebo v createAirplane
-                Airplane airplane = Airplane.createAirplane(Integer.parseInt(array[0].trim()), Integer.parseInt(array[4].trim()),
-                        array[1], Integer.parseInt(array[3].trim()), Integer.parseInt(array[5].trim()), array[2]);
+                Airplane airplane = Airplane.createAirplane(array[0], array[1], Integer.parseInt(array[2].trim()),
+                        Integer.parseInt(array[3].trim()), Integer.parseInt(array[4].trim()), Integer.parseInt(array[5].trim()));
                 
                 airplaneService.createAirplane(airplane);
                 

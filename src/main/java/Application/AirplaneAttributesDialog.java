@@ -21,7 +21,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     public AirplaneAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
         if (o == null) {
-            detached = Airplane.createAirplane(0, 0, "", 0, 0, "");
+            detached = Airplane.createAirplane("", "", 0, 0, 0, 0);
             update = false;
             this.setTitle("Create Airplane");
         } else {
@@ -37,7 +37,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
 
     public AirplaneAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider) {
         super(parent, modal);
-        detached = Airplane.createAirplane(0, 0, "", 0, 0, "");
+        detached = Airplane.createAirplane("", "", 0, 0, 0, 0);
         update = false;
         this.setTitle("Create Airplane");
         initDialog(managementProvider);

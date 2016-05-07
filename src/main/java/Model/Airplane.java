@@ -22,15 +22,15 @@ public class Airplane implements Serializable {
     private Collection<Route> routes;
     private Collection<Flight> flights;
 
-    public static Airplane createAirplane(int passengerCapacity, int maximumRange,
-            String airline, Integer maximumCargoCapacity, Integer maximumTakeoffWeight, String airplaneCode) {
+    public static Airplane createAirplane(String airplaneCode, String airline, int passengerCapacity, int maximumRange,
+            Integer maximumCargoCapacity, Integer maximumTakeoffWeight) {
         Airplane airplane = new Airplane();
+        airplane.setAirplaneCode(airplaneCode);
+        airplane.setAirline(airline);
         airplane.setPassengerCapacity(passengerCapacity);
         airplane.setMaximumRange(maximumRange);
-        airplane.setAirline(airline);
         airplane.setMaximumCargoCapacity(maximumCargoCapacity);
         airplane.setMaximumTakeoffWeight(maximumTakeoffWeight);
-        airplane.setAirplaneCode(airplaneCode);
         airplane.setRoutes(new ArrayList<>());
         airplane.setFlights(new ArrayList<>());
         return airplane;
@@ -41,7 +41,7 @@ public class Airplane implements Serializable {
         return String.valueOf("| AIRPLANE | CODE : " + this.getAirplaneCode()
                 + " | AIRLINE : " + this.getAirline() + " | PASSENGER C. : "
                 + this.getPassengerCapacity() + " | RANGE : "
-                + this.getMaximumRange() + " | CARGO C. " + this.getMaximumCargoCapacity()
+                + this.getMaximumRange() + " | CARGO C. : " + this.getMaximumCargoCapacity()
                 + " | TAKEOFF WEIGHT : " + this.getMaximumTakeoffWeight() + " |");
     }
 
@@ -50,7 +50,7 @@ public class Airplane implements Serializable {
             routes.add(route);
         }
     }
-    
+
     @Id
     @GeneratedValue
     @Column(name = "id_airplane", nullable = false, insertable = true, updatable = true)

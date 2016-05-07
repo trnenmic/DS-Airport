@@ -20,8 +20,8 @@ public class Client implements Serializable {
 
     public static Client createClient(String passportNumber, String address, String gender, String email, String phoneNumber){
         Client client = new Client();
-        client.setAddress(address);
         client.setPassportNumber(passportNumber);
+        client.setAddress(address);
         client.setGender(gender);
         client.setEmail(email);
         client.setPhoneNumber(phoneNumber);
