@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
-//        ApplicationFrame frame = new ApplicationFrame();
+        ApplicationFrame frame = new ApplicationFrame();
         
         try {
             ClientDemoFrame clientDemoFrame = new ClientDemoFrame();

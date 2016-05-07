@@ -5,9 +5,9 @@ import Model.Airport;
 import Model.Route;
 import Validator.InvalidAttributeException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -59,12 +59,12 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         createResultList();
         return getCastedResult();
     }
-    
+
     @Override
     public List<Airport> findAllOrdered() {
         refresh();
         List<Order> orders = new ArrayList<>(3);
-        
+
         orders.add(criteriaBuilder.asc(root.get("airportName")));
         orders.add(criteriaBuilder.asc(root.get("city")));
         orders.add(criteriaBuilder.asc(root.get("country")));
@@ -108,7 +108,7 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         orders.add(criteriaBuilder.asc(root.get("airportName")));
         orders.add(criteriaBuilder.asc(root.get("city")));
         orders.add(criteriaBuilder.asc(root.get("country")));
-        
+
         if (name != null) {
             predicates.add(criteriaBuilder.equal(root.get("airportName"), name));
         }
@@ -130,6 +130,22 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         criteriaQuery.orderBy(orders.toArray(new Order[orders.size()]));
         createResultList();
         return getCastedResult();
+    }
+
+    @Override
+    public List<Airport> findSpecifiedAlternate(String name, String city, String country, String icao, String iata) {
+//        System.out.println("name: " + name + "  city: " + city + "  country: " + country + "  icao: " + icao + "  iata: " + iata);
+        TypedQuery<Airport> query = em.createQuery("SELECT a FROM Airport a WHERE (:name IS NULL OR a.airportName = :name) "
+                + "AND (:city IS NULL OR a.city = :city) AND (:country IS NULL OR a.country = :country) AND (:icao IS NULL OR a.icao = :icao) "
+                + "AND (:iata IS NULL OR a.iata = :iata)", Airport.class);
+        
+        query.setParameter("name", name);
+        query.setParameter("city", city);
+        query.setParameter("country", country);
+        query.setParameter("icao", icao);
+        query.setParameter("iata", iata);
+        
+        return query.getResultList();
     }
 
 //    Tohle je sileny, ani to nefiltruje spravne (pokud zadas napr. Heathrow a Prague, tak najde obe letiste)

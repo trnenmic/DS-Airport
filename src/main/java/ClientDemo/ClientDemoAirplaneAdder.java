@@ -57,6 +57,10 @@ public class ClientDemoAirplaneAdder {
         String array[];
         for (int i = 0; i < n; i++) {
             numAirplanesRead++;
+            if (numAirplanesRead == 1000) {
+                System.out.println("End of file reached, no more airplanes to add!");
+                break;
+            }
             try {
                 tmp = br.readLine();
                 array = tmp.split(",");

@@ -69,7 +69,9 @@ public class ApplicationFrame extends javax.swing.JFrame {
     }
 
     private void updateAirportList() {
-        airportjList.setListData(mgProvider.getAirportManager().findSpecified(name,
+//        airportjList.setListData(mgProvider.getAirportManager().findSpecified(name,
+//                city, country, icao, iata).toArray());
+        airportjList.setListData(mgProvider.getAirportManager().findSpecifiedAlternate(name,
                 city, country, icao, iata).toArray());
     }
 

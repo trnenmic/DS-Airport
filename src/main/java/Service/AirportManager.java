@@ -28,4 +28,5 @@ public interface AirportManager {
     List<Route> findJoinedDestinationRoutes(Airport airport);
     
     List<Airport> findSpecified(String name, String city, String country, String icao, String iata);
+    List<Airport> findSpecifiedAlternate(String name, String city, String country, String icao, String iata);
 }
