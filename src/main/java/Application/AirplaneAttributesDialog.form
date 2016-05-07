@@ -94,19 +94,19 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="airplaneCodeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="airplaneAirlineLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="airplaneCapacityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="airplaneFuelTankLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="airplanePayloadLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="airplaneLoadCapacityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="airplanePassengerCapacityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="airplaneMaximumRangeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="airplaneCargoCapacityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="airplaneMaximumTakeoffWeightLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="airplanePayloadTextField" alignment="0" pref="130" max="32767" attributes="0"/>
-                              <Component id="airplaneFuelTankTextField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="airplaneCapacityTextField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="airplaneMaximumCargoCapacityTextField" alignment="0" pref="130" max="32767" attributes="0"/>
+                              <Component id="airplaneMaximumRangeTextField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="airplanePassengerCapacityTextField" alignment="0" max="32767" attributes="0"/>
                               <Component id="airplaneAirlineTextField" alignment="0" max="32767" attributes="0"/>
                               <Component id="airplaneCodeTextField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="airplaneLoadCapacityTextField" max="32767" attributes="0"/>
+                              <Component id="airplaneMaximumTakeoffWeightTextField" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -131,23 +131,23 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="airplaneCapacityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="airplaneCapacityTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="airplanePassengerCapacityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="airplanePassengerCapacityTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="airplaneFuelTankLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="airplaneFuelTankTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="airplaneMaximumRangeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="airplaneMaximumRangeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="airplanePayloadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="airplanePayloadTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="airplaneCargoCapacityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="airplaneMaximumCargoCapacityTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="airplaneLoadCapacityLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="airplaneLoadCapacityTextField" min="-2" max="-2" attributes="0"/>
+                      <Component id="airplaneMaximumTakeoffWeightLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="airplaneMaximumTakeoffWeightTextField" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -193,27 +193,12 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="airplaneCapacityLabel">
+        <Component class="javax.swing.JLabel" name="airplanePassengerCapacityLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Capacity:"/>
+            <Property name="text" type="java.lang.String" value="Passenger capacity:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="airplaneCapacityTextField">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="38" green="34" red="34" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="airplaneFuelTankLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Fuel Tank:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="airplaneFuelTankTextField">
+        <Component class="javax.swing.JTextField" name="airplanePassengerCapacityTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="34" red="34" type="rgb"/>
@@ -223,7 +208,22 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="airplanePayloadTextField">
+        <Component class="javax.swing.JLabel" name="airplaneMaximumRangeLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Max. Range:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="airplaneMaximumRangeTextField">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="38" green="34" red="34" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="airplaneMaximumCargoCapacityTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="34" red="34" type="rgb"/>
@@ -233,20 +233,20 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="airplanePayloadTextFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="airplaneMaximumCargoCapacityTextFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="airplanePayloadLabel">
+        <Component class="javax.swing.JLabel" name="airplaneCargoCapacityLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Payload:"/>
+            <Property name="text" type="java.lang.String" value="Max. cargo capacity:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="airplaneLoadCapacityLabel">
+        <Component class="javax.swing.JLabel" name="airplaneMaximumTakeoffWeightLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Load capacity:"/>
+            <Property name="text" type="java.lang.String" value="Max. takeoff weight:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="airplaneLoadCapacityTextField">
+        <Component class="javax.swing.JTextField" name="airplaneMaximumTakeoffWeightTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="34" red="34" type="rgb"/>
@@ -256,7 +256,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="airplaneLoadCapacityTextFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="airplaneMaximumTakeoffWeightTextFieldActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

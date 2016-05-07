@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.Collection;
-import javax.validation.constraints.*;
 
 /**
  * Created by M on 27. 4. 2016.
@@ -61,11 +60,7 @@ public class Airplane implements Serializable {
     public void setIdAirplane(int idAirplane) {
         this.idAirplane = idAirplane;
     }
-
-    // TESTING
-    @NotNull
-    @Min(0)
-    @Max(1000)
+    
     @Basic
     @Column(name = "passenger_capacity", nullable = false, insertable = true, updatable = true)
     public int getPassengerCapacity() {

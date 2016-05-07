@@ -6,10 +6,7 @@ import Model.Route;
 import Validator.InvalidAttributeException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
 /**
  *
@@ -28,22 +25,56 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
 
     @Override
     public Airplane createAirplane(Airplane airplane) throws InvalidAttributeException {
-
         // validation
+        checkConstraints(airplane);
         return airplaneDAO.create(airplane);
     }
 
     @Override
     public Airplane updateAirplane(Airplane airplane) throws InvalidAttributeException {
-
         // validation
+        checkConstraints(airplane);
         return airplaneDAO.update(airplane);
+    }
+    
+    private void checkConstraints(Airplane airplane) throws InvalidAttributeException {
+        List<Airplane> allAirplanes = findAll();
+        allAirplanes.remove(airplane);
+        // check UNIQUE constraints
+        String tmpCode = airplane.getAirplaneCode();
+        for (Airplane a : allAirplanes) {
+            if (tmpCode.equals(a.getAirplaneCode())) {
+                throw new InvalidAttributeException("Airplane with the same code is already in the database!");
+            }
+        }
+        // check correct_airplane_code constraint
+        if (airplane.getAirplaneCode().length() <= 2) {
+            throw new InvalidAttributeException("Airplane code must be at least 3 characters long!");
+        }
+        // check positive_maximum_cargo_capacity constraint
+        if (airplane.getMaximumCargoCapacity() <= 0) {
+            throw new InvalidAttributeException("Maximum cargo capacity of the airplane must be greater than 0!");
+        }
+        // check positive_maximum_range constraint
+        if (airplane.getMaximumRange() <= 0) {
+            throw new InvalidAttributeException("Maximum range of the airplane must be greater than 0!");
+        }
+        // check positive_maximum_takeoff_weight
+        if (airplane.getMaximumTakeoffWeight() <= 0) {
+            throw new InvalidAttributeException("Maximum takeoff weight of the airplane must be greater than 0!");
+        }
+        // check positive_passenger_capacity
+        if (airplane.getPassengerCapacity() < 0) {
+            throw new InvalidAttributeException("Passenger capacity of the airplane must be a positive number!");
+        }
+        
     }
 
     @Override
     public void deleteAirplane(Airplane airplane) throws InvalidAttributeException {
 
         // validation
+        airplaneDAO.delete(airplane);
     }
 
     @Override
@@ -112,7 +143,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     }
 
     @Override
-    public List<Airplane> findSpecified(String code, String airline,
+    public List<Airplane> findSpecified(String airplaneCode, String airline,
             Integer maxPassengerCapacity, Integer minPassengerCapacity,
             Integer maxMaximumRange, Integer minMaximumRange) {
 
@@ -120,28 +151,28 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         List<Predicate> predicates = new ArrayList<>(6);
         List<Order> orders = new ArrayList<>(4);
 
-        orders.add(criteriaBuilder.asc(root.get("code")));
+        orders.add(criteriaBuilder.asc(root.get("airplaneCode")));
         orders.add(criteriaBuilder.asc(root.get("airline")));
         orders.add(criteriaBuilder.asc(root.get("passengerCapacity")));
         orders.add(criteriaBuilder.asc(root.get("maximumRange")));
 
-        if (code != null) {
-            predicates.add(criteriaBuilder.equal(root.get("code"), code));
+        if (airplaneCode != null) {
+            predicates.add(criteriaBuilder.equal(root.get("airplaneCode"), airplaneCode));
         }
         if (airline != null) {
             predicates.add(criteriaBuilder.equal(root.get("airline"), airline));
         }
         if (maxPassengerCapacity != null) {
-            predicates.add(criteriaBuilder.lt(root.get("passengerCapacity"), maxPassengerCapacity));
+            predicates.add(criteriaBuilder.gt(root.get("passengerCapacity"), maxPassengerCapacity));
         }
         if (minPassengerCapacity != null) {
-            predicates.add(criteriaBuilder.gt(root.get("passengerCapacity"), minPassengerCapacity));
+            predicates.add(criteriaBuilder.lt(root.get("passengerCapacity"), minPassengerCapacity));
         }
         if (maxMaximumRange != null) {
-            predicates.add(criteriaBuilder.lt(root.get("maximumRange"), maxMaximumRange));
+            predicates.add(criteriaBuilder.gt(root.get("maximumRange"), maxMaximumRange));
         }
         if (minMaximumRange != null) {
-            predicates.add(criteriaBuilder.gt(root.get("maximumRange"), minMaximumRange));
+            predicates.add(criteriaBuilder.lt(root.get("maximumRange"), minMaximumRange));
         }
         if (!predicates.isEmpty()) {
             criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));

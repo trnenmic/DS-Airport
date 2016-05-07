@@ -15,6 +15,9 @@ public class ClientDemoFrame extends javax.swing.JFrame {
 
     private final ManagementProvider mgProvider = new ManagementProvider();
     private final ClientDemoAirplaneAdder adder;
+    
+    private final String prefix = "There are ";
+    private final String postfix = " airplanes in the database.";
 
     /**
      * Creates new form ClientDemoFrame
@@ -24,8 +27,12 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         this.adder = new ClientDemoAirplaneAdder();
         initComponents();
         initLists();
-
+        updateNumAirplanesLabel();
         this.setVisible(true);
+    }
+    
+    private void updateNumAirplanesLabel() {
+        numAirplanesLabel.setText(prefix + mgProvider.getAirplaneManager().findAll().size() + postfix);
     }
 
     private void initLists() {
@@ -57,8 +64,10 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         airplanesList = new javax.swing.JList();
+        refreshButton = new javax.swing.JButton();
+        numAirplanesLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         airplanesSlider.setMajorTickSpacing(1);
@@ -87,36 +96,51 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(airplanesList);
 
+        refreshButton.setText("Refresh data");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
+        numAirplanesLabel.setText("There are 0 airplanes in the database.");
+
         javax.swing.GroupLayout airplanesPanelLayout = new javax.swing.GroupLayout(airplanesPanel);
         airplanesPanel.setLayout(airplanesPanelLayout);
         airplanesPanelLayout.setHorizontalGroup(
             airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(airplanesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(airplanesPanelLayout.createSequentialGroup()
-                        .addComponent(airplanesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, airplanesPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(airplanesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+            .addGroup(airplanesPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, airplanesPanelLayout.createSequentialGroup()
+                        .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(numAirplanesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(airplanesSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE))
+                    .addComponent(airplanesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         airplanesPanelLayout.setVerticalGroup(
             airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(airplanesPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(airplanesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, airplanesPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(25, 25, 25)))
-                .addComponent(airplanesButton, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(airplanesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numAirplanesLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(airplanesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         jTabbedPane1.addTab("Airplanes", airplanesPanel);
@@ -130,7 +154,6 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
@@ -141,7 +164,13 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private void airplanesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplanesButtonActionPerformed
         adder.addAirplanes(airplanesSlider.getValue());
         updateAirplanesList();
+        updateNumAirplanesLabel();
     }//GEN-LAST:event_airplanesButtonActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        updateAirplanesList();
+        updateNumAirplanesLabel();
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,5 +219,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel numAirplanesLabel;
+    private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables
 }

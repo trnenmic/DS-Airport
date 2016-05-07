@@ -26,29 +26,27 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
 
     @Override
     public Route createRoute(Route route) throws InvalidAttributeException {
-        
         // validation
-        
+        checkConstraints(route);
         return routeDAO.create(route);
         
     }
 
     @Override
     public Route updateRoute(Route route) throws InvalidAttributeException {
-        
         // validation
-        
+        checkConstraints(route);
         return routeDAO.update(route);
+        
+    }
+    
+    private void checkConstraints(Route route) throws InvalidAttributeException {
         
     }
 
     @Override
-    public void deleteRoute(Route route) throws InvalidAttributeException {
-        
-        // validation
-        
+    public void deleteRoute(Route route) throws InvalidAttributeException {        
         routeDAO.delete(route);
-        
     }
     
 

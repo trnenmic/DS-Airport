@@ -27,7 +27,6 @@ public class ClientDemoAirplaneAdder {
     public ClientDemoAirplaneAdder() throws FileNotFoundException, UnsupportedEncodingException, IOException {
         this.br = new BufferedReader(new FileReader(dataFile));
         loadProgress();
-
     }
 
     private void loadProgress() throws IOException {
@@ -38,7 +37,7 @@ public class ClientDemoAirplaneAdder {
         } else {
             saveReader = new BufferedReader(new FileReader(saveFile));
             numAirplanesRead = Integer.parseInt(saveReader.readLine());
-            System.out.println("Loading progress... skipping " + numAirplanesRead + " lines.");
+//            System.out.println("Loading progress... skipping " + numAirplanesRead + " lines.");
             for (int i = 0; i < numAirplanesRead; i++) {
                 br.readLine();
             }

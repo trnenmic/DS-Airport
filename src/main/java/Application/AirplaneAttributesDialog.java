@@ -65,20 +65,20 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private void updateTextFields() {
         Airplane airplane = (Airplane) detached;
         airplaneAirlineTextField.setText(airplane.getAirline());
-        airplaneCapacityTextField.setText("" + airplane.getPassengerCapacity());
+        airplanePassengerCapacityTextField.setText("" + airplane.getPassengerCapacity());
         airplaneCodeTextField.setText(airplane.getAirplaneCode());
-        airplaneFuelTankTextField.setText("" + airplane.getMaximumRange());
-        airplaneLoadCapacityTextField.setText("" + airplane.getMaximumTakeoffWeight());
-        airplanePayloadTextField.setText("" + airplane.getMaximumCargoCapacity());
+        airplaneMaximumRangeTextField.setText("" + airplane.getMaximumRange());
+        airplaneMaximumTakeoffWeightTextField.setText("" + airplane.getMaximumTakeoffWeight());
+        airplaneMaximumCargoCapacityTextField.setText("" + airplane.getMaximumCargoCapacity());
     }
 
     private void saveAirplane() throws InvalidAttributeException {
         Airplane airplane = (Airplane) detached;
-        airplane.setPassengerCapacity(Integer.parseInt(airplaneCapacityTextField.getText()));
-        airplane.setMaximumRange(Integer.parseInt(airplaneFuelTankTextField.getText()));
+        airplane.setPassengerCapacity(Integer.parseInt(airplanePassengerCapacityTextField.getText()));
+        airplane.setMaximumRange(Integer.parseInt(airplaneMaximumRangeTextField.getText()));
         airplane.setAirline(airplaneAirlineTextField.getText());
-        airplane.setMaximumCargoCapacity(Integer.parseInt(airplanePayloadTextField.getText()));
-        airplane.setMaximumTakeoffWeight(Integer.parseInt(airplaneLoadCapacityTextField.getText()));
+        airplane.setMaximumCargoCapacity(Integer.parseInt(airplaneMaximumCargoCapacityTextField.getText()));
+        airplane.setMaximumTakeoffWeight(Integer.parseInt(airplaneMaximumTakeoffWeightTextField.getText()));
         airplane.setAirplaneCode(airplaneCodeTextField.getText());
 //        mgProvider.getAirplaneValidator().validate(airplane);
         if (update) {
@@ -106,14 +106,14 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         airplaneCodeTextField = new javax.swing.JTextField();
         airplaneAirlineLabel = new javax.swing.JLabel();
         airplaneAirlineTextField = new javax.swing.JTextField();
-        airplaneCapacityLabel = new javax.swing.JLabel();
-        airplaneCapacityTextField = new javax.swing.JTextField();
-        airplaneFuelTankLabel = new javax.swing.JLabel();
-        airplaneFuelTankTextField = new javax.swing.JTextField();
-        airplanePayloadTextField = new javax.swing.JTextField();
-        airplanePayloadLabel = new javax.swing.JLabel();
-        airplaneLoadCapacityLabel = new javax.swing.JLabel();
-        airplaneLoadCapacityTextField = new javax.swing.JTextField();
+        airplanePassengerCapacityLabel = new javax.swing.JLabel();
+        airplanePassengerCapacityTextField = new javax.swing.JTextField();
+        airplaneMaximumRangeLabel = new javax.swing.JLabel();
+        airplaneMaximumRangeTextField = new javax.swing.JTextField();
+        airplaneMaximumCargoCapacityTextField = new javax.swing.JTextField();
+        airplaneCargoCapacityLabel = new javax.swing.JLabel();
+        airplaneMaximumTakeoffWeightLabel = new javax.swing.JLabel();
+        airplaneMaximumTakeoffWeightTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         airplaneRoutesList = new javax.swing.JList();
         airplaneSaveButton = new javax.swing.JButton();
@@ -139,33 +139,33 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         airplaneAirlineTextField.setBackground(new java.awt.Color(52, 52, 56));
         airplaneAirlineTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        airplaneCapacityLabel.setText("Capacity:");
+        airplanePassengerCapacityLabel.setText("Passenger capacity:");
 
-        airplaneCapacityTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneCapacityTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplanePassengerCapacityTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplanePassengerCapacityTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        airplaneFuelTankLabel.setText("Fuel Tank:");
+        airplaneMaximumRangeLabel.setText("Max. Range:");
 
-        airplaneFuelTankTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneFuelTankTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplaneMaximumRangeTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplaneMaximumRangeTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        airplanePayloadTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplanePayloadTextField.setForeground(new java.awt.Color(255, 255, 255));
-        airplanePayloadTextField.addActionListener(new java.awt.event.ActionListener() {
+        airplaneMaximumCargoCapacityTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplaneMaximumCargoCapacityTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplaneMaximumCargoCapacityTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                airplanePayloadTextFieldActionPerformed(evt);
+                airplaneMaximumCargoCapacityTextFieldActionPerformed(evt);
             }
         });
 
-        airplanePayloadLabel.setText("Payload:");
+        airplaneCargoCapacityLabel.setText("Max. cargo capacity:");
 
-        airplaneLoadCapacityLabel.setText("Load capacity:");
+        airplaneMaximumTakeoffWeightLabel.setText("Max. takeoff weight:");
 
-        airplaneLoadCapacityTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneLoadCapacityTextField.setForeground(new java.awt.Color(255, 255, 255));
-        airplaneLoadCapacityTextField.addActionListener(new java.awt.event.ActionListener() {
+        airplaneMaximumTakeoffWeightTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplaneMaximumTakeoffWeightTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplaneMaximumTakeoffWeightTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                airplaneLoadCapacityTextFieldActionPerformed(evt);
+                airplaneMaximumTakeoffWeightTextFieldActionPerformed(evt);
             }
         });
 
@@ -183,18 +183,18 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
                         .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(airplaneCodeLabel)
                             .addComponent(airplaneAirlineLabel)
-                            .addComponent(airplaneCapacityLabel)
-                            .addComponent(airplaneFuelTankLabel)
-                            .addComponent(airplanePayloadLabel)
-                            .addComponent(airplaneLoadCapacityLabel))
+                            .addComponent(airplanePassengerCapacityLabel)
+                            .addComponent(airplaneMaximumRangeLabel)
+                            .addComponent(airplaneCargoCapacityLabel)
+                            .addComponent(airplaneMaximumTakeoffWeightLabel))
                         .addGap(18, 18, 18)
                         .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(airplanePayloadTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(airplaneFuelTankTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(airplaneCapacityTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(airplaneMaximumCargoCapacityTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(airplaneMaximumRangeTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(airplanePassengerCapacityTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(airplaneAirlineTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(airplaneCodeTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(airplaneLoadCapacityTextField))))
+                            .addComponent(airplaneMaximumTakeoffWeightTextField))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         airportAttributesPanelLayout.setVerticalGroup(
@@ -212,20 +212,20 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
                     .addComponent(airplaneAirlineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airplaneCapacityLabel)
-                    .addComponent(airplaneCapacityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(airplanePassengerCapacityLabel)
+                    .addComponent(airplanePassengerCapacityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airplaneFuelTankLabel)
-                    .addComponent(airplaneFuelTankTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(airplaneMaximumRangeLabel)
+                    .addComponent(airplaneMaximumRangeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airplanePayloadLabel)
-                    .addComponent(airplanePayloadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(airplaneCargoCapacityLabel)
+                    .addComponent(airplaneMaximumCargoCapacityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(airportAttributesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(airplaneLoadCapacityLabel)
-                    .addComponent(airplaneLoadCapacityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(airplaneMaximumTakeoffWeightLabel)
+                    .addComponent(airplaneMaximumTakeoffWeightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -305,9 +305,9 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void airplanePayloadTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplanePayloadTextFieldActionPerformed
+    private void airplaneMaximumCargoCapacityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneMaximumCargoCapacityTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_airplanePayloadTextFieldActionPerformed
+    }//GEN-LAST:event_airplaneMaximumCargoCapacityTextFieldActionPerformed
 
     private void airplaneSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneSaveButtonActionPerformed
         warningLabel.setText(" ");
@@ -321,9 +321,9 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         updateLists();
     }//GEN-LAST:event_airplaneSaveButtonActionPerformed
 
-    private void airplaneLoadCapacityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneLoadCapacityTextFieldActionPerformed
+    private void airplaneMaximumTakeoffWeightTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneMaximumTakeoffWeightTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_airplaneLoadCapacityTextFieldActionPerformed
+    }//GEN-LAST:event_airplaneMaximumTakeoffWeightTextFieldActionPerformed
 
     private void airplaneAddingRoutesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneAddingRoutesButtonActionPerformed
         warningLabel.setText(" ");
@@ -383,16 +383,16 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel airplaneAirlineLabel;
     private javax.swing.JTextField airplaneAirlineTextField;
     private javax.swing.JLabel airplaneAttributesLabel;
-    private javax.swing.JLabel airplaneCapacityLabel;
-    private javax.swing.JTextField airplaneCapacityTextField;
+    private javax.swing.JLabel airplaneCargoCapacityLabel;
     private javax.swing.JLabel airplaneCodeLabel;
     private javax.swing.JTextField airplaneCodeTextField;
-    private javax.swing.JLabel airplaneFuelTankLabel;
-    private javax.swing.JTextField airplaneFuelTankTextField;
-    private javax.swing.JLabel airplaneLoadCapacityLabel;
-    private javax.swing.JTextField airplaneLoadCapacityTextField;
-    private javax.swing.JLabel airplanePayloadLabel;
-    private javax.swing.JTextField airplanePayloadTextField;
+    private javax.swing.JTextField airplaneMaximumCargoCapacityTextField;
+    private javax.swing.JLabel airplaneMaximumRangeLabel;
+    private javax.swing.JTextField airplaneMaximumRangeTextField;
+    private javax.swing.JLabel airplaneMaximumTakeoffWeightLabel;
+    private javax.swing.JTextField airplaneMaximumTakeoffWeightTextField;
+    private javax.swing.JLabel airplanePassengerCapacityLabel;
+    private javax.swing.JTextField airplanePassengerCapacityTextField;
     private javax.swing.JList airplaneRoutesList;
     private javax.swing.JButton airplaneSaveButton;
     private javax.swing.JPanel airportAttributesPanel;

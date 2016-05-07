@@ -6,7 +6,6 @@ import Model.Route;
 import Validator.InvalidAttributeException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
@@ -29,16 +28,41 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
 
     @Override
     public Airport createAirport(Airport airport) throws InvalidAttributeException {
-
         // validation
+        checkConstraints(airport);
         return airportDAO.create(airport);
     }
 
     @Override
     public Airport updateAirport(Airport airport) throws InvalidAttributeException {
-
         // validation
+        checkConstraints(airport);
         return airportDAO.update(airport);
+    }
+    
+    private void checkConstraints(Airport airport) throws InvalidAttributeException {
+        // tmp values for optimisation
+        String tmpIcao = airport.getIcao();
+        String tmpIata = airport.getIata();        
+        // check correct_iata_length
+        if (tmpIata.length() != 3) {
+            throw new InvalidAttributeException("IATA code must be 3 characters long!");
+        }
+        // check correct_icao_length
+        if (tmpIcao.length() != 4) {
+            throw new InvalidAttributeException("ICAO code must be 4 characters long!");
+        }
+        // check UNIQUE constraints
+        List<Airport> allAirports = findAll();
+        allAirports.remove(airport);
+        for (Airport a : allAirports) {
+            if (tmpIcao.equals(a.getIcao())) {
+                throw new InvalidAttributeException("ICAO code must be unique!");
+            }
+            if (tmpIata.equals(a.getIata())) {
+                throw new InvalidAttributeException("IATA code must be unique!");
+            }
+        }
     }
 
     @Override

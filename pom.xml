@@ -29,6 +29,7 @@
         </dependency>
         
         <!-- Bean Validation API and RI -->
+        <!--
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -39,8 +40,9 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.0.2.GA</version>
         </dependency>
-        
+        -->
         <!-- Static logger binder error? -->
+        <!--
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -51,7 +53,8 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.5</version>
         </dependency>
-
+        -->
+        
     </dependencies>
     
     <repositories>

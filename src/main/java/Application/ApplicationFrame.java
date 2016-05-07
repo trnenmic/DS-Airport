@@ -1,11 +1,15 @@
 package Application;
 
 import Application.GUIDesigners.DialogDesigner;
+import ClientDemo.ClientDemoFrame;
 import Model.Airplane;
 import Model.Airport;
 import Model.Route;
 import Service.ManagementProvider;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 import javax.swing.UIManager;
 
@@ -49,10 +53,12 @@ public class ApplicationFrame extends javax.swing.JFrame {
      */
     public ApplicationFrame() {
         initComponents();
-        this.setVisible(true);
         setLocationRelativeTo(null);
         initManagement();
         initLists();
+        this.setName("DS Airport");
+        // set visible after succesful connection to the database and creation of list data
+        this.setVisible(true);
     }
 
     private void initLists() {
@@ -173,6 +179,8 @@ public class ApplicationFrame extends javax.swing.JFrame {
         routeCountryTextField1 = new javax.swing.JTextField();
         routeCountryLabel2 = new javax.swing.JLabel();
         routeCountryTextField2 = new javax.swing.JTextField();
+        clientDemoPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         warningLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -282,10 +290,12 @@ public class ApplicationFrame extends javax.swing.JFrame {
         airportPanel.setLayout(airportPanelLayout);
         airportPanelLayout.setHorizontalGroup(
             airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, airportPanelLayout.createSequentialGroup()
+            .addGroup(airportPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(airportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(airportPanelLayout.createSequentialGroup()
+                        .addComponent(airportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(16, Short.MAX_VALUE))
                     .addGroup(airportPanelLayout.createSequentialGroup()
                         .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(airportPanelLayout.createSequentialGroup()
@@ -315,14 +325,14 @@ public class ApplicationFrame extends javax.swing.JFrame {
                                         .addComponent(airportIataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(airportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
                         .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(createAirportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(applyFilterAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(updateAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(deleteAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(deleteAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(8, Short.MAX_VALUE))))
         );
         airportPanelLayout.setVerticalGroup(
             airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,12 +349,12 @@ public class ApplicationFrame extends javax.swing.JFrame {
                             .addComponent(airportIcaoLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(airportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(airportIataLabel))
-                                .addComponent(airportCityLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(airportCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(airportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(airportIataLabel))
+                            .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(airportCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(airportCityLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(airportCountryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,7 +367,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
                         .addComponent(deleteAirportButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(applyFilterAirportButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(airportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -635,8 +645,8 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
         routeCountryLabel1.setText("Country:");
 
-        routeCountryTextField1.setEditable(false);
         routeCountryTextField1.setBackground(new java.awt.Color(52, 52, 56));
+        routeCountryTextField1.setForeground(new java.awt.Color(255, 255, 255));
         routeCountryTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 routeCountryTextField1ActionPerformed(evt);
@@ -645,8 +655,8 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
         routeCountryLabel2.setText("Country:");
 
-        routeCountryTextField2.setEditable(false);
         routeCountryTextField2.setBackground(new java.awt.Color(52, 52, 56));
+        routeCountryTextField2.setForeground(new java.awt.Color(255, 255, 255));
         routeCountryTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 routeCountryTextField2ActionPerformed(evt);
@@ -799,6 +809,32 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Route", routePanel);
 
+        jButton1.setText("Run Client Demo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout clientDemoPanelLayout = new javax.swing.GroupLayout(clientDemoPanel);
+        clientDemoPanel.setLayout(clientDemoPanelLayout);
+        clientDemoPanelLayout.setHorizontalGroup(
+            clientDemoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clientDemoPanelLayout.createSequentialGroup()
+                .addGap(296, 296, 296)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(300, Short.MAX_VALUE))
+        );
+        clientDemoPanelLayout.setVerticalGroup(
+            clientDemoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clientDemoPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(371, Short.MAX_VALUE))
+        );
+
+        mainTabbedPane.addTab("Client Demo", clientDemoPanel);
+
         warningLabel.setForeground(new java.awt.Color(204, 0, 0));
         warningLabel.setText(" ");
 
@@ -929,10 +965,14 @@ public class ApplicationFrame extends javax.swing.JFrame {
         try {
             filterCode = airplaneCodeTextField.getText().equals("") ? null : airplaneCodeTextField.getText();
             filterAirline = airplaneAirlineTextField.getText().equals("") ? null : airplaneAirlineTextField.getText();
-            filterMaxPassengerCapacity = Integer.parseInt(airplanePassengerGreaterTextField.getText());
-            filterMinPassengerCapacity = Integer.parseInt(airplanePassengerLesserTextField.getText());
-            filterMaxMaximumRange = Integer.parseInt(airplaneRangeGreaterTextField.getText());
-            filterMinMaximumRange = Integer.parseInt(airplaneRangeLesserTextField.getText());
+            filterMaxPassengerCapacity = airplanePassengerGreaterTextField.getText().equals("") ?
+                    null : Integer.parseInt(airplanePassengerGreaterTextField.getText());
+            filterMinPassengerCapacity = airplanePassengerLesserTextField.getText().equals("") ? 
+                    null : Integer.parseInt(airplanePassengerLesserTextField.getText());
+            filterMaxMaximumRange = airplaneRangeGreaterTextField.getText().equals("") ?
+                    null : Integer.parseInt(airplaneRangeGreaterTextField.getText());
+            filterMinMaximumRange = airplaneRangeLesserTextField.getText().equals("") ? 
+                    null : Integer.parseInt(airplaneRangeLesserTextField.getText());
             updateAirplaneList();
         } catch (NumberFormatException e) {
             warningLabel.setText("Input is not and integer.");
@@ -952,6 +992,14 @@ public class ApplicationFrame extends javax.swing.JFrame {
     private void airplanePassengerGreaterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplanePassengerGreaterTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_airplanePassengerGreaterTextFieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            ClientDemoFrame clientDemoFrame = new ClientDemoFrame();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1026,6 +1074,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
     private javax.swing.JButton applyFilterAirplaneButton;
     private javax.swing.JButton applyFilterAirportButton;
     private javax.swing.JButton applyFilterRouteButton;
+    private javax.swing.JPanel clientDemoPanel;
     private javax.swing.JButton createAirplaneButton;
     private javax.swing.JButton createAirportButton;
     private javax.swing.JButton createRouteButton;
@@ -1033,6 +1082,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
     private javax.swing.JButton deleteAirportButton;
     private javax.swing.JButton deleteRouteButton;
     private javax.swing.JLabel destinationFilterLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JLabel originFilterLabel;
     private javax.swing.JLabel routeCityLabel1;
