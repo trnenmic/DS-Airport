@@ -31,12 +31,28 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     }
 
     @Override
+    public Airplane createAirplane(Airplane airplane, String airplanePassengerCapacity,
+            String maximumRange, String airline, String maximumCargo,
+            String maximumTakeoffWeight, String airplaneCode) throws InvalidAttributeException {
+        setAttributes(airplane, airplanePassengerCapacity, maximumRange, airline, maximumCargo, maximumTakeoffWeight, airplaneCode);
+        return createAirplane(airplane);
+    }
+
+    @Override
     public Airplane updateAirplane(Airplane airplane) throws InvalidAttributeException {
         // validation
         checkConstraints(airplane);
         return airplaneDAO.update(airplane);
     }
-    
+
+    @Override
+    public Airplane updateAirplane(Airplane airplane, String airplanePassengerCapacity,
+            String maximumRange, String airline, String maximumCargo,
+            String maximumTakeoffWeight, String airplaneCode) throws InvalidAttributeException {
+        setAttributes(airplane, airplanePassengerCapacity, maximumRange, airline, maximumCargo, maximumTakeoffWeight, airplaneCode);
+        return updateAirplane(airplane);
+    }
+
     private void checkConstraints(Airplane airplane) throws InvalidAttributeException {
         List<Airplane> allAirplanes = findAll();
         allAirplanes.remove(airplane);
@@ -67,7 +83,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         if (airplane.getPassengerCapacity() < 0) {
             throw new InvalidAttributeException("Passenger capacity of the airplane must be a positive number!");
         }
-        
+
     }
 
     @Override
@@ -93,7 +109,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     public List<Airplane> findAllOrdered() {
         refresh();
         List<Order> orders = new ArrayList<>(4);
-        
+
         orders.add(criteriaBuilder.asc(root.get("code")));
         orders.add(criteriaBuilder.asc(root.get("airline")));
         orders.add(criteriaBuilder.asc(root.get("passengerCapacity")));
@@ -187,4 +203,18 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         criteriaQuery = criteriaQuery.select(root);
     }
 
+    private void setAttributes(Airplane airplane, String airplanePassengerCapacity,
+            String maximumRange, String airline, String maximumCargo,
+            String maximumTakeoffWeight, String airplaneCode) throws InvalidAttributeException {
+        try {
+            airplane.setPassengerCapacity(Integer.parseInt(airplanePassengerCapacity));
+            airplane.setMaximumRange(Integer.parseInt(maximumRange));
+            airplane.setAirline(airline);
+            airplane.setMaximumCargoCapacity(Integer.parseInt(maximumCargo));
+            airplane.setMaximumTakeoffWeight(Integer.parseInt(maximumTakeoffWeight));
+            airplane.setAirplaneCode(airplaneCode);
+        } catch (NumberFormatException e) {
+            throw new InvalidAttributeException("Fields passenger capacity, maximum range, cargo capacity and takeoffweight must be integers.");
+        }
+    }
 }

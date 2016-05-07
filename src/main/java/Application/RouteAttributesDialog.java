@@ -17,7 +17,6 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
     private Object detached = null;
     private BoundingUpdater boundingUpdater;
     private boolean updated = false;
-    private Boolean toBeRestored = true;
 
     public RouteAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
         super(parent, modal);
@@ -74,19 +73,6 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
             originIataTextField.setText(route.getOrigin().getIata());
             originIcaoTextField.setText(route.getOrigin().getIcao());
         }
-    }
-
-    private void saveRoute() throws InvalidAttributeException {
-        Route route = (Route) detached;
-//        mgProvider.getRouteValidator().validate(route);
-        if (updated) {
-            detached = mgProvider.getRouteManager().updateRoute(route);
-        } else {
-            detached = mgProvider.getRouteManager().createRoute(route);
-            updated = true;
-            this.setTitle("Update Route Attributes");
-        }
-        boundingUpdater.updateBoundings();
     }
 
     /**
@@ -540,7 +526,15 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
     private void routeSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeSaveButtonActionPerformed
         warningLabel.setText(" ");
         try {
-            saveRoute();
+            Route route = (Route) detached;
+            if (updated) {
+                detached = mgProvider.getRouteManager().updateRoute(route);
+            } else {
+                detached = mgProvider.getRouteManager().createRoute(route);
+                updated = true;
+                this.setTitle("Update Route Attributes");
+            }
+            boundingUpdater.updateBoundings();
         } catch (InvalidAttributeException e) {
             warningLabel.setText(e.getMessage());
         }

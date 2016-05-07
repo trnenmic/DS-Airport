@@ -12,7 +12,15 @@ import java.util.List;
 public interface AirportManager {
     
     Airport createAirport(Airport airport) throws InvalidAttributeException;
+    
+    Airport createAirport(Airport airport, String name, String city, String country,
+            String iata, String icao) throws InvalidAttributeException;
+        
     Airport updateAirport(Airport airport) throws InvalidAttributeException;
+    
+    Airport updateAirport(Airport airport, String name, String city, String country,
+            String iata, String icao) throws InvalidAttributeException;
+    
     void deleteAirport(Airport airport) throws InvalidAttributeException;
 
     Airport find(int idAirport);

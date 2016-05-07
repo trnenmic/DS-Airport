@@ -1,6 +1,7 @@
 package Application;
 
 import Application.GUIDesigners.BoundingUpdater;
+import Application.GUIDesigners.Utils;
 import Model.Airplane;
 import Model.Route;
 import Service.ManagementProvider;
@@ -431,17 +432,16 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
 
     private void applyFilterAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterAirplaneButtonActionPerformed
         warningLabel.setText(" ");
-        //§§ validation might be needed
-        name1 = (routeNameTextField1.getText().equals("") ? null : routeNameTextField1.getText());
-        name2 = (routeNameTextField2.getText().equals("") ? null : routeNameTextField2.getText());
-        city1 = (routeCityTextField1.getText().equals("") ? null : routeCityTextField1.getText());
-        city2 = (routeCityTextField2.getText().equals("") ? null : routeCityTextField2.getText());
-        country1 = (routeCountryTextField1.getText().equals("") ? null : routeCountryTextField1.getText());
-        country2 = (routeCountryTextField2.getText().equals("") ? null : routeCountryTextField2.getText());
-        iata1 = (routeIataTextField1.getText().equals("") ? null : routeIataTextField1.getText());
-        iata2 = (routeIataTextField2.getText().equals("") ? null : routeIataTextField2.getText());
-        icao1 = (routeIcaoTextField1.getText().equals("") ? null : routeIcaoTextField1.getText());
-        icao2 = (routeIcaoTextField2.getText().equals("") ? null : routeIcaoTextField2.getText());
+        name1 = Utils.emptyStringToNull(routeNameTextField1);
+        name2 = Utils.emptyStringToNull(routeNameTextField2);
+        city1 = Utils.emptyStringToNull(routeCityTextField1);
+        city2 = Utils.emptyStringToNull(routeCityTextField2);
+        country1 = Utils.emptyStringToNull(routeCountryTextField1);
+        country2 = Utils.emptyStringToNull(routeCountryTextField2);
+        iata1 = Utils.emptyStringToNull(routeIataTextField1);
+        iata2 = Utils.emptyStringToNull(routeIataTextField2);
+        icao1 = Utils.emptyStringToNull(routeIcaoTextField1);
+        icao2 = Utils.emptyStringToNull(routeIcaoTextField2);
         updateLists();
     }//GEN-LAST:event_applyFilterAirplaneButtonActionPerformed
 

@@ -1,6 +1,7 @@
 package Application;
 
 import Application.GUIDesigners.BoundingUpdater;
+import Application.GUIDesigners.Utils;
 import Model.Airplane;
 import Model.Route;
 import Service.ManagementProvider;
@@ -18,10 +19,10 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
 
     private String filterCode = null;
     private String filterAirline = null;
-    private Integer filterMaxFuelCapacity = null;
-    private Integer filterMinFuelCapacity = null;
-    private Integer filterMaxLoadingCapacity = null;
-    private Integer filterMinLoadingCapacity = null;
+    private Integer filterMaxPassengerCapacity = null;
+    private Integer filterMinPassengerCapacity = null;
+    private Integer filterMaxMaximumRange = null;
+    private Integer filterMinMaximumRange = null;
 
     public RouteBoundingDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o, BoundingUpdater boundingUpdater) {
         super(parent, modal);
@@ -45,9 +46,9 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
 
     private void updateLists() {
         filteredAirplanesList.setListData(mgProvider.getAirplaneManager().findSpecified(
-                filterCode, filterAirline, 
-                filterMaxFuelCapacity, filterMinFuelCapacity,
-                filterMaxLoadingCapacity, filterMinLoadingCapacity).toArray());
+                filterCode, filterAirline,
+                filterMaxPassengerCapacity, filterMinPassengerCapacity,
+                filterMaxMaximumRange, filterMinMaximumRange).toArray());
         currentAirplanesList.setListData(((Route) detached).getAirplanes().toArray());
     }
 
@@ -68,12 +69,12 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
         airplaneCodeLabel = new javax.swing.JLabel();
         airplaneCodeTextField = new javax.swing.JTextField();
         airplaneFuelGreaterLabel = new javax.swing.JLabel();
-        airplaneFuelGreaterTextField = new javax.swing.JTextField();
+        airplanePassengerGreaterTextField = new javax.swing.JTextField();
         airplaneFuelLesserLabel = new javax.swing.JLabel();
-        airplaneFuelLesserTextField = new javax.swing.JTextField();
+        airplanePassengerLesserTextField = new javax.swing.JTextField();
         airplaneLoadingLesserLabel = new javax.swing.JLabel();
-        airplaneLoadingLesserTextField = new javax.swing.JTextField();
-        airplaneLoadingGreaterTextField = new javax.swing.JTextField();
+        airplaneRangeLesserTextField = new javax.swing.JTextField();
+        airplaneRangeGreaterTextField = new javax.swing.JTextField();
         airplaneLoadingGreaterLabel = new javax.swing.JLabel();
         airplaneAirlineLabel = new javax.swing.JLabel();
         airplaneAirlineTextField = new javax.swing.JTextField();
@@ -116,21 +117,21 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
 
         airplaneFuelGreaterLabel.setText("Fuel capacity greater than:");
 
-        airplaneFuelGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneFuelGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplanePassengerGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplanePassengerGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
 
         airplaneFuelLesserLabel.setText("Fuel capacity lesser than:");
 
-        airplaneFuelLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneFuelLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplanePassengerLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplanePassengerLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
 
         airplaneLoadingLesserLabel.setText("Loading capacity lesser than:");
 
-        airplaneLoadingLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneLoadingLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplaneRangeLesserTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplaneRangeLesserTextField.setForeground(new java.awt.Color(255, 255, 255));
 
-        airplaneLoadingGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
-        airplaneLoadingGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airplaneRangeGreaterTextField.setBackground(new java.awt.Color(52, 52, 56));
+        airplaneRangeGreaterTextField.setForeground(new java.awt.Color(255, 255, 255));
 
         airplaneLoadingGreaterLabel.setText("Loading capacity greater than:");
 
@@ -162,9 +163,9 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(airplaneFuelLesserLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(airplaneFuelLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(airplanePassengerLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(airplaneFuelGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(airplanePassengerGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(28, 28, 28)
@@ -185,8 +186,8 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
                                     .addComponent(airplaneLoadingLesserLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(airplaneLoadingLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(airplaneLoadingGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(airplaneRangeLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(airplaneRangeGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -217,11 +218,11 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(29, 29, 29)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(airplaneFuelGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(airplanePassengerGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(airplaneFuelGreaterLabel))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(airplaneFuelLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(airplanePassengerLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(airplaneFuelLesserLabel))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,11 +231,11 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(airplaneLoadingGreaterLabel)
-                            .addComponent(airplaneLoadingGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(airplaneRangeGreaterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(airplaneLoadingLesserLabel)
-                            .addComponent(airplaneLoadingLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(airplaneRangeLesserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(27, 27, 27)
                 .addComponent(filteredAirplanesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,12 +319,12 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
     private void applyFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterButtonActionPerformed
         warningLabel.setText(" ");
         try {
-            filterCode = airplaneCodeTextField.getText().equals("") ? null : airplaneCodeTextField.getText();
-            filterAirline = airplaneAirlineTextField.getText().equals("") ? null : airplaneAirlineTextField.getText();
-            filterMaxFuelCapacity = Integer.parseInt(airplaneFuelGreaterTextField.getText());
-            filterMinFuelCapacity = Integer.parseInt(airplaneFuelLesserTextField.getText());
-            filterMaxLoadingCapacity = Integer.parseInt(airplaneLoadingGreaterTextField.getText());
-            filterMinLoadingCapacity = Integer.parseInt(airplaneLoadingLesserTextField.getText());
+            filterCode = Utils.emptyStringToNull(airplaneCodeTextField);
+            filterAirline = Utils.emptyStringToNull(airplaneAirlineTextField);
+            filterMaxPassengerCapacity = Utils.emptyStringToNullConvert(airplanePassengerGreaterTextField);
+            filterMinPassengerCapacity = Utils.emptyStringToNullConvert(airplanePassengerLesserTextField);
+            filterMaxMaximumRange = Utils.emptyStringToNullConvert(airplaneRangeGreaterTextField);
+            filterMinMaximumRange = Utils.emptyStringToNullConvert(airplaneRangeLesserTextField);
             updateLists();
         } catch (NumberFormatException e) {
             warningLabel.setText("Input is not and integer.");
@@ -408,13 +409,13 @@ public class RouteBoundingDialog extends javax.swing.JDialog {
     private javax.swing.JTextField airplaneCodeTextField;
     private javax.swing.JLabel airplaneFilterLabel;
     private javax.swing.JLabel airplaneFuelGreaterLabel;
-    private javax.swing.JTextField airplaneFuelGreaterTextField;
     private javax.swing.JLabel airplaneFuelLesserLabel;
-    private javax.swing.JTextField airplaneFuelLesserTextField;
     private javax.swing.JLabel airplaneLoadingGreaterLabel;
-    private javax.swing.JTextField airplaneLoadingGreaterTextField;
     private javax.swing.JLabel airplaneLoadingLesserLabel;
-    private javax.swing.JTextField airplaneLoadingLesserTextField;
+    private javax.swing.JTextField airplanePassengerGreaterTextField;
+    private javax.swing.JTextField airplanePassengerLesserTextField;
+    private javax.swing.JTextField airplaneRangeGreaterTextField;
+    private javax.swing.JTextField airplaneRangeLesserTextField;
     private javax.swing.JButton applyFilterButton;
     private javax.swing.JList currentAirplanesList;
     private javax.swing.JScrollPane currentAirplanesScrollPane;

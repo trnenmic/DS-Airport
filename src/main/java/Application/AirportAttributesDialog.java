@@ -31,7 +31,7 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
             this.setTitle("Update Airport attributes");
         }
         initDialog(managementProvider);
-        if(updated){
+        if (updated) {
             updateTextFields();
         }
     }
@@ -68,24 +68,6 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
         airportCountryTextField.setText(airport.getCountry());
         airportIataTextField.setText(airport.getIata());
         airportIcaoTextField.setText(airport.getIcao());
-    }
-
-    private void saveAirport() throws InvalidAttributeException {
-        Airport airport = (Airport) detached;
-        airport.setAirportName(airportNameTextField.getText());
-        airport.setCity(airportCityTextField.getText());
-        airport.setCountry(airportCountryTextField.getText());
-        airport.setIata(airportIataTextField.getText());
-        airport.setIcao(airportIcaoTextField.getText());
-//        mgProvider.getAirportValidator().validate(airport);
-        if (updated) {
-            detached = mgProvider.getAirportManager().updateAirport(airport);
-        } else {
-            detached = mgProvider.getAirportManager().createAirport(airport);
-            updated = true;
-            this.setTitle("Update Airport Attributes");
-        }
-        boundingUpdater.updateBoundings();
     }
 
     /**
@@ -300,9 +282,22 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     private void airportSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportSaveButtonActionPerformed
         warningLabel.setText(" ");
         try {
-            saveAirport();
+            Airport airport = (Airport) detached;
+            if (updated) {
+                detached = mgProvider.getAirportManager().updateAirport(airport, airportNameTextField.getText(),
+                        airportCityTextField.getText(), airportCountryTextField.getText(),
+                        airportIataTextField.getText(), airportIataTextField.getText());
+            } else {
+                detached = mgProvider.getAirportManager().createAirport(airport, airportNameTextField.getText(),
+                        airportCityTextField.getText(), airportCountryTextField.getText(),
+                        airportIataTextField.getText(), airportIataTextField.getText());
+                updated = true;
+                this.setTitle("Update Airport Attributes");
+            }
+            boundingUpdater.updateBoundings();
         } catch (InvalidAttributeException ex) {
             warningLabel.setText(ex.getMessage());
+            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         updateLists();
     }//GEN-LAST:event_airportSaveButtonActionPerformed

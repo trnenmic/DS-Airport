@@ -91,10 +91,10 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="airplaneFuelLesserLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="airplaneFuelLesserTextField" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="airplanePassengerLesserTextField" min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="airplaneFuelGreaterTextField" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="airplanePassengerGreaterTextField" min="-2" pref="45" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -122,8 +122,8 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="airplaneLoadingLesserTextField" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
-                                      <Component id="airplaneLoadingGreaterTextField" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                                      <Component id="airplaneRangeLesserTextField" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                                      <Component id="airplaneRangeGreaterTextField" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -163,12 +163,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="airplaneFuelGreaterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airplanePassengerGreaterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="airplaneFuelGreaterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="airplaneFuelLesserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airplanePassengerLesserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="airplaneFuelLesserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -181,12 +181,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="airplaneLoadingGreaterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="airplaneLoadingGreaterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="airplaneRangeGreaterTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="airplaneLoadingLesserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="airplaneLoadingLesserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="airplaneRangeLesserTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -267,7 +267,7 @@
             <Property name="text" type="java.lang.String" value="Fuel capacity greater than:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="airplaneFuelGreaterTextField">
+        <Component class="javax.swing.JTextField" name="airplanePassengerGreaterTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="34" red="34" type="rgb"/>
@@ -282,7 +282,7 @@
             <Property name="text" type="java.lang.String" value="Fuel capacity lesser than:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="airplaneFuelLesserTextField">
+        <Component class="javax.swing.JTextField" name="airplanePassengerLesserTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="34" red="34" type="rgb"/>
@@ -297,7 +297,7 @@
             <Property name="text" type="java.lang.String" value="Loading capacity lesser than:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="airplaneLoadingLesserTextField">
+        <Component class="javax.swing.JTextField" name="airplaneRangeLesserTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="34" red="34" type="rgb"/>
@@ -307,7 +307,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="airplaneLoadingGreaterTextField">
+        <Component class="javax.swing.JTextField" name="airplaneRangeGreaterTextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="34" red="34" type="rgb"/>

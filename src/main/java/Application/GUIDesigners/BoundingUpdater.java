@@ -4,6 +4,7 @@ import Model.Airplane;
 import Model.Airport;
 import Model.Route;
 import Service.ManagementProvider;
+import Validator.InvalidAttributeException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,15 +24,15 @@ public class BoundingUpdater {
         this.managementProvider = managementProvider;
     }
 
-    public void updateBoundings() {
+    public void updateBoundings() throws InvalidAttributeException {
         for (Airplane a : airplanes) {
-            managementProvider.getGenericManagerImpl().update(a);
+            managementProvider.getAirplaneManager().updateAirplane(a);
         }
         for (Route r : routes) {
-            managementProvider.getGenericManagerImpl().update(r);
+            managementProvider.getRouteManager().updateRoute(r);
         }
         for (Airport a : airports) {
-            managementProvider.getGenericManagerImpl().update(a);
+            managementProvider.getAirportManager().updateAirport(a);
         }
         clean();
     }
@@ -59,4 +60,5 @@ public class BoundingUpdater {
         routes = new ArrayList<>();
         airports = new ArrayList<>();
     }
+    
 }

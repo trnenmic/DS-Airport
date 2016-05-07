@@ -1,11 +1,13 @@
 package Application;
 
 import Application.GUIDesigners.DialogDesigner;
+import Application.GUIDesigners.Utils;
 import ClientDemo.ClientDemoFrame;
 import Model.Airplane;
 import Model.Airport;
 import Model.Route;
 import Service.ManagementProvider;
+import Validator.InvalidAttributeException;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -883,7 +885,12 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
     private void deleteAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirportButtonActionPerformed
         warningLabel.setText(" ");
-        mgProvider.getGenericManagerImpl().delete((Airport) airportjList.getSelectedValue());
+        try {
+            mgProvider.getAirportManager().deleteAirport((Airport) airportjList.getSelectedValue());
+        } catch (InvalidAttributeException ex) {
+            warningLabel.setText(ex.getMessage());
+            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateAirportList();
     }//GEN-LAST:event_deleteAirportButtonActionPerformed
 
@@ -947,45 +954,42 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
     private void applyFilterRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterRouteButtonActionPerformed
         warningLabel.setText(" ");
-        name1 = (routeNameTextField1.getText().equals("") ? null : routeNameTextField1.getText());
-        name2 = (routeNameTextField2.getText().equals("") ? null : routeNameTextField2.getText());
-        city1 = (routeCityTextField1.getText().equals("") ? null : routeCityTextField1.getText());
-        city2 = (routeCityTextField2.getText().equals("") ? null : routeCityTextField2.getText());
-        country1 = (routeCountryTextField1.getText().equals("") ? null : routeCountryTextField1.getText());
-        country2 = (routeCountryTextField2.getText().equals("") ? null : routeCountryTextField2.getText());
-        iata1 = (routeIataTextField1.getText().equals("") ? null : routeIataTextField1.getText());
-        iata2 = (routeIataTextField2.getText().equals("") ? null : routeIataTextField2.getText());
-        icao1 = (routeIcaoTextField1.getText().equals("") ? null : routeIcaoTextField1.getText());
-        icao2 = (routeIcaoTextField2.getText().equals("") ? null : routeIcaoTextField2.getText());
+        name1 = Utils.emptyStringToNull(routeNameTextField1);
+        name2 = Utils.emptyStringToNull(routeNameTextField2);
+        city1 = Utils.emptyStringToNull(routeCityTextField1);
+        city2 = Utils.emptyStringToNull(routeCityTextField2);
+        country1 = Utils.emptyStringToNull(routeCountryTextField1);
+        country2 = Utils.emptyStringToNull(routeCountryTextField2);
+        iata1 = Utils.emptyStringToNull(routeIataTextField1);
+        iata2 = Utils.emptyStringToNull(routeIataTextField2);
+        icao1 = Utils.emptyStringToNull(routeIcaoTextField1);
+        icao2 = Utils.emptyStringToNull(routeIcaoTextField2);
         updateRouteList();
     }//GEN-LAST:event_applyFilterRouteButtonActionPerformed
 
     private void applyFilterAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterAirplaneButtonActionPerformed
         warningLabel.setText(" ");
         try {
-            filterCode = airplaneCodeTextField.getText().equals("") ? null : airplaneCodeTextField.getText();
-            filterAirline = airplaneAirlineTextField.getText().equals("") ? null : airplaneAirlineTextField.getText();
-            filterMaxPassengerCapacity = airplanePassengerGreaterTextField.getText().equals("") ?
-                    null : Integer.parseInt(airplanePassengerGreaterTextField.getText());
-            filterMinPassengerCapacity = airplanePassengerLesserTextField.getText().equals("") ? 
-                    null : Integer.parseInt(airplanePassengerLesserTextField.getText());
-            filterMaxMaximumRange = airplaneRangeGreaterTextField.getText().equals("") ?
-                    null : Integer.parseInt(airplaneRangeGreaterTextField.getText());
-            filterMinMaximumRange = airplaneRangeLesserTextField.getText().equals("") ? 
-                    null : Integer.parseInt(airplaneRangeLesserTextField.getText());
+            filterCode = Utils.emptyStringToNull(airplaneCodeTextField);
+            filterAirline = Utils.emptyStringToNull(airplaneAirlineTextField);
+            filterMaxPassengerCapacity = Utils.emptyStringToNullConvert(airplanePassengerGreaterTextField);
+            filterMinPassengerCapacity = Utils.emptyStringToNullConvert(airplanePassengerLesserTextField);
+            filterMaxMaximumRange = Utils.emptyStringToNullConvert(airplaneRangeGreaterTextField);
+            filterMinMaximumRange = Utils.emptyStringToNullConvert(airplaneRangeLesserTextField);
             updateAirplaneList();
         } catch (NumberFormatException e) {
+            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, e);
             warningLabel.setText("Input is not and integer.");
         }
     }//GEN-LAST:event_applyFilterAirplaneButtonActionPerformed
 
     private void applyFilterAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterAirportButtonActionPerformed
         warningLabel.setText(" ");
-        name = (airportNameTextField.getText().equals("") ? null : airportNameTextField.getText());
-        city = (airportCityTextField.getText().equals("") ? null : airportCityTextField.getText());
-        country = (airportCountryTextField.getText().equals("") ? null : airportCountryTextField.getText());
-        iata = (airportIataTextField.getText().equals("") ? null : airportIataTextField.getText());
-        icao = (airportIcaoTextField.getText().equals("") ? null : airportIcaoTextField.getText());
+        name = Utils.emptyStringToNull(airportNameTextField);
+        city = Utils.emptyStringToNull(airportCityTextField);
+        country = Utils.emptyStringToNull(airportCountryTextField);
+        iata = Utils.emptyStringToNull(airportIataTextField);
+        icao = Utils.emptyStringToNull(airportIcaoTextField);
         updateAirportList();
     }//GEN-LAST:event_applyFilterAirportButtonActionPerformed
 

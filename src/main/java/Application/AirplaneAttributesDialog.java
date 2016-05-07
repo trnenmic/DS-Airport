@@ -5,6 +5,8 @@ import Application.GUIDesigners.DialogDesigner;
 import Model.Airplane;
 import Service.ManagementProvider;
 import Validator.InvalidAttributeException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 /**
@@ -72,24 +74,6 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         airplaneMaximumCargoCapacityTextField.setText("" + airplane.getMaximumCargoCapacity());
     }
 
-    private void saveAirplane() throws InvalidAttributeException {
-        Airplane airplane = (Airplane) detached;
-        airplane.setPassengerCapacity(Integer.parseInt(airplanePassengerCapacityTextField.getText()));
-        airplane.setMaximumRange(Integer.parseInt(airplaneMaximumRangeTextField.getText()));
-        airplane.setAirline(airplaneAirlineTextField.getText());
-        airplane.setMaximumCargoCapacity(Integer.parseInt(airplaneMaximumCargoCapacityTextField.getText()));
-        airplane.setMaximumTakeoffWeight(Integer.parseInt(airplaneMaximumTakeoffWeightTextField.getText()));
-        airplane.setAirplaneCode(airplaneCodeTextField.getText());
-//        mgProvider.getAirplaneValidator().validate(airplane);
-        if (update) {
-            detached = mgProvider.getAirplaneManager().updateAirplane(airplane);
-        } else {
-            detached = mgProvider.getAirplaneManager().createAirplane(airplane);
-            update = true;
-            this.setTitle("Update Airplane Attributes");
-        }
-        boundingUpdater.updateBoundings();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -312,11 +296,24 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
     private void airplaneSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneSaveButtonActionPerformed
         warningLabel.setText(" ");
         try {
-            saveAirplane();
-        } catch (NumberFormatException e) {
-            warningLabel.setText("Input is not integer.");
+            Airplane airplane = (Airplane) detached;
+            if (update) {
+                detached = mgProvider.getAirplaneManager().updateAirplane(airplane, airplanePassengerCapacityTextField.getText(),
+                        airplaneMaximumRangeTextField.getText(), airplaneAirlineTextField.getText(),
+                        airplaneMaximumCargoCapacityTextField.getText(), airplaneMaximumTakeoffWeightTextField.getText(),
+                        airplaneCodeTextField.getText());
+            } else {
+                detached = mgProvider.getAirplaneManager().createAirplane(airplane, airplanePassengerCapacityTextField.getText(),
+                        airplaneMaximumRangeTextField.getText(), airplaneAirlineTextField.getText(),
+                        airplaneMaximumCargoCapacityTextField.getText(), airplaneMaximumTakeoffWeightTextField.getText(),
+                        airplaneCodeTextField.getText());
+                update = true;
+                this.setTitle("Update Airplane Attributes");
+            }
+            boundingUpdater.updateBoundings();
         } catch (InvalidAttributeException e) {
             warningLabel.setText(e.getMessage());
+            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, e);
         }
         updateLists();
     }//GEN-LAST:event_airplaneSaveButtonActionPerformed

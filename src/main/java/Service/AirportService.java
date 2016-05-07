@@ -39,11 +39,11 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         checkConstraints(airport);
         return airportDAO.update(airport);
     }
-    
+
     private void checkConstraints(Airport airport) throws InvalidAttributeException {
         // tmp values for optimisation
         String tmpIcao = airport.getIcao();
-        String tmpIata = airport.getIata();        
+        String tmpIata = airport.getIata();
         // check correct_iata_length
         if (tmpIata.length() != 3) {
             throw new InvalidAttributeException("IATA code must be 3 characters long!");
@@ -162,13 +162,13 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         TypedQuery<Airport> query = em.createQuery("SELECT a FROM Airport a WHERE (:name IS NULL OR a.airportName = :name) "
                 + "AND (:city IS NULL OR a.city = :city) AND (:country IS NULL OR a.country = :country) AND (:icao IS NULL OR a.icao = :icao) "
                 + "AND (:iata IS NULL OR a.iata = :iata)", Airport.class);
-        
+
         query.setParameter("name", name);
         query.setParameter("city", city);
         query.setParameter("country", country);
         query.setParameter("icao", icao);
         query.setParameter("iata", iata);
-        
+
         return query.getResultList();
     }
 
@@ -233,4 +233,25 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Airport.class);
     }
+
+    @Override
+    public Airport createAirport(Airport airport, String name, String city, String country, String iata, String icao) throws InvalidAttributeException {
+        setAttributes(airport, name, city, country, iata, icao);
+        return createAirport(airport);
+    }
+
+    @Override
+    public Airport updateAirport(Airport airport, String name, String city, String country, String iata, String icao) throws InvalidAttributeException {
+        setAttributes(airport, name, city, country, iata, icao);
+        return updateAirport(airport);
+    }
+
+    private void setAttributes(Airport airport, String name, String city, String country, String iata, String icao) {
+        airport.setAirportName(name);
+        airport.setCity(city);
+        airport.setCountry(country);
+        airport.setIata(iata);
+        airport.setIcao(icao);
+    }
+
 }

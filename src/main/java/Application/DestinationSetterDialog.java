@@ -1,6 +1,7 @@
 package Application;
 
 import Application.GUIDesigners.BoundingUpdater;
+import Application.GUIDesigners.Utils;
 import Model.Airport;
 import Model.Route;
 import Service.ManagementProvider;
@@ -424,11 +425,11 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
 
     private void applyFilterAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterAirplaneButtonActionPerformed
         warningLabel.setText(" ");
-        name = (airportNameTextField.getText().equals("") ? null : airportNameTextField.getText());
-        city = (airportCityTextField.getText().equals("") ? null : airportCityTextField.getText());
-        country = (airportCountryTextField.getText().equals("") ? null : airportCountryTextField.getText());
-        iata = (airportIataTextField.getText().equals("") ? null : airportIataTextField.getText());
-        icao = (airportIcaoTextField.getText().equals("") ? null : airportIcaoTextField.getText());
+        name = Utils.emptyStringToNull(airportNameTextField);
+        city = Utils.emptyStringToNull(airportCityTextField);
+        country = Utils.emptyStringToNull(airportCountryTextField);
+        iata = Utils.emptyStringToNull(airportIataTextField);
+        icao = Utils.emptyStringToNull(airportIcaoTextField);
         updateLists();
     }//GEN-LAST:event_applyFilterAirplaneButtonActionPerformed
 
