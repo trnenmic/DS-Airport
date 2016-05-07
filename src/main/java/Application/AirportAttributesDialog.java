@@ -2,8 +2,11 @@ package Application;
 
 import Application.GUIDesigners.BoundingUpdater;
 import Model.Airport;
+import Model.Route;
 import Service.ManagementProvider;
 import Validator.InvalidAttributeException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
@@ -57,8 +60,21 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     }
 
     private void updateLists() {
-        airportOriginList.setListData(((Airport) detached).getOrigins().toArray());
-        airportDestinationList.setListData(((Airport) detached).getDestinations().toArray());
+        //Origins
+        Airport airport = (Airport) detached;
+        List<Route> routes = mgProvider.getRouteManager().findAll();
+        List<Route> origins = new ArrayList<>();
+        List<Route> destinations = new ArrayList<>();
+        for (Route r : routes) {
+            if (r.getDestination() != null && r.getDestination().getIdAirport() == airport.getIdAirport()) {
+                destinations.add(r);
+            }
+            if (r.getOrigin()!= null && r.getOrigin().getIdAirport() == airport.getIdAirport()) {
+                origins.add(r);
+            }
+        }
+        airportOriginList.setListData((origins.isEmpty()) ? new Object[0] : origins.toArray());
+        airportDestinationList.setListData((destinations.isEmpty()) ? new Object[0] : destinations.toArray());
     }
 
     private void updateTextFields() {
