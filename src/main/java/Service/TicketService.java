@@ -25,14 +25,14 @@ public class TicketService extends GenericServiceImpl<Ticket> implements TicketM
     public Ticket createTicket(Ticket ticket) throws InvalidAttributeException {
         // validation
         checkConstraints(ticket);
-        return ticketDAO.create(ticket);
+        return ticketDAO.createTx(ticket);
     }
 
     @Override
     public Ticket updateTicket(Ticket ticket) throws InvalidAttributeException {
         // validation
         checkConstraints(ticket);
-        return ticketDAO.update(ticket);
+        return ticketDAO.updateTx(ticket);
     }
     
     private void checkConstraints(Ticket ticket) throws InvalidAttributeException {
@@ -54,7 +54,7 @@ public class TicketService extends GenericServiceImpl<Ticket> implements TicketM
     
     @Override
     public void deleteTicket(Ticket ticket) throws InvalidAttributeException {
-        ticketDAO.delete(ticket);
+        ticketDAO.deleteTx(ticket);
     }
     
     @Override

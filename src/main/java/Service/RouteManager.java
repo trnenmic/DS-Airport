@@ -14,6 +14,7 @@ public interface RouteManager {
     
     Route createRoute(Route route) throws InvalidAttributeException;
     Route updateRoute(Route route) throws InvalidAttributeException;
+    void updateRoutes(List<Route> routes);
     void deleteRoute(Route route) throws InvalidAttributeException;
     
 

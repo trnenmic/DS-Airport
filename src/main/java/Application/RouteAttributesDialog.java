@@ -1,6 +1,6 @@
 package Application;
 
-import Application.GUIDesigners.BoundingUpdater;
+import Service.RelationService;
 import Application.GUIDesigners.DialogDesigner;
 import Model.Route;
 import Service.ManagementProvider;
@@ -15,7 +15,7 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
-    private BoundingUpdater boundingUpdater;
+    private RelationService boundingUpdater;
     private boolean updated = false;
 
     public RouteAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
@@ -41,7 +41,7 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
 
     private void initDialog(ManagementProvider managementProvider) {
         mgProvider = managementProvider;
-        boundingUpdater = new BoundingUpdater(managementProvider);
+        boundingUpdater = mgProvider.getRelationService();
         initComponents();
         setLocationRelativeTo(null);
         initLists();
@@ -534,7 +534,7 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
                 updated = true;
                 this.setTitle("Update Route Attributes");
             }
-            boundingUpdater.updateBoundings();
+            boundingUpdater.updateBoundingsTx();
         } catch (InvalidAttributeException e) {
             warningLabel.setText(e.getMessage());
         }

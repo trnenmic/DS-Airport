@@ -20,14 +20,14 @@ public class ClientService extends GenericServiceImpl<Client> implements ClientM
     public Client createClient(Client client) throws InvalidAttributeException {
         // validation
         checkConstraints(client);
-        return clientDAO.create(client);
+        return clientDAO.createTx(client);
     }
 
     @Override
     public Client updateClient(Client client) throws InvalidAttributeException {
         // validation
         checkConstraints(client);
-        return clientDAO.update(client);
+        return clientDAO.updateTx(client);
     }
     
     private void checkConstraints(Client client) throws InvalidAttributeException {
@@ -44,7 +44,7 @@ public class ClientService extends GenericServiceImpl<Client> implements ClientM
     @Override
     public void deleteClient(Client client) throws InvalidAttributeException {
         
-        clientDAO.delete(client);
+        clientDAO.deleteTx(client);
     }
 
     @Override

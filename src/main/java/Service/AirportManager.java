@@ -21,6 +21,8 @@ public interface AirportManager {
     Airport updateAirport(Airport airport, String name, String city, String country,
             String iata, String icao) throws InvalidAttributeException;
     
+    void updateAirports(List<Airport> airports);
+    
     void deleteAirport(Airport airport) throws InvalidAttributeException;
 
     Airport find(int idAirport);

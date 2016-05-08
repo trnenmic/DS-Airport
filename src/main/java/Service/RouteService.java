@@ -14,11 +14,11 @@ import javax.persistence.criteria.Root;
  * @author Martin Cap
  */
 public class RouteService extends GenericServiceImpl<Route> implements RouteManager {
-    
+
     private Root<Route> root;
-    
+
     private final GenericDAOImpl<Route> routeDAO = new GenericDAOImpl<>();
-    
+
     public RouteService() {
         this.root = criteriaQuery.from(Route.class);
         this.criteriaQuery = criteriaQuery.select(root);
@@ -28,40 +28,39 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
     public Route createRoute(Route route) throws InvalidAttributeException {
         // validation
         checkConstraints(route);
-        return routeDAO.create(route);
-        
+        return routeDAO.createTx(route);
+
     }
 
     @Override
     public Route updateRoute(Route route) throws InvalidAttributeException {
         // validation
         checkConstraints(route);
-        return routeDAO.update(route);
-        
+        return routeDAO.updateTx(route);
+
     }
-    
+
     private void checkConstraints(Route route) throws InvalidAttributeException {
-        
+
     }
 
     @Override
-    public void deleteRoute(Route route) throws InvalidAttributeException {        
+    public void deleteRoute(Route route) throws InvalidAttributeException {
         routeDAO.delete(route);
     }
-    
 
     @Override
     public Route find(int idRoute) {
         return em.find(Route.class, idRoute);
     }
-    
+
     @Override
     public List<Route> findAll() {
         refresh();
         createResultList();
         return getCastedResult();
     }
-    
+
     @Override
     public List<Route> findAllOrderedById() {
         refresh();
@@ -89,11 +88,11 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
     }
 
     // REDUNDANT METHODS //
-    
     /**
      * REDUNDANT --> you can get the origin from the route itself !!!
+     *
      * @param route
-     * @return 
+     * @return
      */
     @Override
     public Airport findOrigin(Route route) {
@@ -104,22 +103,21 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
     public Airport findDestination(Route route) {
         return route.getDestination();
     }
-    
+
     // END OF REDUNDANT METHODS //
-    
     @Override
     public List<Route> findSpecified(String city1, String city2, String airportName1, String airportName2, String icao1, String icao2, String iata1, String iata2, String country1, String country2) {
         refresh();
         createResultList();
-        
+
         List<Route> result = new ArrayList<>();
-        
+
         boolean correct;
-        
+
         for (Route r : getCastedResult()) {
             Airport origin = r.getOrigin();
             Airport destination = r.getDestination();
-            
+
             correct = true;
             // origin
             if (correct && city1 != null) {
@@ -147,7 +145,7 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
                     correct = false;
                 }
             }
-            
+
             // destination
             if (correct && city2 != null) {
                 if (!destination.getCity().equals(city2)) {
@@ -180,11 +178,18 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
         }
         return result;
     }
-    
+
     public void refresh() {
+        em.clear();
         criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Route.class);
     }
 
-    
+    @Override
+    public void updateRoutes(List<Route> routes) {
+        for (Route r : routes) {
+            routeDAO.update(r);
+        }
+    }
+
 }

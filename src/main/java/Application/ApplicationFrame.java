@@ -71,14 +71,12 @@ public class ApplicationFrame extends javax.swing.JFrame {
     }
 
     private void updateLists() {
-        routejList.setListData(mgProvider.getRouteManager().findAll().toArray());
-        airplanejList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
-        airportjList.setListData(mgProvider.getAirportManager().findAll().toArray());
+        updateAirportList();
+        updateAirplaneList();
+        updateRouteList();
     }
 
     private void updateAirportList() {
-//        airportjList.setListData(mgProvider.getAirportManager().findSpecified(name,
-//                city, country, icao, iata).toArray());
         airportjList.setListData(mgProvider.getAirportManager().findSpecifiedAlternate(name,
                 city, country, icao, iata).toArray());
     }
@@ -886,10 +884,9 @@ public class ApplicationFrame extends javax.swing.JFrame {
     private void deleteAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirportButtonActionPerformed
         warningLabel.setText(" ");
         try {
-            mgProvider.getAirportManager().deleteAirport((Airport) airportjList.getSelectedValue());
+            mgProvider.getRelationService().deleteAirport((Airport) airportjList.getSelectedValue());
         } catch (InvalidAttributeException ex) {
             warningLabel.setText(ex.getMessage());
-            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         updateAirportList();
     }//GEN-LAST:event_deleteAirportButtonActionPerformed
@@ -902,7 +899,11 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
     private void deleteRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteButtonActionPerformed
         warningLabel.setText(" ");
-        mgProvider.getGenericManagerImpl().delete((Route) routejList.getSelectedValue());
+        try {
+            mgProvider.getRelationService().deleteRoute((Route) routejList.getSelectedValue());
+        } catch (InvalidAttributeException e) {
+            warningLabel.setText(e.getMessage());
+        }
         updateRouteList();
     }//GEN-LAST:event_deleteRouteButtonActionPerformed
 
@@ -929,7 +930,11 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
     private void deleteAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirplaneButtonActionPerformed
         warningLabel.setText(" ");
-        mgProvider.getGenericManagerImpl().delete((Airplane) airplanejList.getSelectedValue());
+        try {
+            mgProvider.getRelationService().deleteAirplane((Airplane) airplanejList.getSelectedValue());
+        } catch (InvalidAttributeException e) {
+            warningLabel.setText(e.getMessage());
+        }
         updateAirplaneList();
     }//GEN-LAST:event_deleteAirplaneButtonActionPerformed
 
@@ -978,7 +983,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
             filterMinMaximumRange = Utils.emptyStringToNullConvert(airplaneRangeLesserTextField);
             updateAirplaneList();
         } catch (NumberFormatException e) {
-            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, e);
             warningLabel.setText("Input is not and integer.");
         }
     }//GEN-LAST:event_applyFilterAirplaneButtonActionPerformed

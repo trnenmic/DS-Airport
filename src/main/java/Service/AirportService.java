@@ -30,14 +30,14 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
     public Airport createAirport(Airport airport) throws InvalidAttributeException {
         // validation
         checkConstraints(airport);
-        return airportDAO.create(airport);
+        return airportDAO.createTx(airport);
     }
 
     @Override
     public Airport updateAirport(Airport airport) throws InvalidAttributeException {
         // validation
         checkConstraints(airport);
-        return airportDAO.update(airport);
+        return airportDAO.updateTx(airport);
     }
 
     private void checkConstraints(Airport airport) throws InvalidAttributeException {
@@ -69,7 +69,10 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
     public void deleteAirport(Airport airport) throws InvalidAttributeException {
 
         // validation
-        airportDAO.delete(airport);
+        //Airport a = em.getReference(Airport.class, airport.getIdAirport());
+        System.out.println("so????");
+        em.remove(airport);
+        //airportDAO.delete(airport);
     }
 
     @Override
@@ -230,6 +233,7 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
 //        return getCastedResult();
 //    }
     public void refresh() {
+        em.clear();
         criteriaQuery = criteriaBuilder.createQuery();
         root = criteriaQuery.from(Airport.class);
     }
@@ -252,6 +256,13 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         airport.setCountry(country);
         airport.setIata(iata);
         airport.setIcao(icao);
+    }
+
+    @Override
+    public void updateAirports(List<Airport> airports) {
+        for (Airport a : airports) {
+            airportDAO.update(a);
+        }
     }
 
 }

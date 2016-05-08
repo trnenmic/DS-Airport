@@ -17,8 +17,8 @@ public class Utils {
         return (jTextField.getText().equals("") ? null : jTextField.getText());
     }
 
-    public static Integer emptyStringToNullConvert(JTextField jTextField) throws NumberFormatException{
-        return Integer.parseInt(jTextField.getText());
+    public static Integer emptyStringToNullConvert(JTextField jTextField) throws NumberFormatException {
+        return jTextField.getText().equals("") ? null : Integer.parseInt(jTextField.getText()); 
     }
 
 }

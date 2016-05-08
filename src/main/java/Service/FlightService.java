@@ -25,14 +25,14 @@ public class FlightService extends GenericServiceImpl<Flight> implements FlightM
     public Flight createFlight(Flight flight) throws InvalidAttributeException {
         // validation
         checkConstraints(flight);
-        return flightDAO.create(flight);
+        return flightDAO.createTx(flight);
     }
 
     @Override
     public Flight updateFlight(Flight flight) throws InvalidAttributeException {
         // validation
         checkConstraints(flight);
-        return flightDAO.update(flight);
+        return flightDAO.updateTx(flight);
     }
     
     private void checkConstraints(Flight flight) throws InvalidAttributeException {
@@ -49,7 +49,7 @@ public class FlightService extends GenericServiceImpl<Flight> implements FlightM
     
     @Override
     public void deleteFlight(Flight flight) throws InvalidAttributeException {
-        flightDAO.delete(flight);
+        flightDAO.deleteTx(flight);
     }
     
     @Override

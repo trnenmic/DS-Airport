@@ -1,6 +1,6 @@
 package Application;
 
-import Application.GUIDesigners.BoundingUpdater;
+import Service.RelationService;
 import Application.GUIDesigners.Utils;
 import Model.Airplane;
 import Model.Route;
@@ -15,7 +15,7 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
-    private BoundingUpdater boundingUpdater;
+    private RelationService boundingUpdater;
 
     private String name1 = null;
     private String name2 = null;
@@ -29,7 +29,7 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
     private String icao2 = null;
 
     public AirplaneBoundingDialog(java.awt.Frame parent, boolean modal,
-            ManagementProvider managementProvider, Object o, BoundingUpdater boundingUpdater) {
+            ManagementProvider managementProvider, Object o, RelationService boundingUpdater) {
         super(parent, modal);
         this.boundingUpdater = boundingUpdater;
         detached = o;
@@ -51,8 +51,16 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
 
     private void updateLists() {
         //needed to edit
+        updateFiltered();
+        updateCurrent();
+        
+    }
+
+    private void updateFiltered() {
         filteredRoutesList.setListData(mgProvider.getRouteManager().findSpecified(
                 city1, city2, name1, name2, icao1, icao2, iata1, iata2, country1, country2).toArray());
+    }
+    private void updateCurrent(){
         currentRoutesList.setListData(((Airplane) detached).getRoutes().toArray());
     }
 
@@ -418,16 +426,27 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
 
     private void deleteRouteBoundingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteBoundingButtonActionPerformed
         warningLabel.setText(" ");
+        if (currentRoutesList.getSelectedValue() != null) {
+            Airplane airplane = (Airplane) detached;
+            Route route = (Route) currentRoutesList.getSelectedValue();
+            airplane.getRoutes().remove(route);
+            route.getAirplanes().remove(airplane);
+            boundingUpdater.addRoute(route);
+        }
+        updateCurrent();
 // TODO add your handling code here:
     }//GEN-LAST:event_deleteRouteBoundingButtonActionPerformed
 
     private void addBoudningToAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBoudningToAirplaneButtonActionPerformed
         warningLabel.setText(" ");
-        Airplane airplane = (Airplane) detached;
-        Route route = (Route) filteredRoutesList.getSelectedValue();
-        airplane.getRoutes().add(route);
-        route.getAirplanes().add(airplane);
-        boundingUpdater.addRoute(route);
+        if (filteredRoutesList.getSelectedValue() != null) {
+            Airplane airplane = (Airplane) detached;
+            Route route = (Route) filteredRoutesList.getSelectedValue();
+            airplane.addRoute(route);
+            route.addAirplane(airplane);
+            boundingUpdater.addRoute(route);
+        }
+        updateCurrent();
     }//GEN-LAST:event_addBoudningToAirplaneButtonActionPerformed
 
     private void applyFilterAirplaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterAirplaneButtonActionPerformed
@@ -448,50 +467,6 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AirplaneBoundingDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AirplaneBoundingDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AirplaneBoundingDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AirplaneBoundingDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ManagementProvider managementProvider = new ManagementProvider();
-//                managementProvider.setAirplaneManager(new AirplaneDAO());
-//                managementProvider.setAirportManager(new AirportDAO());
-//                managementProvider.setRouteManager(new RouteDAO());
-                AirplaneBoundingDialog dialog = new AirplaneBoundingDialog(new javax.swing.JFrame(),
-                        true, managementProvider, Airplane.createAirplane("", "", 0, 0, 0, 0), new BoundingUpdater(managementProvider));
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBoudningToAirplaneButton;

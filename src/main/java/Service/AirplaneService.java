@@ -27,7 +27,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     public Airplane createAirplane(Airplane airplane) throws InvalidAttributeException {
         // validation
         checkConstraints(airplane);
-        return airplaneDAO.create(airplane);
+        return airplaneDAO.createTx(airplane);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     public Airplane updateAirplane(Airplane airplane) throws InvalidAttributeException {
         // validation
         checkConstraints(airplane);
-        return airplaneDAO.update(airplane);
+        return airplaneDAO.updateTx(airplane);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         // check UNIQUE constraints
         String tmpCode = airplane.getAirplaneCode();
         for (Airplane a : allAirplanes) {
-            if (tmpCode.equals(a.getAirplaneCode())) {
+            if (tmpCode.equals(a.getAirplaneCode()) && a.getIdAirplane() != airplane.getIdAirplane()) {
                 throw new InvalidAttributeException("Airplane with the same code is already in the database!");
             }
         }
@@ -90,7 +90,10 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     public void deleteAirplane(Airplane airplane) throws InvalidAttributeException {
 
         // validation
-        airplaneDAO.delete(airplane);
+        //airplaneDAO.delete(airplane);
+        //Airplane airplaneToRemove = em.getReference(Airplane.class, airplane.getIdAirplane());
+        Airplane airplaneToRemove = em.find(Airplane.class, airplane.getIdAirplane());
+        em.remove(airplaneToRemove);
     }
 
     @Override
@@ -199,6 +202,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     }
 
     public void refresh() {
+        em.clear();
         root = criteriaQuery.from(Airplane.class);
         criteriaQuery = criteriaQuery.select(root);
     }
@@ -215,6 +219,13 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
             airplane.setAirplaneCode(airplaneCode);
         } catch (NumberFormatException e) {
             throw new InvalidAttributeException("Fields passenger capacity, maximum range, cargo capacity and takeoffweight must be integers.");
+        }
+    }
+
+    @Override
+    public void updateAirplanes(List<Airplane> airplanes) {
+        for (Airplane a : airplanes) {
+            airplaneDAO.update(a);
         }
     }
 }

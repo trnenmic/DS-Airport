@@ -1,6 +1,6 @@
 package Application;
 
-import Application.GUIDesigners.BoundingUpdater;
+import Service.RelationService;
 import Application.GUIDesigners.Utils;
 import Model.Airport;
 import Model.Route;
@@ -16,7 +16,7 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
-    private BoundingUpdater boundingUpdater;
+    private RelationService boundingUpdater;
 
     private String name = null;
     private String city = null;
@@ -24,7 +24,7 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
     private String iata = null;
     private String icao = null;
 
-    public DestinationSetterDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o, BoundingUpdater boundingUpdater) {
+    public DestinationSetterDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o, RelationService boundingUpdater) {
         super(parent, modal);
         detached = o;
         this.boundingUpdater = boundingUpdater;
@@ -492,23 +492,6 @@ public class DestinationSetterDialog extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ManagementProvider managementProvider = new ManagementProvider();
-//                managementProvider.setAirplaneManager(new AirplaneDAO());
-//                managementProvider.setAirportManager(new AirportDAO());
-//                managementProvider.setRouteManager(new RouteDAO());
-                DestinationSetterDialog dialog = new DestinationSetterDialog(new javax.swing.JFrame(),
-                        true, managementProvider, Airport.createAirport("", "", "", "", ""), new BoundingUpdater(managementProvider));
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

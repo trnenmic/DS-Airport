@@ -1,6 +1,6 @@
 package Application;
 
-import Application.GUIDesigners.BoundingUpdater;
+import Service.RelationService;
 import Model.Airport;
 import Model.Route;
 import Service.ManagementProvider;
@@ -19,7 +19,7 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
-    private BoundingUpdater boundingUpdater;
+    private RelationService boundingUpdater;
     private boolean updated = false;
 
     public AirportAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
@@ -47,7 +47,7 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
 
     private void initDialog(ManagementProvider managementProvider) {
         mgProvider = managementProvider;
-        this.boundingUpdater = new BoundingUpdater(managementProvider);
+        this.boundingUpdater = mgProvider.getRelationService();
         initComponents();
         setLocationRelativeTo(null);
         initLists();
@@ -140,6 +140,11 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
 
         airportIcaoTextField.setBackground(new java.awt.Color(52, 52, 56));
         airportIcaoTextField.setForeground(new java.awt.Color(255, 255, 255));
+        airportIcaoTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                airportIcaoTextFieldActionPerformed(evt);
+            }
+        });
 
         airportIataLabel.setText("IATA");
 
@@ -302,18 +307,17 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
             if (updated) {
                 detached = mgProvider.getAirportManager().updateAirport(airport, airportNameTextField.getText(),
                         airportCityTextField.getText(), airportCountryTextField.getText(),
-                        airportIataTextField.getText(), airportIataTextField.getText());
+                        airportIataTextField.getText(), airportIcaoTextField.getText());
             } else {
                 detached = mgProvider.getAirportManager().createAirport(airport, airportNameTextField.getText(),
                         airportCityTextField.getText(), airportCountryTextField.getText(),
-                        airportIataTextField.getText(), airportIataTextField.getText());
+                        airportIataTextField.getText(), airportIcaoTextField.getText());
                 updated = true;
                 this.setTitle("Update Airport Attributes");
             }
-            boundingUpdater.updateBoundings();
+            boundingUpdater.updateBoundingsTx();
         } catch (InvalidAttributeException ex) {
             warningLabel.setText(ex.getMessage());
-            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         updateLists();
     }//GEN-LAST:event_airportSaveButtonActionPerformed
@@ -321,6 +325,10 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     private void airportCountryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportCountryTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_airportCountryTextFieldActionPerformed
+
+    private void airportIcaoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportIcaoTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_airportIcaoTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

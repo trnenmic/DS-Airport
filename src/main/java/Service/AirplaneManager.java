@@ -5,6 +5,10 @@ import Model.Route;
 import Validator.InvalidAttributeException;
 
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 /**
  * Created by M on 1. 5. 2016.
@@ -22,6 +26,8 @@ public interface AirplaneManager {
     Airplane updateAirplane(Airplane airplane, String airplanePassengerCapacity,
             String maximumRange, String airline, String maximumCargo,
             String maximumTakeoffWeight, String airplaneCode) throws InvalidAttributeException;
+
+    void updateAirplanes(List<Airplane> airplanes);
 
     void deleteAirplane(Airplane airplane) throws InvalidAttributeException;
 

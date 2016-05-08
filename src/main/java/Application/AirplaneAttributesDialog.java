@@ -1,6 +1,6 @@
 package Application;
 
-import Application.GUIDesigners.BoundingUpdater;
+import Service.RelationService;
 import Application.GUIDesigners.DialogDesigner;
 import Model.Airplane;
 import Service.ManagementProvider;
@@ -17,7 +17,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
 
     private ManagementProvider mgProvider;
     private Object detached = null;
-    private BoundingUpdater boundingUpdater;
+    private RelationService boundingUpdater;
     private boolean update = false;
 
     public AirplaneAttributesDialog(java.awt.Frame parent, boolean modal, ManagementProvider managementProvider, Object o) {
@@ -47,7 +47,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
 
     private void initDialog(ManagementProvider managementProvider) {
         mgProvider = managementProvider;
-        boundingUpdater = new BoundingUpdater(managementProvider);
+        boundingUpdater = mgProvider.getRelationService();
         initComponents();
         setLocationRelativeTo(null);
         initLists();
@@ -73,7 +73,6 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         airplaneMaximumTakeoffWeightTextField.setText("" + airplane.getMaximumTakeoffWeight());
         airplaneMaximumCargoCapacityTextField.setText("" + airplane.getMaximumCargoCapacity());
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -310,7 +309,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
                 update = true;
                 this.setTitle("Update Airplane Attributes");
             }
-            boundingUpdater.updateBoundings();
+            boundingUpdater.updateBoundingsTx();
         } catch (InvalidAttributeException e) {
             warningLabel.setText(e.getMessage());
             Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, e);

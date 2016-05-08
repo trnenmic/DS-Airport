@@ -7,19 +7,22 @@ import Data.GenericDAOImpl;
  * @author M
  */
 public class ManagementProvider {
-    
+
     private AirplaneManager airplaneManager = new AirplaneService();
     private AirportManager airportManager = new AirportService();
     private RouteManager routeManager = new RouteService();
-    
-    private GenericDAOImpl genericManagerImpl = new GenericDAOImpl();
+    private RelationService relationService;
 
-    public GenericDAOImpl getGenericManagerImpl() {
-        return genericManagerImpl;
+    public ManagementProvider() {
+        this.relationService = new RelationService(airplaneManager, airportManager, routeManager);
     }
 
-    public void setGenericManagerImpl(GenericDAOImpl genericManagerImpl) {
-        this.genericManagerImpl = genericManagerImpl;
+    public RelationService getRelationService() {
+        return relationService;
+    }
+
+    public void setRelationService(RelationService relationService) {
+        this.relationService = relationService;
     }
 
     public AirplaneManager getAirplaneManager() {
@@ -45,5 +48,5 @@ public class ManagementProvider {
     public void setRouteManager(RouteManager routeManager) {
         this.routeManager = routeManager;
     }
-    
+
 }

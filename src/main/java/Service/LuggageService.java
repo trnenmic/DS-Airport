@@ -25,14 +25,14 @@ public class LuggageService extends GenericServiceImpl<Luggage> implements Lugga
     public Luggage createLuggage(Luggage luggage) throws InvalidAttributeException {
         // validation
         checkConstraints(luggage);
-        return luggageDAO.create(luggage);
+        return luggageDAO.createTx(luggage);
     }
 
     @Override
     public Luggage updateLuggage(Luggage luggage) throws InvalidAttributeException {
         // validation
         checkConstraints(luggage);
-        return luggageDAO.update(luggage);
+        return luggageDAO.updateTx(luggage);
     }
     
     private void checkConstraints(Luggage luggage) throws InvalidAttributeException {
@@ -49,7 +49,7 @@ public class LuggageService extends GenericServiceImpl<Luggage> implements Lugga
     
     @Override
     public void deleteLuggage(Luggage luggage) throws InvalidAttributeException {
-        luggageDAO.delete(luggage);
+        luggageDAO.deleteTx(luggage);
     }
     
     @Override
