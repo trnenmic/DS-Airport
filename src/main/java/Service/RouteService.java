@@ -18,6 +18,9 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
     private Root<Route> root;
 
     private final GenericDAOImpl<Route> routeDAO = new GenericDAOImpl<>();
+    
+    private final AirportManager airportService = new AirportService();
+    private final AirplaneManager airplaneService = new AirplaneService();
 
     public RouteService() {
         this.root = criteriaQuery.from(Route.class);
@@ -29,9 +32,8 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
         // validation
         checkConstraints(route);
         return routeDAO.createTx(route);
-
     }
-
+    
     @Override
     public Route updateRoute(Route route) throws InvalidAttributeException {
         // validation

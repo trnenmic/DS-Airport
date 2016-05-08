@@ -49,7 +49,7 @@ public class LuggageService extends GenericServiceImpl<Luggage> implements Lugga
     
     @Override
     public void deleteLuggage(Luggage luggage) throws InvalidAttributeException {
-        luggageDAO.deleteTx(luggage);
+        luggageDAO.delete(luggage);
     }
     
     @Override

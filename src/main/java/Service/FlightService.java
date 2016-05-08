@@ -49,7 +49,7 @@ public class FlightService extends GenericServiceImpl<Flight> implements FlightM
     
     @Override
     public void deleteFlight(Flight flight) throws InvalidAttributeException {
-        flightDAO.deleteTx(flight);
+        flightDAO.delete(flight);
     }
     
     @Override

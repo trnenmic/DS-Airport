@@ -39,6 +39,7 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         checkConstraints(airport);
         return airportDAO.updateTx(airport);
     }
+    
 
     private void checkConstraints(Airport airport) throws InvalidAttributeException {
         // tmp values for optimisation
@@ -54,13 +55,15 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         }
         // check UNIQUE constraints
         List<Airport> allAirports = findAll();
-        allAirports.remove(airport);
+        int tmpIdAirport = airport.getIdAirport();
         for (Airport a : allAirports) {
-            if (tmpIcao.equals(a.getIcao())) {
-                throw new InvalidAttributeException("ICAO code must be unique!");
-            }
-            if (tmpIata.equals(a.getIata())) {
-                throw new InvalidAttributeException("IATA code must be unique!");
+            if (tmpIdAirport != a.getIdAirport()) {
+                if (tmpIcao.equals(a.getIcao())) {
+                    throw new InvalidAttributeException("ICAO code must be unique!");
+                }
+                if (tmpIata.equals(a.getIata())) {
+                    throw new InvalidAttributeException("IATA code must be unique!");
+                }
             }
         }
     }
@@ -70,9 +73,43 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
 
         // validation
         //Airport a = em.getReference(Airport.class, airport.getIdAirport());
-        System.out.println("so????");
-        em.remove(airport);
+//        System.out.println("so????");
+//        em.remove(airport);
         //airportDAO.delete(airport);
+        
+        Airport airportToRemove = em.find(Airport.class, airport.getIdAirport());
+        Route tmp;
+        RouteManager routeService = new RouteService();
+        
+        System.out.println("number of routes where the airport is the destination: " + airportToRemove.getDestinations().size());
+        for (Route r : airportToRemove.getDestinations()) {
+            tmp = em.find(Route.class, r.getIdRoute());
+            System.out.println(tmp);
+//            tmp.setDestination(null);
+        }
+        
+        System.out.println("number of routes where the airport is the origin: " + airportToRemove.getOrigins().size());
+        for (Route r : airportToRemove.getOrigins()) {
+            tmp = em.find(Route.class, r.getIdRoute());
+            System.out.println(tmp);
+//            tmp.setDestination(null);
+        }
+        
+        
+        
+//        tx.begin();
+//        for (Route r : airportToRemove.getDestinations()) {
+//            tmp = em.find(Route.class, r.getIdRoute());
+//            tmp.setDestination(null);
+//            routeService.updateRoute(tmp);
+//        }
+//        for (Route r : airportToRemove.getOrigins()) {
+//            tmp = em.find(Route.class, r.getIdRoute());
+//            tmp.setOrigin(null);
+//            routeService.updateRoute(tmp);
+//        }
+//        em.remove(airportToRemove);
+//        tx.commit();
     }
 
     @Override

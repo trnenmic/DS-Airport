@@ -157,7 +157,7 @@ public class Airport implements Serializable {
         return result;
     }
 
-    @OneToMany()
+    @OneToMany(mappedBy = "destination")
     public Collection<Route> getDestinations() {
         return destinations;
     }
@@ -166,7 +166,7 @@ public class Airport implements Serializable {
         this.destinations = destinations;
     }
 
-    @OneToMany()
+    @OneToMany(mappedBy = "origin")
     public Collection<Route> getOrigins() {
         return origins;
     }

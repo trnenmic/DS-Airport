@@ -55,7 +55,6 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
 
     private void checkConstraints(Airplane airplane) throws InvalidAttributeException {
         List<Airplane> allAirplanes = findAll();
-        allAirplanes.remove(airplane);
         // check UNIQUE constraints
         String tmpCode = airplane.getAirplaneCode();
         for (Airplane a : allAirplanes) {
@@ -90,10 +89,18 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     public void deleteAirplane(Airplane airplane) throws InvalidAttributeException {
 
         // validation
-        //airplaneDAO.delete(airplane);
-        //Airplane airplaneToRemove = em.getReference(Airplane.class, airplane.getIdAirplane());
+//        -- does not work --
+//        airplaneDAO.delete(em.find(Airplane.class, airplane.getIdAirplane()));
+        
+//      -- does not work --
+//        Airplane airplaneToRemove = em.find(Airplane.class, airplane.getIdAirplane());
+//        airplaneDAO.delete(airplaneToRemove);
+        
+//        --- works properly --- 
         Airplane airplaneToRemove = em.find(Airplane.class, airplane.getIdAirplane());
+        tx.begin();
         em.remove(airplaneToRemove);
+        tx.commit();
     }
 
     @Override

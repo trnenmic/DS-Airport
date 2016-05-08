@@ -12,7 +12,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
     protected EntityManager em = emf.createEntityManager();
     protected EntityTransaction tx = em.getTransaction();
-
+    
     @Override
     public T createTx(T t) {
         tx.begin();

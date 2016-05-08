@@ -44,7 +44,7 @@ public class ClientService extends GenericServiceImpl<Client> implements ClientM
     @Override
     public void deleteClient(Client client) throws InvalidAttributeException {
         
-        clientDAO.deleteTx(client);
+        clientDAO.delete(client);
     }
 
     @Override
