@@ -6,6 +6,7 @@ import Model.Route;
 import Validator.InvalidAttributeException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
@@ -74,9 +75,14 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         // validation
         //Airport a = em.getReference(Airport.class, airport.getIdAirport());
 //        System.out.println("so????");
-//        em.remove(airport);
+        //em.remove(airport);
         //airportDAO.delete(airport);
         
+        Airport airportToRemove = em.find(Airport.class, airport.getIdAirport());
+        tx.begin();
+        em.remove(airportToRemove);
+        tx.commit();
+        /*
         Airport airportToRemove = em.find(Airport.class, airport.getIdAirport());
         Route tmp;
         RouteManager routeService = new RouteService();
@@ -93,7 +99,7 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
             tmp = em.find(Route.class, r.getIdRoute());
             System.out.println(tmp);
 //            tmp.setDestination(null);
-        }
+        }*/
         
         
         
@@ -198,7 +204,6 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
 
     @Override
     public List<Airport> findSpecifiedAlternate(String name, String city, String country, String icao, String iata) {
-//        System.out.println("name: " + name + "  city: " + city + "  country: " + country + "  icao: " + icao + "  iata: " + iata);
         TypedQuery<Airport> query = em.createQuery("SELECT a FROM Airport a WHERE (:name IS NULL OR a.airportName = :name) "
                 + "AND (:city IS NULL OR a.city = :city) AND (:country IS NULL OR a.country = :country) AND (:icao IS NULL OR a.icao = :icao) "
                 + "AND (:iata IS NULL OR a.iata = :iata)", Airport.class);
@@ -208,67 +213,10 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         query.setParameter("country", country);
         query.setParameter("icao", icao);
         query.setParameter("iata", iata);
-
+        
         return query.getResultList();
     }
 
-//    Tohle je sileny, ani to nefiltruje spravne (pokud zadas napr. Heathrow a Prague, tak najde obe letiste)
-//    @Override
-//    public List<Airport> findSpecified(String name, String city, String country, String icao, String iata) {
-//        refresh();
-//        if (name == null && city == null && country == null && icao == null && iata == null) {
-//            createResultList();
-//            return getCastedResult();
-//        }
-//        Set<Object> resultSet = new HashSet<>();
-//        
-//        if (name != null) {
-//            //tady to rovna se nedela zadny rozdil, radsi jsem ho tu nechal 
-//            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("airportName"), name));
-//            createResultList();
-//            if (resultList.isEmpty()) {
-//                return getCastedResult();
-//            }
-//            resultSet.addAll(resultList);
-//        }
-//        if (city != null) {
-//            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("city"), city));
-//            createResultList();
-//            if (resultList.isEmpty()) {
-//                return getCastedResult();
-//            }
-//            resultSet.addAll(resultList);
-//        }
-//        if (country != null) {
-//            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("country"), country));
-//            createResultList();
-//            if (resultList.isEmpty()) {
-//                return getCastedResult();
-//            }
-//            resultSet.addAll(resultList);
-//        }
-//        if (icao != null) {
-//            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("icao"), icao));
-//            createResultList();
-//            if (resultList.isEmpty()) {
-//                return getCastedResult();
-//            }
-//            resultSet.addAll(resultList);
-//        }
-//        if (iata != null) {
-//            criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(root.get("iata"), iata));
-//            createResultList();
-//            if (resultList.isEmpty()) {
-//                return getCastedResult();
-//            }
-//            resultSet.addAll(resultList);
-//        }
-//        refreshResultList();
-//        for (Object o : resultSet) {
-//            resultList.add((Airport)o);
-//        }
-//        return getCastedResult();
-//    }
     public void refresh() {
         em.clear();
         criteriaQuery = criteriaBuilder.createQuery();

@@ -73,6 +73,7 @@ public class Route implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "origin_id_airport")
     public Airport getOrigin() {
         return origin;
     }
@@ -82,6 +83,7 @@ public class Route implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "destination_id_airport")
     public Airport getDestination() {
         return destination;
     }

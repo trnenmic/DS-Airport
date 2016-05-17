@@ -95,10 +95,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
     private void initManagement() {
         mgProvider = new ManagementProvider();
-//        mgProvider.setAirplaneManager(new AirplaneDAO());
-//        mgProvider.setAirportManager(new AirportDAO());
-//        mgProvider.setRouteManager(new RouteDAO());
-//        mgProvider.setGenericManagerImpl(new GenericDAOImpl());
     }
 
     /**

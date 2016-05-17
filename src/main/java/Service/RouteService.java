@@ -7,6 +7,8 @@ import Model.Route;
 import Validator.InvalidAttributeException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
@@ -70,6 +72,28 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
         createResultList();
         return getCastedResult();
     }
+    
+    @Override
+    public List<Route> findDestinations(Airport airport){
+        refresh();
+        List<Predicate> predicates = new ArrayList<>(1);
+        predicates.add(criteriaBuilder.equal(root.get("destination"), airport));
+        criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("idRoute")));
+        createResultList();
+        return getCastedResult();
+    }
+    
+        @Override
+    public List<Route> findOrigins(Airport airport){
+        refresh();
+        List<Predicate> predicates = new ArrayList<>(1);
+        predicates.add(criteriaBuilder.equal(root.get("origin"), airport));
+        criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("idRoute")));
+        createResultList();
+        return getCastedResult();
+    }
 
     @Override
     public List<Airplane> findJoinedAirplanes(Route route) {
@@ -87,23 +111,6 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
     public boolean eraseRouteAirportBound(int routeId, int airportId) {
         // TO DO
         return false;
-    }
-
-    // REDUNDANT METHODS //
-    /**
-     * REDUNDANT --> you can get the origin from the route itself !!!
-     *
-     * @param route
-     * @return
-     */
-    @Override
-    public Airport findOrigin(Route route) {
-        return route.getOrigin();
-    }
-
-    @Override
-    public Airport findDestination(Route route) {
-        return route.getDestination();
     }
 
     // END OF REDUNDANT METHODS //

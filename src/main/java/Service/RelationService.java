@@ -67,20 +67,20 @@ public class RelationService {
 
     public void deleteAirport(Airport airport) throws InvalidAttributeException {
         if (airport != null) {
-//            List<Route> destinationsToUpdate = new ArrayList<>(airport.getDestinations());
-//            for (Route r : destinationsToUpdate) {
-//                r.setDestination(null);
-//                addRoute(r);
-//            }
-//            List<Route> originsToUpdate = new ArrayList<>(airport.getOrigins());
-//            for (Route r : originsToUpdate) {
-//                r.setDestination(null);
-//                addRoute(r);
-//            }
-//            tx.begin();
+            List<Route> destinationsToUpdate = new ArrayList<>(airport.getDestinations());
+            for (Route r : destinationsToUpdate) {
+                r.setDestination(null);
+                addRoute(r);
+            }
+            List<Route> originsToUpdate = new ArrayList<>(airport.getOrigins());
+            for (Route r : originsToUpdate) {
+                r.setDestination(null);
+                addRoute(r);
+            }
+            //tx.begin();
             updateBoundingsTx();
             airportManager.deleteAirport(airport);
-//            tx.commit();
+           // tx.commit();
         }
     }
 

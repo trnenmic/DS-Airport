@@ -60,19 +60,9 @@ public class AirportAttributesDialog extends javax.swing.JDialog {
     }
 
     private void updateLists() {
-        //Origins
         Airport airport = (Airport) detached;
-        List<Route> routes = mgProvider.getRouteManager().findAll();
-        List<Route> origins = new ArrayList<>();
-        List<Route> destinations = new ArrayList<>();
-        for (Route r : routes) {
-            if (r.getDestination() != null && r.getDestination().getIdAirport() == airport.getIdAirport()) {
-                destinations.add(r);
-            }
-            if (r.getOrigin()!= null && r.getOrigin().getIdAirport() == airport.getIdAirport()) {
-                origins.add(r);
-            }
-        }
+        List<Route> origins = mgProvider.getRouteManager().findOrigins(airport);
+        List<Route> destinations = mgProvider.getRouteManager().findDestinations(airport);
         airportOriginList.setListData((origins.isEmpty()) ? new Object[0] : origins.toArray());
         airportDestinationList.setListData((destinations.isEmpty()) ? new Object[0] : destinations.toArray());
     }
