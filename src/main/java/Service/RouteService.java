@@ -50,7 +50,10 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
 
     @Override
     public void deleteRoute(Route route) throws InvalidAttributeException {
-        routeDAO.delete(route);
+        Route routeToRemove = em.find(Route.class, route.getIdRoute());
+        tx.begin();
+        em.remove(routeToRemove);
+        tx.commit();
     }
 
     @Override
@@ -196,9 +199,12 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
 
     @Override
     public void updateRoutes(List<Route> routes) {
+        System.out.println("start");
         for (Route r : routes) {
+            System.out.println("update");
             routeDAO.update(r);
         }
+        System.out.println("updated");
     }
 
 }

@@ -527,6 +527,7 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
         warningLabel.setText(" ");
         try {
             Route route = (Route) detached;
+            mgProvider.getTx().begin();
             if (updated) {
                 detached = mgProvider.getRouteManager().updateRoute(route);
             } else {
@@ -534,7 +535,8 @@ public class RouteAttributesDialog extends javax.swing.JDialog {
                 updated = true;
                 this.setTitle("Update Route Attributes");
             }
-            boundingUpdater.updateBoundingsTx();
+            boundingUpdater.updateBoundings();
+            mgProvider.getTx().commit();
         } catch (InvalidAttributeException e) {
             warningLabel.setText(e.getMessage());
         }

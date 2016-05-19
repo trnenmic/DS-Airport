@@ -51,7 +51,6 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         initLists();
-
     }
 
     private void initLists() {
@@ -296,6 +295,7 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
         warningLabel.setText(" ");
         try {
             Airplane airplane = (Airplane) detached;
+            mgProvider.getTx().begin();
             if (update) {
                 detached = mgProvider.getAirplaneManager().updateAirplane(airplane, airplanePassengerCapacityTextField.getText(),
                         airplaneMaximumRangeTextField.getText(), airplaneAirlineTextField.getText(),
@@ -309,7 +309,8 @@ public class AirplaneAttributesDialog extends javax.swing.JDialog {
                 update = true;
                 this.setTitle("Update Airplane Attributes");
             }
-            boundingUpdater.updateBoundingsTx();
+            boundingUpdater.updateBoundings();
+            mgProvider.getTx().commit();
         } catch (InvalidAttributeException e) {
             warningLabel.setText(e.getMessage());
             Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, e);

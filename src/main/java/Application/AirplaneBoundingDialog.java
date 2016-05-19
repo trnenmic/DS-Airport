@@ -445,6 +445,7 @@ public class AirplaneBoundingDialog extends javax.swing.JDialog {
             airplane.addRoute(route);
             route.addAirplane(airplane);
             boundingUpdater.addRoute(route);
+            boundingUpdater.addAirplane(airplane);
         }
         updateCurrent();
     }//GEN-LAST:event_addBoudningToAirplaneButtonActionPerformed

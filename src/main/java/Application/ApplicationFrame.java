@@ -110,7 +110,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
         airportPanel = new javax.swing.JPanel();
         createAirportButton = new javax.swing.JButton();
         updateAirportButton = new javax.swing.JButton();
-        deleteAirportButton = new javax.swing.JButton();
         applyFilterAirportButton = new javax.swing.JButton();
         airportFilterLabel = new javax.swing.JLabel();
         airportIcaoTextField = new javax.swing.JTextField();
@@ -207,15 +206,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
             }
         });
 
-        deleteAirportButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        deleteAirportButton.setForeground(new java.awt.Color(137, 25, 25));
-        deleteAirportButton.setText("Delete selected");
-        deleteAirportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteAirportButtonActionPerformed(evt);
-            }
-        });
-
         applyFilterAirportButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         applyFilterAirportButton.setForeground(new java.awt.Color(25, 62, 137));
         applyFilterAirportButton.setText("Apply filter");
@@ -291,7 +281,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
                 .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(airportPanelLayout.createSequentialGroup()
                         .addComponent(airportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(16, Short.MAX_VALUE))
+                        .addContainerGap(26, Short.MAX_VALUE))
                     .addGroup(airportPanelLayout.createSequentialGroup()
                         .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(airportPanelLayout.createSequentialGroup()
@@ -321,14 +311,13 @@ public class ApplicationFrame extends javax.swing.JFrame {
                                         .addComponent(airportIataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(airportIataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                         .addGroup(airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(createAirportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(applyFilterAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(updateAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(deleteAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(8, Short.MAX_VALUE))))
+                                .addComponent(updateAirportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(21, Short.MAX_VALUE))))
         );
         airportPanelLayout.setVerticalGroup(
             airportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,10 +349,8 @@ public class ApplicationFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(updateAirportButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteAirportButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(applyFilterAirportButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(airportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -877,16 +864,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_airportNameTextFieldActionPerformed
 
-    private void deleteAirportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirportButtonActionPerformed
-        warningLabel.setText(" ");
-        try {
-            mgProvider.getRelationService().deleteAirport((Airport) airportjList.getSelectedValue());
-        } catch (InvalidAttributeException ex) {
-            warningLabel.setText(ex.getMessage());
-        }
-        updateAirportList();
-    }//GEN-LAST:event_deleteAirportButtonActionPerformed
-
     private void createRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRouteButtonActionPerformed
         RouteAttributesDialog attributesDialog = new RouteAttributesDialog(this, true, mgProvider);
         DialogDesigner.centerDialog(attributesDialog);
@@ -1083,7 +1060,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
     private javax.swing.JButton createAirportButton;
     private javax.swing.JButton createRouteButton;
     private javax.swing.JButton deleteAirplaneButton;
-    private javax.swing.JButton deleteAirportButton;
     private javax.swing.JButton deleteRouteButton;
     private javax.swing.JLabel destinationFilterLabel;
     private javax.swing.JButton jButton1;

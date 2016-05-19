@@ -94,7 +94,6 @@ public class Route implements Serializable {
 
 
     @ManyToMany
-    //@JoinTable(name = "airplane_has_route")
     public Collection<Airplane> getAirplanes() {
         return airplanes;
     }

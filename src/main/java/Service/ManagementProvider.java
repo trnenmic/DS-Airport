@@ -1,6 +1,10 @@
 package Service;
 
 import Data.GenericDAOImpl;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -8,6 +12,10 @@ import Data.GenericDAOImpl;
  */
 public class ManagementProvider {
 
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
+    private EntityManager em = emf.createEntityManager();
+    private EntityTransaction tx = em.getTransaction();
+    
     private AirplaneManager airplaneManager = new AirplaneService();
     private AirportManager airportManager = new AirportService();
     private RouteManager routeManager = new RouteService();
@@ -47,6 +55,14 @@ public class ManagementProvider {
 
     public void setRouteManager(RouteManager routeManager) {
         this.routeManager = routeManager;
+    }
+
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public EntityTransaction getTx() {
+        return tx;
     }
 
 }

@@ -209,6 +209,9 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
     }
 
     public void refresh() {
+        tx.begin();
+        em.flush();
+        tx.commit();
         em.clear();
         root = criteriaQuery.from(Airplane.class);
         criteriaQuery = criteriaQuery.select(root);
