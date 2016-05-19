@@ -1,56 +1,122 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Tests;
 
-import Model.Airport;
 import Service.ManagementProvider;
-import java.util.List;
 
 /**
  *
  * @author M
  */
 public class TestPerformance {
-    
+
     public static void main(String[] args) {
         TestPerformance testPerformance = new TestPerformance();
-        testPerformance.start();
-        testPerformance.start2();
+        System.out.println();
+        System.out.println();
+        testPerformance.test1();
+        testPerformance.test2();
+        testPerformance.testConcreteAirport();
+        testPerformance.testFindAll();
+        testPerformance.test1();
+        testPerformance.testConcreteAirportIataIcao();
+        System.out.println();
+        System.out.println();
     }
-    
-    public void start(){
+
+    public void test1() {
         ManagementProvider mgProvider = new ManagementProvider();
-        Long start1 = System.nanoTime(); 
-        Object[] list1 = mgProvider.getAirportManager().findSpecifiedAlternate(null,
-                "New York", "USA", null, null).toArray();
+        Long start1 = System.nanoTime();
+        Object[] list2 = mgProvider.getAirportManager().findSpecified(null, "New York", "USA", null, null).toArray();
         Long end1 = System.nanoTime();
         Long start2 = System.nanoTime();
-        Object[] list2 = mgProvider.getAirportManager().findSpecified(null,
-                "New York", "USA", null, null).toArray();
+        Object[] list1 = mgProvider.getAirportManager().findSpecifiedAlternate(null, "New York", "USA", null, null).toArray();
         Long end2 = System.nanoTime();
-        double resultMs1 = ((double)(end1 - start1)/1000000);
-        double resultMs2 = ((double)(end2 - start2)/1000000);
-        System.out.println("Named Query - time: " + resultMs1 + " ; Number of found results: " +  list1.length + " ;");
-        System.out.println("JPA Criteria - time: " + resultMs2 + " ; Number of found results: " +  list2.length + " ;");
+        double resultMs1 = ((double) (end1 - start1) / 1000000);
+        double resultMs2 = ((double) (end2 - start2) / 1000000);
+        
+        System.out.println("=================================================================");
+        System.out.println("Test - find all airports in New York, USA (there are none):");
+        System.out.println();
+        System.out.println("JPA Criteria - time: " + resultMs1 + "\t; Number of found results: " + list1.length + "\t;");
+        System.out.println(" Typed Query - time: " + resultMs2 + "\t; Number of found results: " + list2.length + "\t;");
+        System.out.println("=================================================================");
+
     }
-    
-    public void start2(){
+
+    public void test2() {
         ManagementProvider mgProvider = new ManagementProvider();
-        Long start1 = System.nanoTime(); 
-        Object[] list1 = mgProvider.getAirportManager().findSpecifiedAlternate("a",
-                "a", "a", "aaaa", "aaa").toArray();
+        Long start1 = System.nanoTime();
+        Object[] list2 = mgProvider.getAirportManager().findSpecified(null, null, "China", null, null).toArray();
         Long end1 = System.nanoTime();
         Long start2 = System.nanoTime();
-        Object[] list2 = mgProvider.getAirportManager().findSpecified("a",
-                "a", "a", "aaaa", "aaa").toArray();
+        Object[] list1 = mgProvider.getAirportManager().findSpecifiedAlternate(null, null, "China", null, null).toArray();
         Long end2 = System.nanoTime();
-        double resultMs1 = ((double)(end1 - start1)/1000000);
-        double resultMs2 = ((double)(end2 - start2)/1000000);
-        System.out.println("Named Query - time: " + resultMs1 + " ; Number of found results: " +  list1.length + " ;");
-        System.out.println("JPA Criteria - time: " + resultMs2 + " ; Number of found results: " +  list2.length + " ;");
+        double resultMs1 = ((double) (end1 - start1) / 1000000);
+        double resultMs2 = ((double) (end2 - start2) / 1000000);
+        System.out.println("=================================================================");
+        System.out.println("Test - find all airports in China (one not null argument):");
+        System.out.println();
+        System.out.println("JPA Criteria - time: " + resultMs1 + "\t; Number of found results: " + list1.length + "\t;");
+        System.out.println(" Typed Query - time: " + resultMs2 + "\t; Number of found results: " + list2.length + "\t;");
+        System.out.println("=================================================================");
+
+    }
+
+    public void testConcreteAirport() {
+        ManagementProvider mgProvider = new ManagementProvider();
+        Long start1 = System.nanoTime();
+        Object[] list2 = mgProvider.getAirportManager().findSpecified("Ed Pacocha Airport", "Alangalang", "Philippines", "TXVA", "XRK").toArray();
+        Long end1 = System.nanoTime();
+        Long start2 = System.nanoTime();
+        Object[] list1 = mgProvider.getAirportManager().findSpecifiedAlternate(null, "Alangalang", "Philippines", "TXVA", "XRK").toArray();
+        Long end2 = System.nanoTime();
+        double resultMs1 = ((double) (end1 - start1) / 1000000);
+        double resultMs2 = ((double) (end2 - start2) / 1000000);
+
+        System.out.println("=================================================================");
+        System.out.println("Test - find one aiport by using all arguments:");
+        System.out.println();
+        System.out.println("JPA Criteria - time: " + resultMs1 + "\t; Number of found results: " + list1.length + "\t;");
+        System.out.println(" Typed Query - time: " + resultMs2 + "\t; Number of found results: " + list2.length + "\t;");
+        System.out.println("=================================================================");
     }
     
+
+    public void testFindAll() {
+        ManagementProvider mgProvider = new ManagementProvider();
+        Long start1 = System.nanoTime();
+        Object[] list2 = mgProvider.getAirportManager().findSpecified(null, null, null, null, null).toArray();
+        Long end1 = System.nanoTime();
+        Long start2 = System.nanoTime();
+        Object[] list1 = mgProvider.getAirportManager().findSpecifiedAlternate(null, null, null, null, null).toArray();
+        Long end2 = System.nanoTime();
+        double resultMs1 = ((double) (end1 - start1) / 1000000);
+        double resultMs2 = ((double) (end2 - start2) / 1000000);
+
+        System.out.println("=================================================================");
+        System.out.println("Test - find all airports (all arguments are null):");
+        System.out.println();
+        System.out.println("JPA Criteria - time: " + resultMs1 + "\t; Number of found results: " + list1.length + "\t;");
+        System.out.println(" Typed Query - time: " + resultMs2 + "\t; Number of found results: " + list2.length + "\t;");
+        System.out.println("=================================================================");
+    }
+    
+    public void testConcreteAirportIataIcao() {
+        ManagementProvider mgProvider = new ManagementProvider();
+        Long start1 = System.nanoTime();
+        Object[] list2 = mgProvider.getAirportManager().findSpecified(null, null, null, "JEKR", "JCZ").toArray();
+        Long end1 = System.nanoTime();
+        Long start2 = System.nanoTime();
+        Object[] list1 = mgProvider.getAirportManager().findSpecifiedAlternate(null, null, null, "JEKR", "JCZ").toArray();
+        Long end2 = System.nanoTime();
+        double resultMs1 = ((double) (end1 - start1) / 1000000);
+        double resultMs2 = ((double) (end2 - start2) / 1000000);
+
+        System.out.println("=================================================================");
+        System.out.println("Test - find one aiport by using IATA and ICAO codes:");
+        System.out.println();
+        System.out.println("JPA Criteria - time: " + resultMs1 + "\t; Number of found results: " + list1.length + "\t;");
+        System.out.println(" Typed Query - time: " + resultMs2 + "\t; Number of found results: " + list2.length + "\t;");
+        System.out.println("=================================================================");
+    }
+
 }

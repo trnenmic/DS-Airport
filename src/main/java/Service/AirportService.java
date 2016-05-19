@@ -174,10 +174,10 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
     public List<Airport> findSpecified(String name, String city, String country, String icao, String iata) {
         refresh();
         List<Predicate> predicates = new ArrayList<>(5);
-        List<Order> orders = new ArrayList<>(3);
-        orders.add(criteriaBuilder.asc(root.get("airportName")));
-        orders.add(criteriaBuilder.asc(root.get("city")));
-        orders.add(criteriaBuilder.asc(root.get("country")));
+//        List<Order> orders = new ArrayList<>(3);
+//        orders.add(criteriaBuilder.asc(root.get("airportName")));
+//        orders.add(criteriaBuilder.asc(root.get("city")));
+//        orders.add(criteriaBuilder.asc(root.get("country")));
 
         if (name != null) {
             predicates.add(criteriaBuilder.equal(root.get("airportName"), name));
@@ -197,7 +197,7 @@ public class AirportService extends GenericServiceImpl<Airport> implements Airpo
         if (!predicates.isEmpty()) {
             criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
         }
-        criteriaQuery.orderBy(orders.toArray(new Order[orders.size()]));
+//        criteriaQuery.orderBy(orders.toArray(new Order[orders.size()]));
         createResultList();
         return getCastedResult();
     }

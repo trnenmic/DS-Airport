@@ -14,17 +14,20 @@ import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 public class ClientDemoFrame extends javax.swing.JFrame {
 
     private final ManagementProvider mgProvider = new ManagementProvider();
-    private final ClientDemoAirplaneAdder adder;
+    private final ClientDemoAirplaneAdder airplaneAdder;
+    private final ClientDemoAirportAdder airportAdder;
+    
     
     private final String prefix = "There are ";
-    private final String postfix = " airplanes in the database.";
+    private final String postfix = " in the database.";
 
     /**
      * Creates new form ClientDemoFrame
      * @throws java.io.UnsupportedEncodingException
      */
     public ClientDemoFrame() throws UnsupportedEncodingException, IOException {
-        this.adder = new ClientDemoAirplaneAdder();
+        this.airplaneAdder = new ClientDemoAirplaneAdder();
+        this.airportAdder = new ClientDemoAirportAdder();
         initComponents();
         initLists();
         updateNumAirplanesLabel();
@@ -32,20 +35,30 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     }
     
     private void updateNumAirplanesLabel() {
-        numAirplanesLabel.setText(prefix + mgProvider.getAirplaneManager().findAll().size() + postfix);
+        numAirplanesLabel.setText(prefix + mgProvider.getAirplaneManager().findAll().size() + " airplanes" + postfix);
+    }
+    
+    private void updateNumAirportsLabel() {
+        numAirportsLabel.setText(prefix + mgProvider.getAirportManager().findAll().size() + " airports" + postfix);
     }
 
     private void initLists() {
         airplanesList.setSelectionMode(SINGLE_SELECTION);
+        airportsList.setSelectionMode(SINGLE_SELECTION);
         updateLists();
     }
 
     private void updateLists() {
-        airplanesList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
+        updateAirplanesList();
+        updateAirportsList();
     }
 
     private void updateAirplanesList() {
         airplanesList.setListData(mgProvider.getAirplaneManager().findAll().toArray());
+    }
+    
+    private void updateAirportsList() {
+        airportsList.setListData(mgProvider.getAirportManager().findAll().toArray());
     }
     
     /**
@@ -61,11 +74,19 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         airplanesPanel = new javax.swing.JPanel();
         airplanesSlider = new javax.swing.JSlider();
         airplanesButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        airplanesLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         airplanesList = new javax.swing.JList();
-        refreshButton = new javax.swing.JButton();
+        airplanesRefreshButton = new javax.swing.JButton();
         numAirplanesLabel = new javax.swing.JLabel();
+        airportsPanel = new javax.swing.JPanel();
+        airportsSlider = new javax.swing.JSlider();
+        airportsButton = new javax.swing.JButton();
+        airportsLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        airportsList = new javax.swing.JList();
+        airportsRefreshButton = new javax.swing.JButton();
+        numAirportsLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -87,7 +108,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Please select how many airplanes to add:");
+        airplanesLabel.setText("Please select how many airplanes to add:");
 
         airplanesList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -96,10 +117,10 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(airplanesList);
 
-        refreshButton.setText("Refresh data");
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+        airplanesRefreshButton.setText("Refresh data");
+        airplanesRefreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
+                airplanesRefreshButtonActionPerformed(evt);
             }
         });
 
@@ -118,13 +139,13 @@ public class ClientDemoFrame extends javax.swing.JFrame {
                 .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, airplanesPanelLayout.createSequentialGroup()
                         .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(airplanesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(numAirplanesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(airplanesSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE))
                     .addComponent(airplanesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addComponent(airplanesRefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         airplanesPanelLayout.setVerticalGroup(
             airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,18 +153,93 @@ public class ClientDemoFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(airplanesLabel)
                     .addGroup(airplanesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(airplanesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(numAirplanesLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(airplanesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(airplanesRefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
 
         jTabbedPane1.addTab("Airplanes", airplanesPanel);
+
+        airportsSlider.setMajorTickSpacing(1);
+        airportsSlider.setMaximum(10);
+        airportsSlider.setMinimum(1);
+        airportsSlider.setPaintLabels(true);
+        airportsSlider.setPaintTicks(true);
+        airportsSlider.setSnapToTicks(true);
+        airportsSlider.setToolTipText("");
+        airportsSlider.setValue(1);
+
+        airportsButton.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        airportsButton.setText("Add airports");
+        airportsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                airportsButtonActionPerformed(evt);
+            }
+        });
+
+        airportsLabel.setText("Please select how many airports to add:  ");
+
+        airportsList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(airportsList);
+
+        airportsRefreshButton.setText("Refresh data");
+        airportsRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                airportsRefreshButtonActionPerformed(evt);
+            }
+        });
+
+        numAirportsLabel.setText("There are 0 airports in the database.");
+
+        javax.swing.GroupLayout airportsPanelLayout = new javax.swing.GroupLayout(airportsPanel);
+        airportsPanel.setLayout(airportsPanelLayout);
+        airportsPanelLayout.setHorizontalGroup(
+            airportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(airportsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(airportsPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(airportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, airportsPanelLayout.createSequentialGroup()
+                        .addGroup(airportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(airportsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(numAirportsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(airportsSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE))
+                    .addComponent(airportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(airportsRefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+        airportsPanelLayout.setVerticalGroup(
+            airportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(airportsPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(airportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(airportsLabel)
+                    .addGroup(airportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(airportsSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numAirportsLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(airportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(airportsRefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+        );
+
+        jTabbedPane1.addTab("Airports", airportsPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,15 +258,26 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void airplanesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplanesButtonActionPerformed
-        adder.addAirplanes(airplanesSlider.getValue());
+        airplaneAdder.addAirplanes(airplanesSlider.getValue());
         updateAirplanesList();
         updateNumAirplanesLabel();
     }//GEN-LAST:event_airplanesButtonActionPerformed
 
-    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+    private void airplanesRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplanesRefreshButtonActionPerformed
         updateAirplanesList();
         updateNumAirplanesLabel();
-    }//GEN-LAST:event_refreshButtonActionPerformed
+    }//GEN-LAST:event_airplanesRefreshButtonActionPerformed
+
+    private void airportsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportsButtonActionPerformed
+        airportAdder.addAirplanes(airportsSlider.getValue());
+        updateAirportsList();
+        updateNumAirportsLabel();
+    }//GEN-LAST:event_airportsButtonActionPerformed
+
+    private void airportsRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airportsRefreshButtonActionPerformed
+        updateAirportsList();
+        updateNumAirportsLabel();
+    }//GEN-LAST:event_airportsRefreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,13 +320,21 @@ public class ClientDemoFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton airplanesButton;
+    private javax.swing.JLabel airplanesLabel;
     private javax.swing.JList airplanesList;
     private javax.swing.JPanel airplanesPanel;
+    private javax.swing.JButton airplanesRefreshButton;
     private javax.swing.JSlider airplanesSlider;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton airportsButton;
+    private javax.swing.JLabel airportsLabel;
+    private javax.swing.JList airportsList;
+    private javax.swing.JPanel airportsPanel;
+    private javax.swing.JButton airportsRefreshButton;
+    private javax.swing.JSlider airportsSlider;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel numAirplanesLabel;
-    private javax.swing.JButton refreshButton;
+    private javax.swing.JLabel numAirportsLabel;
     // End of variables declaration//GEN-END:variables
 }
