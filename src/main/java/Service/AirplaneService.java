@@ -120,7 +120,7 @@ public class AirplaneService extends GenericServiceImpl<Airplane> implements Air
         refresh();
         List<Order> orders = new ArrayList<>(4);
 
-        orders.add(criteriaBuilder.asc(root.get("code")));
+        orders.add(criteriaBuilder.asc(root.get("airplaneCode")));
         orders.add(criteriaBuilder.asc(root.get("airline")));
         orders.add(criteriaBuilder.asc(root.get("passengerCapacity")));
         orders.add(criteriaBuilder.asc(root.get("maximumRange")));

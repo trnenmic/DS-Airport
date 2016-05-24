@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
+import static javax.swing.ListSelectionModel.*;
 
 /**
  *
@@ -65,7 +65,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         airportsList.setSelectionMode(SINGLE_SELECTION);
         clientsList.setSelectionMode(SINGLE_SELECTION);
         crewMembersList.setSelectionMode(SINGLE_SELECTION);
-        routesList.setSelectionMode(SINGLE_SELECTION);
+        routesList.setSelectionMode(MULTIPLE_INTERVAL_SELECTION);
         updateLists();
     }
 
@@ -148,9 +148,10 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         routesList = new javax.swing.JList();
         routesRefreshButton = new javax.swing.JButton();
         numRoutesLabel = new javax.swing.JLabel();
+        routesAddAirplanesButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 650));
 
         airplanesSlider.setMajorTickSpacing(1);
         airplanesSlider.setMaximum(10);
@@ -490,6 +491,14 @@ public class ClientDemoFrame extends javax.swing.JFrame {
 
         numRoutesLabel.setText("There are 0 routes in the database.");
 
+        routesAddAirplanesButton.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        routesAddAirplanesButton.setText("Add airplanes to selected routes");
+        routesAddAirplanesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                routesAddAirplanesButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout airportsPanel1Layout = new javax.swing.GroupLayout(airportsPanel1);
         airportsPanel1.setLayout(airportsPanel1Layout);
         airportsPanel1Layout.setHorizontalGroup(
@@ -508,7 +517,8 @@ public class ClientDemoFrame extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(routesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(routesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(routesRefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(routesRefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(routesAddAirplanesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         airportsPanel1Layout.setVerticalGroup(
@@ -524,8 +534,10 @@ public class ClientDemoFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(routesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(routesAddAirplanesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(routesRefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Routes", airportsPanel1);
@@ -538,9 +550,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -600,6 +610,10 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         updateRoutesList();
         updateNumRoutesLabel();
     }//GEN-LAST:event_routesRefreshButtonActionPerformed
+
+    private void routesAddAirplanesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routesAddAirplanesButtonActionPerformed
+        routeAdder.addAirplanesToRoutes(routesList.getSelectedValuesList());
+    }//GEN-LAST:event_routesAddAirplanesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -677,6 +691,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private javax.swing.JLabel numClientsLabel;
     private javax.swing.JLabel numCrewMembersLabel;
     private javax.swing.JLabel numRoutesLabel;
+    private javax.swing.JButton routesAddAirplanesButton;
     private javax.swing.JButton routesButton;
     private javax.swing.JLabel routesLabel;
     private javax.swing.JList routesList;
