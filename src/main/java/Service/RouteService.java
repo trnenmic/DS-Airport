@@ -45,7 +45,10 @@ public class RouteService extends GenericServiceImpl<Route> implements RouteMana
     }
 
     private void checkConstraints(Route route) throws InvalidAttributeException {
-
+        if (route.getOrigin().getIdAirport() == route.getDestination().getIdAirport()) {
+            throw new InvalidAttributeException("Route origin cannot be its destination and vice versa!");
+        }
+        
     }
 
     @Override

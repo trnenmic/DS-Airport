@@ -2,8 +2,10 @@ package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by M on 27. 4. 2016.
@@ -24,6 +26,24 @@ public class Route implements Serializable {
         route.setOrigin(null);
         route.setDestination(null);
         route.setAirplanes(new ArrayList<>());
+        return route;
+    }
+    
+    public static Route createRoute(Airport origin, Airport destination) {
+        Route route = new Route();
+        route.setOrigin(origin);
+        route.setDestination(destination);
+        route.setAirplanes(new ArrayList<>());
+        return route;
+    }
+    
+    public static Route createRoute(Airport origin, Airport destination, Airplane... airplanes) {
+        Route route = new Route();
+        route.setOrigin(origin);
+        route.setDestination(destination);
+        List<Airplane> airplanesToAdd = new ArrayList<>();
+        airplanesToAdd.addAll(Arrays.asList(airplanes));
+        route.setAirplanes(airplanesToAdd);
         return route;
     }
 

@@ -18,6 +18,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private final AirportAdder airportAdder;
     private final ClientAdder clientAdder;
     private final CrewMemberAdder crewMemberAdder;
+    private final RouteAdder routeAdder;
     
     
     private final String prefix = "There are ";
@@ -32,6 +33,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         this.airportAdder = new AirportAdder();
         this.clientAdder = new ClientAdder();
         this.crewMemberAdder = new CrewMemberAdder();
+        this.routeAdder = new RouteAdder();
         initComponents();
         initLists();
         updateNumAirplanesLabel();
@@ -53,12 +55,17 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private void updateNumCrewMembersLabel() {
         numCrewMembersLabel.setText(prefix + mgProvider.getCrewMemberManager().findAll().size() + " crew members" + postfix);
     }
+    
+    private void updateNumRoutesLabel() {
+        numRoutesLabel.setText(prefix + mgProvider.getRouteManager().findAll().size() + " routes" + postfix);
+    }
 
     private void initLists() {
         airplanesList.setSelectionMode(SINGLE_SELECTION);
         airportsList.setSelectionMode(SINGLE_SELECTION);
         clientsList.setSelectionMode(SINGLE_SELECTION);
         crewMembersList.setSelectionMode(SINGLE_SELECTION);
+        routesList.setSelectionMode(SINGLE_SELECTION);
         updateLists();
     }
 
@@ -67,6 +74,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         updateAirportsList();
         updateClientsList();
         updateCrewMembersList();
+        updateRoutesList();
     }
 
     private void updateAirplanesList() {
@@ -83,6 +91,10 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     
     private void updateCrewMembersList() {
         crewMembersList.setListData(mgProvider.getCrewMemberManager().findAll().toArray());
+    }
+    
+    private void updateRoutesList() {
+        routesList.setListData(mgProvider.getRouteManager().findAll().toArray());
     }
     
     
@@ -128,6 +140,14 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         crewMembersList = new javax.swing.JList();
         crewMembersRefreshButton = new javax.swing.JButton();
         numCrewMembersLabel = new javax.swing.JLabel();
+        airportsPanel1 = new javax.swing.JPanel();
+        routesSlider = new javax.swing.JSlider();
+        routesButton = new javax.swing.JButton();
+        routesLabel = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        routesList = new javax.swing.JList();
+        routesRefreshButton = new javax.swing.JButton();
+        numRoutesLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -408,13 +428,12 @@ public class ClientDemoFrame extends javax.swing.JFrame {
                             .addComponent(numCrewMembersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(crewMembersSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 74, Short.MAX_VALUE))
+                        .addGap(0, 68, Short.MAX_VALUE))
                     .addGroup(crewMembersPanelLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(crewMembersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(crewMembersRefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(crewMembersButton, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(crewMembersButton, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         crewMembersPanelLayout.setVerticalGroup(
@@ -435,6 +454,81 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Crew members", crewMembersPanel);
+
+        routesSlider.setMajorTickSpacing(1);
+        routesSlider.setMaximum(10);
+        routesSlider.setMinimum(1);
+        routesSlider.setPaintLabels(true);
+        routesSlider.setPaintTicks(true);
+        routesSlider.setSnapToTicks(true);
+        routesSlider.setToolTipText("");
+        routesSlider.setValue(1);
+
+        routesButton.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        routesButton.setText("Add random routes");
+        routesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                routesButtonActionPerformed(evt);
+            }
+        });
+
+        routesLabel.setText("Please select how many routes to add:  ");
+
+        routesList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(routesList);
+
+        routesRefreshButton.setText("Refresh data");
+        routesRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                routesRefreshButtonActionPerformed(evt);
+            }
+        });
+
+        numRoutesLabel.setText("There are 0 routes in the database.");
+
+        javax.swing.GroupLayout airportsPanel1Layout = new javax.swing.GroupLayout(airportsPanel1);
+        airportsPanel1.setLayout(airportsPanel1Layout);
+        airportsPanel1Layout.setHorizontalGroup(
+            airportsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(airportsPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+            .addGroup(airportsPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(airportsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(airportsPanel1Layout.createSequentialGroup()
+                        .addGroup(airportsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(numRoutesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(routesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(routesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(routesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(routesRefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
+        );
+        airportsPanel1Layout.setVerticalGroup(
+            airportsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(airportsPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(airportsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(routesLabel)
+                    .addGroup(airportsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(routesSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numRoutesLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(routesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(routesRefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+        );
+
+        jTabbedPane1.addTab("Routes", airportsPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -496,6 +590,17 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         updateNumCrewMembersLabel();
     }//GEN-LAST:event_crewMembersRefreshButtonActionPerformed
 
+    private void routesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routesButtonActionPerformed
+        routeAdder.addRoutes(routesSlider.getValue());
+        updateRoutesList();
+        updateNumRoutesLabel();
+    }//GEN-LAST:event_routesButtonActionPerformed
+
+    private void routesRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routesRefreshButtonActionPerformed
+        updateRoutesList();
+        updateNumRoutesLabel();
+    }//GEN-LAST:event_routesRefreshButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -546,6 +651,7 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private javax.swing.JLabel airportsLabel;
     private javax.swing.JList airportsList;
     private javax.swing.JPanel airportsPanel;
+    private javax.swing.JPanel airportsPanel1;
     private javax.swing.JButton airportsRefreshButton;
     private javax.swing.JSlider airportsSlider;
     private javax.swing.JButton clientsButton;
@@ -564,10 +670,17 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel numAirplanesLabel;
     private javax.swing.JLabel numAirportsLabel;
     private javax.swing.JLabel numClientsLabel;
     private javax.swing.JLabel numCrewMembersLabel;
+    private javax.swing.JLabel numRoutesLabel;
+    private javax.swing.JButton routesButton;
+    private javax.swing.JLabel routesLabel;
+    private javax.swing.JList routesList;
+    private javax.swing.JButton routesRefreshButton;
+    private javax.swing.JSlider routesSlider;
     // End of variables declaration//GEN-END:variables
 }
