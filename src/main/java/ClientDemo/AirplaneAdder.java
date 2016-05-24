@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * @author Martin Cap
  */
-public class ClientDemoAirplaneAdder {
+public class AirplaneAdder {
 
     private final BufferedReader br;
     private BufferedReader saveReader;
@@ -24,7 +24,7 @@ public class ClientDemoAirplaneAdder {
 
     private int numAirplanesRead;
 
-    public ClientDemoAirplaneAdder() throws FileNotFoundException, UnsupportedEncodingException, IOException {
+    public AirplaneAdder() throws FileNotFoundException, UnsupportedEncodingException, IOException {
         this.br = new BufferedReader(new FileReader(dataFile));
         loadProgress();
     }
@@ -69,16 +69,14 @@ public class ClientDemoAirplaneAdder {
                 
                 airplaneService.createAirplane(airplane);
                 
-            } catch (IOException e) {
-                Logger.getLogger(ClientDemoAirplaneAdder.class.getName()).log(Level.SEVERE, null, e);
-            } catch (InvalidAttributeException e) {
-                Logger.getLogger(ClientDemoAirplaneAdder.class.getName()).log(Level.SEVERE, null, e);
+            } catch (IOException | InvalidAttributeException e) {
+                Logger.getLogger(AirplaneAdder.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         try {
             saveProgress();
         } catch (IOException ex) {
-            Logger.getLogger(ClientDemoAirplaneAdder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AirplaneAdder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

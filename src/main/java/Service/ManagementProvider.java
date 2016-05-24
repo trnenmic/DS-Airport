@@ -1,6 +1,5 @@
 package Service;
 
-import Data.GenericDAOImpl;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -19,6 +18,10 @@ public class ManagementProvider {
     private AirplaneManager airplaneManager = new AirplaneService();
     private AirportManager airportManager = new AirportService();
     private RouteManager routeManager = new RouteService();
+    
+    private ClientManager clientManager = new ClientService();
+    private CrewMemberManager crewMemberManager = new CrewMemberService();
+    
     private RelationService relationService;
 
     public ManagementProvider() {
@@ -63,6 +66,22 @@ public class ManagementProvider {
 
     public EntityTransaction getTx() {
         return tx;
+    }
+
+    public ClientManager getClientManager() {
+        return clientManager;
+    }
+
+    public void setClientManager(ClientManager clientManager) {
+        this.clientManager = clientManager;
+    }
+
+    public CrewMemberManager getCrewMemberManager() {
+        return crewMemberManager;
+    }
+
+    public void setCrewMemberManager(CrewMemberManager crewMemberManager) {
+        this.crewMemberManager = crewMemberManager;
     }
 
 }

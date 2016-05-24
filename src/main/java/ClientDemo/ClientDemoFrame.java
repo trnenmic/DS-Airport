@@ -14,8 +14,10 @@ import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 public class ClientDemoFrame extends javax.swing.JFrame {
 
     private final ManagementProvider mgProvider = new ManagementProvider();
-    private final ClientDemoAirplaneAdder airplaneAdder;
-    private final ClientDemoAirportAdder airportAdder;
+    private final AirplaneAdder airplaneAdder;
+    private final AirportAdder airportAdder;
+    private final ClientAdder clientAdder;
+    private final CrewMemberAdder crewMemberAdder;
     
     
     private final String prefix = "There are ";
@@ -26,8 +28,10 @@ public class ClientDemoFrame extends javax.swing.JFrame {
      * @throws java.io.UnsupportedEncodingException
      */
     public ClientDemoFrame() throws UnsupportedEncodingException, IOException {
-        this.airplaneAdder = new ClientDemoAirplaneAdder();
-        this.airportAdder = new ClientDemoAirportAdder();
+        this.airplaneAdder = new AirplaneAdder();
+        this.airportAdder = new AirportAdder();
+        this.clientAdder = new ClientAdder();
+        this.crewMemberAdder = new CrewMemberAdder();
         initComponents();
         initLists();
         updateNumAirplanesLabel();
@@ -41,16 +45,28 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private void updateNumAirportsLabel() {
         numAirportsLabel.setText(prefix + mgProvider.getAirportManager().findAll().size() + " airports" + postfix);
     }
+    
+    private void updateNumClientsLabel() {
+        numClientsLabel.setText(prefix + mgProvider.getClientManager().findAll().size() + " clients" + postfix);
+    }
+    
+    private void updateNumCrewMembersLabel() {
+        numCrewMembersLabel.setText(prefix + mgProvider.getCrewMemberManager().findAll().size() + " crew members" + postfix);
+    }
 
     private void initLists() {
         airplanesList.setSelectionMode(SINGLE_SELECTION);
         airportsList.setSelectionMode(SINGLE_SELECTION);
+        clientsList.setSelectionMode(SINGLE_SELECTION);
+        crewMembersList.setSelectionMode(SINGLE_SELECTION);
         updateLists();
     }
 
     private void updateLists() {
         updateAirplanesList();
         updateAirportsList();
+        updateClientsList();
+        updateCrewMembersList();
     }
 
     private void updateAirplanesList() {
@@ -60,6 +76,15 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private void updateAirportsList() {
         airportsList.setListData(mgProvider.getAirportManager().findAll().toArray());
     }
+    
+    private void updateClientsList() {
+        clientsList.setListData(mgProvider.getClientManager().findAll().toArray());
+    }
+    
+    private void updateCrewMembersList() {
+        crewMembersList.setListData(mgProvider.getCrewMemberManager().findAll().toArray());
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,6 +112,22 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         airportsList = new javax.swing.JList();
         airportsRefreshButton = new javax.swing.JButton();
         numAirportsLabel = new javax.swing.JLabel();
+        clientsPanel = new javax.swing.JPanel();
+        clientsSlider = new javax.swing.JSlider();
+        clientsButton = new javax.swing.JButton();
+        clientsLabel = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        clientsList = new javax.swing.JList();
+        clientsRefreshButton = new javax.swing.JButton();
+        numClientsLabel = new javax.swing.JLabel();
+        crewMembersPanel = new javax.swing.JPanel();
+        crewMembersSlider = new javax.swing.JSlider();
+        crewMembersButton = new javax.swing.JButton();
+        crewMembersLabel = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        crewMembersList = new javax.swing.JList();
+        crewMembersRefreshButton = new javax.swing.JButton();
+        numCrewMembersLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -241,6 +282,160 @@ public class ClientDemoFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Airports", airportsPanel);
 
+        clientsSlider.setMajorTickSpacing(1);
+        clientsSlider.setMaximum(10);
+        clientsSlider.setMinimum(1);
+        clientsSlider.setPaintLabels(true);
+        clientsSlider.setPaintTicks(true);
+        clientsSlider.setSnapToTicks(true);
+        clientsSlider.setToolTipText("");
+        clientsSlider.setValue(1);
+
+        clientsButton.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        clientsButton.setText("Add clients");
+        clientsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientsButtonActionPerformed(evt);
+            }
+        });
+
+        clientsLabel.setText("Please select how many clients to add:  ");
+
+        clientsList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(clientsList);
+
+        clientsRefreshButton.setText("Refresh data");
+        clientsRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientsRefreshButtonActionPerformed(evt);
+            }
+        });
+
+        numClientsLabel.setText("There are 0 clients in the database.");
+
+        javax.swing.GroupLayout clientsPanelLayout = new javax.swing.GroupLayout(clientsPanel);
+        clientsPanel.setLayout(clientsPanelLayout);
+        clientsPanelLayout.setHorizontalGroup(
+            clientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clientsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
+            .addGroup(clientsPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(clientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(clientsPanelLayout.createSequentialGroup()
+                        .addGroup(clientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numClientsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clientsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(clientsSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(clientsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clientsRefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
+        );
+        clientsPanelLayout.setVerticalGroup(
+            clientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clientsPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(clientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clientsLabel)
+                    .addGroup(clientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(clientsSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numClientsLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clientsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clientsRefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+        );
+
+        jTabbedPane1.addTab("Clients", clientsPanel);
+
+        crewMembersSlider.setMajorTickSpacing(1);
+        crewMembersSlider.setMaximum(10);
+        crewMembersSlider.setMinimum(1);
+        crewMembersSlider.setPaintLabels(true);
+        crewMembersSlider.setPaintTicks(true);
+        crewMembersSlider.setSnapToTicks(true);
+        crewMembersSlider.setToolTipText("");
+        crewMembersSlider.setValue(1);
+
+        crewMembersButton.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        crewMembersButton.setText("Add crew members");
+        crewMembersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crewMembersButtonActionPerformed(evt);
+            }
+        });
+
+        crewMembersLabel.setText("Please select how many crew members to add:  ");
+
+        crewMembersList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(crewMembersList);
+
+        crewMembersRefreshButton.setText("Refresh data");
+        crewMembersRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crewMembersRefreshButtonActionPerformed(evt);
+            }
+        });
+
+        numCrewMembersLabel.setText("There are 0 crew members in the database.");
+
+        javax.swing.GroupLayout crewMembersPanelLayout = new javax.swing.GroupLayout(crewMembersPanel);
+        crewMembersPanel.setLayout(crewMembersPanelLayout);
+        crewMembersPanelLayout.setHorizontalGroup(
+            crewMembersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crewMembersPanelLayout.createSequentialGroup()
+                .addGroup(crewMembersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(crewMembersPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4))
+                    .addGroup(crewMembersPanelLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(crewMembersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(crewMembersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(numCrewMembersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(crewMembersSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 74, Short.MAX_VALUE))
+                    .addGroup(crewMembersPanelLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(crewMembersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(crewMembersRefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(crewMembersButton, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        crewMembersPanelLayout.setVerticalGroup(
+            crewMembersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crewMembersPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(crewMembersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(crewMembersLabel)
+                    .addGroup(crewMembersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(crewMembersSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numCrewMembersLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(crewMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(crewMembersRefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+        );
+
+        jTabbedPane1.addTab("Crew members", crewMembersPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,6 +473,28 @@ public class ClientDemoFrame extends javax.swing.JFrame {
         updateAirportsList();
         updateNumAirportsLabel();
     }//GEN-LAST:event_airportsRefreshButtonActionPerformed
+
+    private void clientsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsButtonActionPerformed
+        clientAdder.addClients(clientsSlider.getValue());
+        updateClientsList();
+        updateNumClientsLabel();
+    }//GEN-LAST:event_clientsButtonActionPerformed
+
+    private void clientsRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsRefreshButtonActionPerformed
+        updateClientsList();
+        updateNumClientsLabel();
+    }//GEN-LAST:event_clientsRefreshButtonActionPerformed
+
+    private void crewMembersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crewMembersButtonActionPerformed
+        crewMemberAdder.addCrewMembers(crewMembersSlider.getValue());
+        updateCrewMembersList();
+        updateNumCrewMembersLabel();
+    }//GEN-LAST:event_crewMembersButtonActionPerformed
+
+    private void crewMembersRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crewMembersRefreshButtonActionPerformed
+        updateCrewMembersList();
+        updateNumCrewMembersLabel();
+    }//GEN-LAST:event_crewMembersRefreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,10 +548,26 @@ public class ClientDemoFrame extends javax.swing.JFrame {
     private javax.swing.JPanel airportsPanel;
     private javax.swing.JButton airportsRefreshButton;
     private javax.swing.JSlider airportsSlider;
+    private javax.swing.JButton clientsButton;
+    private javax.swing.JLabel clientsLabel;
+    private javax.swing.JList clientsList;
+    private javax.swing.JPanel clientsPanel;
+    private javax.swing.JButton clientsRefreshButton;
+    private javax.swing.JSlider clientsSlider;
+    private javax.swing.JButton crewMembersButton;
+    private javax.swing.JLabel crewMembersLabel;
+    private javax.swing.JList crewMembersList;
+    private javax.swing.JPanel crewMembersPanel;
+    private javax.swing.JButton crewMembersRefreshButton;
+    private javax.swing.JSlider crewMembersSlider;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel numAirplanesLabel;
     private javax.swing.JLabel numAirportsLabel;
+    private javax.swing.JLabel numClientsLabel;
+    private javax.swing.JLabel numCrewMembersLabel;
     // End of variables declaration//GEN-END:variables
 }
